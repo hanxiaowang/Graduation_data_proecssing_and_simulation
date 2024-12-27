@@ -23,11 +23,12 @@ class date_and_time():
 class save_file(date_and_time):
     def __init__(self):
         super().__init__()
-        path = f'C:\\Users\\AORUS\\OneDrive\\桌面\\bistable date'
-        if os.path.exists(path) == True:
-           pass
-        else:
-            os.mkdir(path)
+        ## Storing data with the file name containing the date when i used to measure.
+        # path = f'C:\\Users\\AORUS\\OneDrive\\桌面\\bistable date'
+        # if os.path.exists(path) == True:
+        #    pass
+        # else:
+        #     os.mkdir(path)
 
     def creat_initial_file(self, path: str):
         if os.path.exists(path) == True:
