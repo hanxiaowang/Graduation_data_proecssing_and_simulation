@@ -15,7 +15,7 @@ mWins = np.hstack((mpart1, np.delete(mpart2, 0), np.delete(mpart3, 0), np.delete
 # mWins=[2,1]
 # mWins = np.hstack((mpart3,np.delete(mpart4, 0), np.delete(mpart5, 0)))
 
-init_path=f'D:\\bistable jump data'
+init_path=f'D:\\bistable date1'
 
 forwards=[]
 backwards=[]
