@@ -1,4 +1,5 @@
 import numpy as np
 
-a=np.arange(0,10,1.5)
-print(a)
+mpart2=np.linspace(1,20,39)
+
+print(mpart2)

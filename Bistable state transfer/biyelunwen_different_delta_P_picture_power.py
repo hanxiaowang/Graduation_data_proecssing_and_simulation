@@ -7,10 +7,10 @@ from Preparation_WXH import save_file as sf
 
 
 # #
-forwardsin1=np.loadtxt(r'D:\bistable date\Pd step=10.0mW\forwards.txt')
-backwardsin1=np.loadtxt(r'D:\bistable date\Pd step=10.0mW\backwards.txt')
-evo_timesin1=np.loadtxt(r'D:\bistable date\Pd step=10.0mW\evo_times.txt')
-delta_Psin1=np.loadtxt(r'D:\bistable date\Pd step=10.0mW\delta_Ps.txt')
+forwardsin1=np.loadtxt(r'D:\bistable date\Pd step=1.0mW\forwards.txt')
+backwardsin1=np.loadtxt(r'D:\bistable date\Pd step=1.0mW\backwards.txt')
+evo_timesin1=np.loadtxt(r'D:\bistable date\Pd step=1.0mW\evo_times.txt')
+delta_Psin1=np.loadtxt(r'D:\bistable date\Pd step=1.0mW\delta_Ps.txt')
 
 forwardsin2=np.loadtxt(r'D:\bistable date\Pd step=0.0001mW\forwards.txt')
 backwardsin2=np.loadtxt(r'D:\bistable date\Pd step=0.0001mW\backwards.txt')
@@ -30,14 +30,14 @@ middle_number=50
 # print(np.shape(forwardsin1))
 plt.figure(figsize=(12,12))
 ax1 = plt.subplot(111)
-# ax1.plot(evo_timesin1[::middle_number], forwardsin1[::middle_number], 's',  markersize=4, label=r'$Re[m,A \longrightarrow B],10mw$',markerfacecolor='None')
+ax1.plot(evo_timesin1[::middle_number], forwardsin1[::middle_number], 's',  markersize=4, label=r'$Re[m,A \longrightarrow B],10mw$',markerfacecolor='None')
 # ax1.plot(evo_timesin2[::middle_number], forwardsin2[::middle_number], 's',  markersize=4, label=r'$Re[m,A \longrightarrow B],0.0001mw$',markerfacecolor='None')
 # ax1.plot(evo_timesin3[::middle_number], forwardsin3[::middle_number], 's',  markersize=4, label=r'$Re[m,A \longrightarrow B],0.01mw$',markerfacecolor='None')
 # ax1.plot(evo_timesin4[::middle_number], forwardsin4[::middle_number], '--',  markersize=4, label=r'$Re[m,A \longrightarrow B],0.01mw$',markerfacecolor='None')
 
-ax1.plot(evo_timesin1[::middle_number], backwardsin1[::middle_number], 's',  markersize=4, label=r'$Re[m,C \longrightarrow D]$',markerfacecolor='None')
-ax1.plot(evo_timesin2[::middle_number], backwardsin2[::middle_number], 's',  markersize=4, label=r'$Re[m,C \longrightarrow D]$',markerfacecolor='None')
-ax1.plot(evo_timesin3[::middle_number], backwardsin3[::middle_number], 's',  markersize=4, label=r'$Re[m,A \longrightarrow B],0.01mw$',markerfacecolor='None')
+# ax1.plot(evo_timesin1[::middle_number], backwardsin1[::middle_number], 's',  markersize=4, label=r'$Re[m,C \longrightarrow D]$',markerfacecolor='None')
+# ax1.plot(evo_timesin2[::middle_number], backwardsin2[::middle_number], 's',  markersize=4, label=r'$Re[m,C \longrightarrow D]$',markerfacecolor='None')
+# ax1.plot(evo_timesin3[::middle_number], backwardsin3[::middle_number], 's',  markersize=4, label=r'$Re[m,A \longrightarrow B],0.01mw$',markerfacecolor='None')
 # ax1.plot(evo_timesin4[::middle_number], backwardsin4[::middle_number], '--',  markersize=4, label=r'$Re[m,A \longrightarrow B],0.01mw$',markerfacecolor='None')
 
 ax1.set_xlabel(r'$times$ [s]',fontsize=20)

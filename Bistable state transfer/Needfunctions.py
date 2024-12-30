@@ -374,15 +374,18 @@ class Bistability():
 
         return M_sr,M_si,A_sr,A_si,Time
 
-    def m_a_evo_and_back(self,m_s0,a_s0,interval,steps1,steps2,P_d1,P_d2,f_d):
+    def m_a_evo_and_back(self,m_s0,a_s0,interval,steps1,P_d1,steps2,P_d2,f_d):
         ## steps1 is jump time, steps2 is back time
         ## P_d1 is jump power, P_d2 is back power
         M_sr1,M_si1,A_sr1,A_si1,Time1=self.m_a_evo(m_s0,a_s0,interval,steps1,P_d1,f_d)
-        M_sr2,M_si2,A_sr2,A_si2,Time2=self.m_a_evo(m_s0,a_s0,interval,steps2,P_d2,f_d)
+        M_sr2,M_si2,A_sr2,A_si2,Time2=self.m_a_evo(M_sr1[-1]+1j*M_si1[-1],A_sr1[-1]+1j*A_si1[-1],interval,steps2,P_d2,f_d)
         M_sr=np.hstack((M_sr1,np.delete(M_sr2, 0)))
         M_si=np.hstack((M_si1,np.delete(M_si2, 0)))
         A_sr=np.hstack((A_sr1,np.delete(A_sr2, 0)))
         A_si=np.hstack((A_si1,np.delete(A_si2, 0)))
+        for i in range(len(Time2)):
+            Time2[i]=Time2[i]+steps1*interval
+
         Time=np.hstack((Time1,np.delete(Time2, 0)))
 
         return M_sr,M_si,A_sr,A_si,Time

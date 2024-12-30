@@ -23,6 +23,7 @@ class date_and_time():
 class save_file(date_and_time):
     def __init__(self):
         super().__init__()
+        ## try to pull from github
         # path = f'C:\\Users\\AORUS\\OneDrive\\桌面\\bistable date'
         # if os.path.exists(path) == True:
         #    pass

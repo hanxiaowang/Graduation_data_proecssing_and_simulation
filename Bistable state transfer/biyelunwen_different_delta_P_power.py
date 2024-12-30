@@ -15,7 +15,7 @@ mWins = np.hstack((mpart1, np.delete(mpart2, 0), np.delete(mpart3, 0), np.delete
 # mWins=[2,1]
 # mWins = np.hstack((mpart3,np.delete(mpart4, 0), np.delete(mpart5, 0)))
 
-init_path=f'D:\\bistable date1'
+init_path=f'F:\\change power\\bistable date'
 
 forwards=[]
 backwards=[]
@@ -116,10 +116,10 @@ for i in range(len(mWins)):
     delta_p=np.zeros(len(Timeu))+mWin
 
 
-    sf().save_txt(sub_path, 'forwards', msfsquare, fmt = "%.10f")
-    sf().save_txt(sub_path, 'backwards', msbsquare, fmt = "%.10f")
-    sf().save_txt(sub_path, 'evo_times', Timeu, fmt = "%.10f")
-    sf().save_txt(sub_path, 'delta_Ps', delta_p, fmt = "%.10f")
+    sf().save_txt(sub_path, 'forwards', msfsquare, fmt = "%.12f")
+    sf().save_txt(sub_path, 'backwards', msbsquare, fmt = "%.12f")
+    sf().save_txt(sub_path, 'evo_times', Timeu, fmt = "%.12f")
+    sf().save_txt(sub_path, 'delta_Ps', delta_p, fmt = "%.12f")
 
 
 # # # xsmall1=0.2e-6
