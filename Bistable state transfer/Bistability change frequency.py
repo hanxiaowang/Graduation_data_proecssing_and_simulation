@@ -16,19 +16,20 @@ para = {'omega_a': 8.246,
         'P_d': 0.1,
         }
 
-forward, forwardf, backward, backwardf, unstable, unstablef=Bistability(**para).BS_fre_with_unstable()
+# forward, forwardf, backward, backwardf, unstable, unstablef=Bistability(**para).BS_fre_with_unstable()
+forward, forwardf, backward, backwardf, unstable, unstablef=Bistability(**para).BS_fre_inside_BS()
 
 
 
 plt.figure(figsize=(7, 6))
 axes1 = plt.subplot(111)
-axes1.plot(forwardf, forward, 'o', linewidth=5,markersize=10,label=r'forward')
-axes1.plot(backwardf, backward, '^', linewidth=5, label=r'backward')
-axes1.plot(unstablef,unstable, '--', linewidth=5, label=r'unstable')
-axes1.set_xlabel(r'$f_d$ [GHz]', fontsize=20)
+axes1.plot(forwardf, forward, 'o', linewidth=5,color='orange',markersize=10,label=r'forward')
+axes1.plot(backwardf, backward, '^', linewidth=5, color='blue',label=r'backward')
+axes1.plot(unstablef,unstable, '--', linewidth=5, color='purple',label=r'unstable')
+axes1.set_xlabel(r'$P_d$ [mW]', fontsize=20)
 axes1.set_ylabel(r'$\Delta_m$ [MHz]', fontsize=20)
 plt.tick_params(labelsize=20)
-plt.legend(loc=0)
+plt.legend(loc=4)
 plt.show()
 
 fpindex = list(forwardf).index(8.18)
@@ -112,16 +113,12 @@ deltamsu2=(Bistability(**para).branch_fre(wminf+msu2)-wpinf)/(1e6*2*np.pi)
 #
 plt.figure(figsize=(10, 6))
 axes1 = plt.subplot(111)
-axes1.plot(msf.real, msf.imag, '^', linewidth=5, label=r'forward')
+axes1.plot(msf.real, msf.imag, '^', linewidth=5, color='orange',label=r'forward')
 axes1.plot(msf.real[fpindex], msf.imag[fpindex], 's', markersize=10)
-
-
-axes1.plot(msb.real, msb.imag, 'o', linewidth=5, markersize=8, label=r'backward',markerfacecolor='None')
+axes1.plot(msb.real, msb.imag, 'o', linewidth=5,color='blue', markersize=8, label=r'backward',markerfacecolor='None')
 axes1.plot(msb.real[bpindex], msb.imag[bpindex], 's', markersize=10)
-
-axes1.plot(msu.real,msu.imag, 'o', linewidth=5, label=r'unstable',markerfacecolor='None')
+axes1.plot(msu.real,msu.imag, 'o', linewidth=5, color='purple',label=r'unstable',markerfacecolor='None')
 axes1.plot(msu.real[upindex],msu.imag[upindex], 's', markersize=10)
-
 axes1.set_xlabel(r'Real', fontsize=20)
 axes1.set_ylabel(r'Imag', fontsize=20)
 plt.tick_params(labelsize=20)

@@ -65,8 +65,8 @@ for i in range(len(jump_times)):
     sub_path = sf().creat_sub_file(init_path, f'jump back time={round(interval*jump_time*1e9, 10)}ns')
 
         ##总2e5
-    M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo_and_back(msf[-2],asf[-2],interval,jump_time,forwardp[-1],2e5-jump_time,forwardp[-2],f)
-    M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo_and_back(msb[1],asb[1],interval,jump_time,backwardp[0],2e5-jump_time,backwardp[1],f)
+    M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo_and_back_P(msf[-2],asf[-2],interval,jump_time,forwardp[-1],2e5-jump_time,forwardp[-2],f)
+    M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo_and_back_P(msb[1],asb[1],interval,jump_time,backwardp[0],2e5-jump_time,backwardp[1],f)
     # Excition=M_srf[::middle_number]**2+M_sif[::middle_number]**2
     Excitionf = M_srf ** 2 + M_sif ** 2
     # M_srfs2.append(Excitionf)

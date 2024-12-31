@@ -17,6 +17,7 @@ para = {'omega_a': 8.246,
         }
 
 forward, forwardp, backward, backwardp, unstablep, unstable=Bistability(**para).BS_power_with_unstable()
+forward, forwardp, backward, backwardp, unstablep, unstable=Bistability(**para).BS_power_inside_BS()
 
 fpindex = list(forwardp).index(0.1)
 # print(fpindex)

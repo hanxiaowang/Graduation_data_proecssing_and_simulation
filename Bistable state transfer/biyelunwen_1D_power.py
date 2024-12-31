@@ -5,9 +5,9 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 ##定义计算参数
-part1=np.linspace(0.014,0.018,201)
+part1=np.linspace(0.014,0.018,401)
 part2=np.linspace(0.018,0.209,192)
-part3=np.linspace(0.209,0.213,201)
+part3=np.linspace(0.209,0.213,401)
 P = np.hstack((part1, np.delete(part2, 0), np.delete(part3, 0)))
 # mWin=5*1e-3
 # step1=round((0.020-0.010)/mWin)+1
@@ -36,16 +36,16 @@ para = {'omega_a': 8.246,
 forward, forwardp, backward, backwardp, unstable, unstablep=Bistability(**para).BS_power_inside_BS()
 
 # 双稳态图
-plt.figure(figsize=(7, 6))
-axes1 = plt.subplot(111)
-axes1.plot(forwardp, forward, 'o', color='orange',markersize=10,label=r'forward',markerfacecolor='None')
-axes1.plot(backwardp, backward, '^',  color='green',markersize=5,label=r'backward',markerfacecolor='None')
-axes1.plot(unstablep,unstable, '--', linewidth=5, color='purple',label=r'unstable')
-axes1.set_xlabel(r'$P_d$ [mW]', fontsize=20)
-axes1.set_ylabel(r'$\Delta_m$ [MHz]', fontsize=20)
-plt.tick_params(labelsize=20)
-plt.legend(loc=7,fontsize=10)
-plt.show()
+# plt.figure(figsize=(7, 6))
+# axes1 = plt.subplot(111)
+# axes1.plot(forwardp, forward, 'o', color='orange',markersize=10,label=r'forward',markerfacecolor='None')
+# axes1.plot(backwardp, backward, '^',  color='green',markersize=5,label=r'backward',markerfacecolor='None')
+# axes1.plot(unstablep,unstable, '--', linewidth=5, color='purple',label=r'unstable')
+# axes1.set_xlabel(r'$P_d$ [mW]', fontsize=20)
+# axes1.set_ylabel(r'$\Delta_m$ [MHz]', fontsize=20)
+# plt.tick_params(labelsize=20)
+# plt.legend(loc=7,fontsize=10)
+# plt.show()
 
 ## 根据Delta_+的双稳态求解m和a
 wminf=8.184*1e9*2*np.pi
@@ -75,8 +75,8 @@ msu,asu=Bistability(**para).cal_ms_as_P(wmu-wminf,unstablep)
 
 
 ## 求解跳跃的演化
-M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo_and_back(msf[-2],asf[-2],1e-11,1e7,forwardp[-1],f)
-M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo_and_back(msb[1],asb[1],1e-11,1e7,backwardp[0],f)
+M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,8e5,forwardp[-1],f)
+M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,8e5,backwardp[0],f)
 
 
 ## m和a的跳跃演化图 3D
@@ -98,106 +98,113 @@ M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo_and_back(msb[1],asb[1]
 # plt.legend(loc=0)
 #
 # plt.show()
-
+aaa=1.2
 xsmall1=0.2e-6
 xlarge1=0.3e-6
-ysmall1=min([-np.abs(M_srf[0]*3),-np.abs(M_sif[0]*3)])
-ylarge1=max([np.abs(M_srf[0]*3),np.abs(M_sif[0]*3)])
+ysmall1=min([min(M_srf),min(M_sif)])*aaa
+ylarge1=max([max(M_srf),max(M_sif)])*aaa
 
 xsmall2=0.2e-6
 xlarge2=0.3e-6
-ysmall2=min([-np.abs(M_srb[0]*2),-np.abs(M_sib[0]*2)])
-ylarge2=max([np.abs(M_srb[0]*2),np.abs(M_sib[0]*2)])
+ysmall2=min([min(M_srb),min(M_sib)])*aaa
+ylarge2=max([max(M_srb),max(M_sib)])*aaa
 
 xsmall3=0.2e-6
 xlarge3=0.3e-6
-ysmall3=min([-np.abs(A_srf[0]*2),-np.abs(A_sif[0]*2)])
-ylarge3=max([np.abs(A_srf[0]*2),np.abs(A_sif[0]*2)])
+ysmall3=min([min(A_srf),min(A_sif)])*aaa
+ylarge3=max([max(A_srf),max(A_sif)])*aaa
 
 xsmall4=0.2e-6
 xlarge4=0.3e-6
-ysmall4=min([-np.abs(A_srb[0]*2),-np.abs(A_sib[0]*2)])
-ylarge4=max([np.abs(A_srb[0]*2),np.abs(A_sib[0]*2)])
+ysmall4=min([min(A_srb),min(A_sib)])*aaa
+ylarge4=max([max(A_srb),max(A_sib)])*aaa
 #
 middle_number=20
 #
 # ## m和a的跳跃演化图 2D
-plt.figure(figsize=(8, 6))
-axes1 = plt.subplot(111)
-axes1.plot(Timeu[::middle_number], M_srf[::middle_number], 's',  markersize=4, label=r'$Re[m,A \longrightarrow B]$',markerfacecolor='None',color='royalblue')
-axes1.plot(Timeu[::middle_number], M_sif[::middle_number], '^',  markersize=4, label=r'$Im[m,A \longrightarrow B]$',markerfacecolor='None',color='deepskyblue')
-# plt.xlim(xsmall1,xlarge1)
-plt.ylim(ysmall1,ylarge1)
-plt.legend(loc=0,fontsize=10)
-#
+# plt.figure(figsize=(8, 6))
+# axes1 = plt.subplot(111)
+# axes1.plot(Timeu[::middle_number], M_srf[::middle_number], 's',  markersize=4, label=r'$Re[m,A \longrightarrow B]$',markerfacecolor='None',color='royalblue')
+# axes1.plot(Timeu[::middle_number], M_sif[::middle_number], '^',  markersize=4, label=r'$Im[m,A \longrightarrow B]$',markerfacecolor='None',color='deepskyblue')
+# # plt.xlim(xsmall1,xlarge1)
+# plt.ylim(ysmall1,ylarge1)
+# plt.legend(loc=0,fontsize=10)
+# plt.show()
+# #
+# plt.figure(figsize=(8, 6))
 # axes2 = plt.subplot(111)
 # axes2.plot(Timeu[::middle_number], M_srb[::middle_number], 's', markersize=4, label=r'$Re[m,C \longrightarrow D]$',markerfacecolor='None',color='fuchsia')
 # axes2.plot(Timeu[::middle_number], M_sib[::middle_number], '^', markersize=4, label=r'$Im[m,C \longrightarrow D]$',markerfacecolor='None',color='tomato')
 # # plt.xlim(xsmall1,xlarge1)
-# plt.ylim(ysmall1,ylarge1)
+# plt.ylim(ysmall2,ylarge2)
 # plt.legend(loc=0,fontsize=10)
 # axes2.set_xlabel(r'Time', fontsize=20)
 # plt.tick_params(labelsize=20)
+# plt.show()
 #
+# plt.figure(figsize=(8, 6))
 # axes3 = plt.subplot(111)
 # axes3.plot(Timeu[::middle_number], A_srf[::middle_number], 's', markersize=4, label=r'$Re[a,A \longrightarrow B]$',markerfacecolor='None',color='royalblue')
 # axes3.plot(Timeu[::middle_number], A_sif[::middle_number], '^', markersize=4, label=r'$Im[a,A \longrightarrow B]$',markerfacecolor='None',color='deepskyblue')
 # # plt.xlim(xsmall1,xlarge1)
-# plt.ylim(ysmall1,ylarge1)
+# plt.ylim(ysmall3,ylarge3)
 # plt.legend(loc=0,fontsize=10)
+# plt.show()
 #
-# axes4 = plt.subplot(111)
-# axes4.plot(Timeu[::middle_number], A_srb[::middle_number], 's', markersize=4, label=r'$Re[a,C \longrightarrow D]$',markerfacecolor='None',color='fuchsia')
-# axes4.plot(Timeu[::middle_number], A_sib[::middle_number], '^', markersize=4, label=r'$Im[a,C \longrightarrow D]$',markerfacecolor='None',color='tomato')
-# # plt.xlim(xsmall1,xlarge1)
-# plt.ylim(ysmall1,ylarge1)
-# plt.legend(loc=0,fontsize=10)
-
+plt.figure(figsize=(8, 6))
+axes4 = plt.subplot(111)
+axes4.plot(Timeu[::middle_number], A_srb[::middle_number], 's', markersize=4, label=r'$Re[a,C \longrightarrow D]$',markerfacecolor='None',color='fuchsia')
+axes4.plot(Timeu[::middle_number], A_sib[::middle_number], '^', markersize=4, label=r'$Im[a,C \longrightarrow D]$',markerfacecolor='None',color='tomato')
+# plt.xlim(xsmall1,xlarge1)
+plt.ylim(ysmall4,ylarge4)
+plt.legend(loc=0,fontsize=10)
 plt.show()
 
+
+
 ## 计算跳跃演化过程的|m|^2和|a|^2以及Delta_+
-msf2=[]
-msb2=[]
-msfsquare=[]
-msbsquare=[]
-asfsquare=[]
-asbsquare=[]
-sumfsquare=[]
-sumbsquare=[]
-Adelta=np.zeros(len(Timeu))+forward[-2]
-Bdelta=np.zeros(len(Timeu))+forward[-1]
-Cdelta=np.zeros(len(Timeu))+backward[1]
-Ddelta=np.zeros(len(Timeu))+backward[0]
-
-for i in range(len(M_srf)):
-    msfm=(M_srf[i]**2+M_sif[i]**2)*2*30*1e-9*2*np.pi
-    msf2.append(msfm)
-    msfsquare.append(M_srf[i]**2+M_sif[i]**2)
-    asfsquare.append(A_srf[i] ** 2 + A_sif[i] ** 2)
-    sumfsquare.append(M_srf[i]**2+M_sif[i]**2+A_srf[i] ** 2 + A_sif[i] ** 2)
-
-for i in range(len(M_srb)):
-    msbm=(M_srb[i]**2+M_sib[i]**2)*2*30*1e-9*2*np.pi
-    msb2.append(msbm)
-    msbsquare.append(M_srb[i] ** 2 + M_sib[i] ** 2)
-    asbsquare.append(A_srb[i] ** 2 + A_sib[i] ** 2)
-    sumbsquare.append(M_srb[i] ** 2 + M_sib[i] ** 2 + A_srb[i] ** 2 + A_sib[i] ** 2)
-
-deltamsf2=(Bistability(**para).branch_fre(wminf+np.array(msf2))-wpinf)/(1e6*2*np.pi)
-deltamsb2=(Bistability(**para).branch_fre(wminf+np.array(msb2))-wpinf)/(1e6*2*np.pi)
+# msf2=[]
+# msb2=[]
+# msfsquare=[]
+# msbsquare=[]
+# asfsquare=[]
+# asbsquare=[]
+# sumfsquare=[]
+# sumbsquare=[]
+# Adelta=np.zeros(len(Timeu))+forward[-2]
+# Bdelta=np.zeros(len(Timeu))+forward[-1]
+# Cdelta=np.zeros(len(Timeu))+backward[1]
+# Ddelta=np.zeros(len(Timeu))+backward[0]
+#
+# for i in range(len(M_srf)):
+#     msfm=(M_srf[i]**2+M_sif[i]**2)*2*30*1e-9*2*np.pi
+#     msf2.append(msfm)
+#     msfsquare.append(M_srf[i]**2+M_sif[i]**2)
+#     asfsquare.append(A_srf[i] ** 2 + A_sif[i] ** 2)
+#     sumfsquare.append(M_srf[i]**2+M_sif[i]**2+A_srf[i] ** 2 + A_sif[i] ** 2)
+#
+# for i in range(len(M_srb)):
+#     msbm=(M_srb[i]**2+M_sib[i]**2)*2*30*1e-9*2*np.pi
+#     msb2.append(msbm)
+#     msbsquare.append(M_srb[i] ** 2 + M_sib[i] ** 2)
+#     asbsquare.append(A_srb[i] ** 2 + A_sib[i] ** 2)
+#     sumbsquare.append(M_srb[i] ** 2 + M_sib[i] ** 2 + A_srb[i] ** 2 + A_sib[i] ** 2)
+#
+# deltamsf2=(Bistability(**para).branch_fre(wminf+np.array(msf2))-wpinf)/(1e6*2*np.pi)
+# deltamsb2=(Bistability(**para).branch_fre(wminf+np.array(msb2))-wpinf)/(1e6*2*np.pi)
 #
 
 ## 激发数|m|^2,|a|^2,两者之和
-plt.figure(figsize=(7, 6))
-axes1 = plt.subplot(111)
-axes1.plot(Timeu[::middle_number], msfsquare[::middle_number], 's', markersize=4, label=r'$A \longrightarrow B,|m|^2$',color='royalblue')
-axes1.plot(Timeu[::middle_number], asfsquare[::middle_number], '^', markersize=4, label=r'$A \longrightarrow B,|a|^2$',color='deepskyblue')
-axes1.plot(Timeu[::middle_number], sumfsquare[::middle_number], '--', linewidth=5, label=r'$A \longrightarrow B,|m|^2+|a|^2$',color='green')
-# axes1.plot(Timeu[::middle_number], msbsquare[::middle_number], 's', markersize=4, label=r'$C \longrightarrow D,|m|^2$',color='fuchsia')
-# axes1.plot(Timeu[::middle_number], asbsquare[::middle_number], '^', markersize=4, label=r'$C \longrightarrow D,|a|^2$',color='tomato')
-# axes1.plot(Timeu[::middle_number], sumbsquare[::middle_number], '--', linewidth=5, label=r'$C \longrightarrow D,|m|^2+|a|^2$',color='green')
-plt.legend(loc=0)
-plt.show()
+# plt.figure(figsize=(7, 6))
+# axes1 = plt.subplot(111)
+# axes1.plot(Timeu[::middle_number], msfsquare[::middle_number], 's', markersize=4, label=r'$A \longrightarrow B,|m|^2$',color='royalblue')
+# axes1.plot(Timeu[::middle_number], asfsquare[::middle_number], '^', markersize=4, label=r'$A \longrightarrow B,|a|^2$',color='deepskyblue')
+# axes1.plot(Timeu[::middle_number], sumfsquare[::middle_number], '--', linewidth=5, label=r'$A \longrightarrow B,|m|^2+|a|^2$',color='green')
+# # axes1.plot(Timeu[::middle_number], msbsquare[::middle_number], 's', markersize=4, label=r'$C \longrightarrow D,|m|^2$',color='fuchsia')
+# # axes1.plot(Timeu[::middle_number], asbsquare[::middle_number], '^', markersize=4, label=r'$C \longrightarrow D,|a|^2$',color='tomato')
+# # axes1.plot(Timeu[::middle_number], sumbsquare[::middle_number], '--', linewidth=5, label=r'$C \longrightarrow D,|m|^2+|a|^2$',color='green')
+# plt.legend(loc=0)
+# plt.show()
 
 
 # print(deltamsf2[0])
