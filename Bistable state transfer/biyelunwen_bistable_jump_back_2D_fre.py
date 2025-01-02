@@ -48,6 +48,8 @@ msf,asf=Bistability(**para).cal_ms_as_f(wmf-wminf,forwardf)
 msb,asb=Bistability(**para).cal_ms_as_f(wmb-wminf,backwardf)
 msu,asu=Bistability(**para).cal_ms_as_f(wmu-wminf,unstablef)
 init_path=f'F:\\change fre\\bistable jump back 100mW and 100kHz'
+init_path1=f'F:\\change fre\\bistable jump back 100mW and 100kHz real  and  imag'
+
 #
 
 mpart2=np.linspace(30,60,31)
@@ -63,6 +65,7 @@ for i in range(len(jump_times)):
     interval=1e-11
     jump_time=1e4*jump_times[i]
     sub_path = sf().creat_sub_file(init_path, f'jump back time={round(interval*jump_time*1e9, 10)}ns')
+    sub_path1 = sf().creat_sub_file(init_path1, f'jump back time={round(interval*jump_time*1e9, 10)}ns')
 
         ##总2e5
     M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo_and_back_f(msf[-2],asf[-2],interval,jump_time,forwardf[-1],6e5-jump_time,forwardf[-2],P)
@@ -77,8 +80,15 @@ for i in range(len(jump_times)):
     sf().save_txt(sub_path, 'forwards', Excitionf, fmt="%.12f")
     sf().save_txt(sub_path, 'backwards', Excitionb, fmt="%.12f")
 
+    sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
+    sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
+
 sf().save_txt(init_path, 'jump back time', jump_times, fmt="%.12f")
 sf().save_txt(init_path, 'evo_times', Timeu, fmt="%.12f")
+sf().save_txt(init_path1, 'jump back time', jump_times, fmt="%.12f")
+sf().save_txt(init_path1, 'evo_times', Timeu, fmt="%.12f")
 
 #
 # plt.figure(figsize=(12,12))

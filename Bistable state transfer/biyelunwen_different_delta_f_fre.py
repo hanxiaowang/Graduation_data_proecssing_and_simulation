@@ -12,10 +12,11 @@ mpart3=np.linspace(1,10,10)
 mpart2=np.linspace(0.1,1,10)
 mpart1=np.linspace(0.01,0.1,10)
 fins = np.hstack((mpart1, np.delete(mpart2, 0), np.delete(mpart3, 0), np.delete(mpart4, 0), np.delete(mpart5, 0)))
-# fins=[0.02,0.01]
+# fins=[2,1]
 # fins = np.hstack((mpart3,np.delete(mpart4, 0), np.delete(mpart5, 0)))
 
 init_path=f'F:\\change fre\\bistable date'
+init_path1=f'F:\\change fre\\bistable date real and imag'
 
 forwards=[]
 backwards=[]
@@ -24,6 +25,7 @@ delta_Ps=[]
 for i in range(len(fins)):
     fin=fins[i]*1e-6
     sub_path=sf().creat_sub_file(init_path, f'fd step={round(fins[i],5)}kHz')
+    sub_path1=sf().creat_sub_file(init_path1, f'fd step={round(fins[i],5)}kHz')
 
     # part1 = np.linspace(8.177, 8.178, 1001)
     # part2 = np.linspace(8.178, 8.206, 141)
@@ -92,8 +94,8 @@ for i in range(len(fins)):
 #
 #
 #     ## 求解跳跃的演化
-    M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,5e6,P,forwardf[-1])
-    M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,5e6,P,backwardf[0])
+    M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,1e7,P,forwardf[-1])
+    M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,1e7,P,backwardf[0])
     msfsquare = []
     msbsquare = []
     asfsquare = []
@@ -114,6 +116,12 @@ for i in range(len(fins)):
 
     delta_f=np.zeros(len(Timeu))+fin
 
+    sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
+    sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
+    sf().save_txt(sub_path1, 'evo_times', Timeu, fmt="%.12f")
+    sf().save_txt(sub_path1, 'delta_fs', delta_f, fmt="%.12f")
 
     sf().save_txt(sub_path, 'forwards', msfsquare, fmt = "%.12f")
     sf().save_txt(sub_path, 'backwards', msbsquare, fmt = "%.12f")

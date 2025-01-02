@@ -51,10 +51,10 @@ msu,asu=Bistability(**para).cal_ms_as_P(wmu-wminf,unstablep)
 
 # jump_times=np.linspace(0,20,21)
 #
-jump_time=0.09e5
+jump_time=0.083e5
 ##总2e5
-M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo_and_back_P(msf[-2],asf[-2],1e-11,jump_time,forwardp[-1],2e5-jump_time,forwardp[-2],f)
-M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo_and_back_P(msb[1],asb[1],1e-11,jump_time,backwardp[0],2e5-jump_time,backwardp[1],f)
+M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo_and_back_P(msf[-2],asf[-2],1e-11,jump_time,forwardp[-1],4e5-jump_time,forwardp[-2],f)
+M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo_and_back_P(msb[1],asb[1],1e-11,jump_time,backwardp[0],4e5-jump_time,backwardp[1],f)
 
 middle_number=20
 plt.figure(figsize=(8, 6))

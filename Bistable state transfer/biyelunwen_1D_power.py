@@ -5,9 +5,9 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 ##定义计算参数
-part1=np.linspace(0.014,0.018,401)
+part1=np.linspace(0.014,0.018,40001)
 part2=np.linspace(0.018,0.209,192)
-part3=np.linspace(0.209,0.213,401)
+part3=np.linspace(0.209,0.213,40001)
 P = np.hstack((part1, np.delete(part2, 0), np.delete(part3, 0)))
 # mWin=5*1e-3
 # step1=round((0.020-0.010)/mWin)+1
@@ -75,8 +75,8 @@ msu,asu=Bistability(**para).cal_ms_as_P(wmu-wminf,unstablep)
 
 
 ## 求解跳跃的演化
-M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,8e5,forwardp[-1],f)
-M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,8e5,backwardp[0],f)
+M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,8e6,forwardp[-1],f)
+M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,8e6,backwardp[0],f)
 
 
 ## m和a的跳跃演化图 3D

@@ -48,6 +48,8 @@ msf,asf=Bistability(**para).cal_ms_as_P(wmf-wminf,forwardp)
 msb,asb=Bistability(**para).cal_ms_as_P(wmb-wminf,backwardp)
 msu,asu=Bistability(**para).cal_ms_as_P(wmu-wminf,unstablep)
 init_path=f'F:\\change power\\bistable jump back 8.18 and 1mW'
+init_path1=f'F:\\change power\\bistable jump back 8.18 and 1mW real and imag'
+
 #
 
 mpart2=np.linspace(1,20,39)
@@ -63,10 +65,11 @@ for i in range(len(jump_times)):
     interval=1e-11
     jump_time=1e4*jump_times[i]
     sub_path = sf().creat_sub_file(init_path, f'jump back time={round(interval*jump_time*1e9, 10)}ns')
+    sub_path1 = sf().creat_sub_file(init_path1, f'jump back time={round(interval*jump_time*1e9, 10)}ns')
 
-        ##总2e5
-    M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo_and_back_P(msf[-2],asf[-2],interval,jump_time,forwardp[-1],2e5-jump_time,forwardp[-2],f)
-    M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo_and_back_P(msb[1],asb[1],interval,jump_time,backwardp[0],2e5-jump_time,backwardp[1],f)
+        ##总5e5
+    M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo_and_back_P(msf[-2],asf[-2],interval,jump_time,forwardp[-1],6e5-jump_time,forwardp[-2],f)
+    M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo_and_back_P(msb[1],asb[1],interval,jump_time,backwardp[0],6e5-jump_time,backwardp[1],f)
     # Excition=M_srf[::middle_number]**2+M_sif[::middle_number]**2
     Excitionf = M_srf ** 2 + M_sif ** 2
     # M_srfs2.append(Excitionf)
@@ -77,9 +80,15 @@ for i in range(len(jump_times)):
     sf().save_txt(sub_path, 'forwards', Excitionf, fmt="%.12f")
     sf().save_txt(sub_path, 'backwards', Excitionb, fmt="%.12f")
 
+    sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
+    sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
+
 sf().save_txt(init_path, 'jump back time', jump_times, fmt="%.12f")
 sf().save_txt(init_path, 'evo_times', Timeu, fmt="%.12f")
-
+sf().save_txt(init_path1, 'jump back time', jump_times, fmt="%.12f")
+sf().save_txt(init_path1, 'evo_times', Timeu, fmt="%.12f")
 #
 # plt.figure(figsize=(12,12))
 # ax1 = plt.subplot(111)

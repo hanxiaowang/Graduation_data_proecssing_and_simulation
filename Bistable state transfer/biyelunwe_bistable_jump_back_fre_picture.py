@@ -12,12 +12,12 @@ backwardsin1=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump
 evo_timesin=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\evo_times.txt')
 delta_Psin=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump back time.txt')
 
-forwardsin2=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump back time=60.0ns\forwards.txt')
-backwardsin2=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump back time=60.0ns\backwards.txt')
+forwardsin2=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump back time=3000.0ns\forwards.txt')
+backwardsin2=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump back time=3000.0ns\backwards.txt')
 
 
-forwardsin3=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump back time=3000.0ns\forwards.txt')
-backwardsin3=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump back time=3000.0ns\backwards.txt')
+forwardsin3=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump back time=6000.0ns\forwards.txt')
+backwardsin3=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump back time=6000.0ns\backwards.txt')
 
 
 middle_number=1

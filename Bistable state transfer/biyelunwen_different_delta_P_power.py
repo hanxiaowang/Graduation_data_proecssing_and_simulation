@@ -15,7 +15,8 @@ mWins = np.hstack((mpart1, np.delete(mpart2, 0), np.delete(mpart3, 0), np.delete
 # mWins=[2,1]
 # mWins = np.hstack((mpart3,np.delete(mpart4, 0), np.delete(mpart5, 0)))
 
-init_path=f'F:\\change power\\bistable date'
+init_path=f'F:\\change power\\bistable date real and imag'
+init_path1=f'F:\\change power\\bistable date'
 
 forwards=[]
 backwards=[]
@@ -24,6 +25,7 @@ delta_Ps=[]
 for i in range(len(mWins)):
     mWin=mWins[i]*1e-3
     sub_path=sf().creat_sub_file(init_path, f'Pd step={round(mWins[i],5)}mW')
+    sub_path1=sf().creat_sub_file(init_path1, f'Pd step={round(mWins[i],5)}mW')
 
     part1=np.arange(0.010,0.020,mWin)
     part2=np.linspace(0.020,0.205,186)
@@ -93,8 +95,8 @@ for i in range(len(mWins)):
 #
 #
 #     ## 求解跳跃的演化
-    M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,6e6,forwardp[-1],f)
-    M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,6e6,backwardp[0],f)
+    M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,1e7,forwardp[-1],f)
+    M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,1e7,backwardp[0],f)
     msfsquare = []
     msbsquare = []
     asfsquare = []
@@ -118,9 +120,15 @@ for i in range(len(mWins)):
 
     sf().save_txt(sub_path, 'forwards', msfsquare, fmt = "%.12f")
     sf().save_txt(sub_path, 'backwards', msbsquare, fmt = "%.12f")
-    sf().save_txt(sub_path, 'evo_times', Timeu, fmt = "%.12f")
-    sf().save_txt(sub_path, 'delta_Ps', delta_p, fmt = "%.12f")
+    sf().save_txt(sub_path, 'evo_times', Timeu, fmt="%.12f")
+    sf().save_txt(sub_path, 'delta_Ps', delta_p, fmt="%.12f")
 
+    sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
+    sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
+    sf().save_txt(sub_path1, 'evo_times', Timeu, fmt="%.12f")
+    sf().save_txt(sub_path1, 'delta_Ps', delta_p, fmt="%.12f")
 
 # # # xsmall1=0.2e-6
 # # # xlarge1=0.3e-6

@@ -53,8 +53,8 @@ msu,asu=Bistability(**para).cal_ms_as_f(wmu-wminf,unstablef)
 #
 jump_time=2.9e5
 ##总2e5
-M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo_and_back_f(msf[-2],asf[-2],1e-11,jump_time,forwardf[-1],6e5-jump_time,forwardf[-2],P)
-M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo_and_back_f(msb[1],asb[1],1e-11,jump_time,backwardf[0],6e5-jump_time,backwardf[1],P)
+M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo_and_back_f(msf[-2],asf[-2],1e-11,jump_time,forwardf[-1],5e5-jump_time,forwardf[-2],P)
+M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo_and_back_f(msb[1],asb[1],1e-11,jump_time,backwardf[0],5e5-jump_time,backwardf[1],P)
 Excitionf = M_srf ** 2 + M_sif ** 2
 Excitionb = M_srb ** 2 + M_sib ** 2
 middle_number=20
