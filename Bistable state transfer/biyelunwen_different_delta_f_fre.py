@@ -12,16 +12,20 @@ mpart3=np.linspace(1,10,10)
 mpart2=np.linspace(0.1,1,10)
 mpart1=np.linspace(0.01,0.1,10)
 fins = np.hstack((mpart1, np.delete(mpart2, 0), np.delete(mpart3, 0), np.delete(mpart4, 0), np.delete(mpart5, 0)))
-# fins=[2,1]
+# fins=[0.5,1]
 # fins = np.hstack((mpart3,np.delete(mpart4, 0), np.delete(mpart5, 0)))
 
 init_path=f'F:\\change fre\\bistable date'
 init_path1=f'F:\\change fre\\bistable date real and imag'
 
-forwards=[]
-backwards=[]
-evo_times=[]
-delta_Ps=[]
+pointWf = []
+pointXf = []
+pointYf = []
+pointZf = []
+pointWw = []
+pointXw = []
+pointYw = []
+pointZw = []
 for i in range(len(fins)):
     fin=fins[i]*1e-6
     sub_path=sf().creat_sub_file(init_path, f'fd step={round(fins[i],5)}kHz')
@@ -53,7 +57,14 @@ for i in range(len(fins)):
     ## Delta_+的双稳态求解
     # forward, forwardf, backward, backwardf, unstablef, unstable=Bistability(**para).BS_fre_with_unstable()
     forward, forwardf, backward, backwardf, unstable, unstablef=Bistability(**para).BS_fre_inside_BS()
-
+    pointWf.append(forwardf[-2])
+    pointXf.append(forwardf[-1])
+    pointYf.append(backwardf[1])
+    pointZf.append(backwardf[0])
+    pointWw.append(forward[-2])
+    pointXw.append(forward[-1])
+    pointYw.append(backward[1])
+    pointZw.append(backward[0])
     ## 双稳态图
     # plt.figure(figsize=(7, 6))
     # axes1 = plt.subplot(111)
@@ -102,6 +113,8 @@ for i in range(len(fins)):
     asbsquare = []
     sumfsquare = []
     sumbsquare = []
+
+
     for i in range(len(M_srf)):
         # msfm = (M_srf[i] ** 2 + M_sif[i] ** 2) * 2 * 30 * 1e-9 * 2 * np.pi
         msfsquare.append(M_srf[i] ** 2 + M_sif[i] ** 2)
@@ -128,7 +141,23 @@ for i in range(len(fins)):
     sf().save_txt(sub_path, 'evo_times', Timeu, fmt = "%.12f")
     sf().save_txt(sub_path, 'delta_fs', delta_f, fmt = "%.12f")
 
+sf().save_txt(init_path1, 'W fre', pointWf, fmt="%.12f")
+sf().save_txt(init_path1, 'W deltaplus', pointWw, fmt="%.12f")
+sf().save_txt(init_path1, 'X fre', pointXf, fmt="%.12f")
+sf().save_txt(init_path1, 'X deltaplus', pointXw, fmt="%.12f")
+sf().save_txt(init_path1, 'Y fre', pointYf, fmt="%.12f")
+sf().save_txt(init_path1, 'Y deltaplus', pointYw, fmt="%.12f")
+sf().save_txt(init_path1, 'Z fre', pointZf, fmt="%.12f")
+sf().save_txt(init_path1, 'Z deltaplus', pointZw, fmt="%.12f")
 
+sf().save_txt(init_path, 'W fre', pointWf, fmt="%.12f")
+sf().save_txt(init_path, 'W deltaplus', pointWw, fmt="%.12f")
+sf().save_txt(init_path, 'X fre', pointXf, fmt="%.12f")
+sf().save_txt(init_path, 'X deltaplus', pointXw, fmt="%.12f")
+sf().save_txt(init_path, 'Y fre', pointYf, fmt="%.12f")
+sf().save_txt(init_path, 'Y deltaplus', pointYw, fmt="%.12f")
+sf().save_txt(init_path, 'Z fre', pointZf, fmt="%.12f")
+sf().save_txt(init_path, 'Z deltaplus', pointZw, fmt="%.12f")
 # # # xsmall1=0.2e-6
 # # # xlarge1=0.3e-6
 # # # ysmall1=min([-np.abs(M_srf[0]*3),-np.abs(M_sif[0]*3)])

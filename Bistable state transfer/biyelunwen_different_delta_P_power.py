@@ -15,13 +15,17 @@ mWins = np.hstack((mpart1, np.delete(mpart2, 0), np.delete(mpart3, 0), np.delete
 # mWins=[2,1]
 # mWins = np.hstack((mpart3,np.delete(mpart4, 0), np.delete(mpart5, 0)))
 
-init_path=f'F:\\change power\\bistable date real and imag'
-init_path1=f'F:\\change power\\bistable date'
+init_path=f'F:\\change power\\bistable date'
+init_path1=f'F:\\change power\\bistable date real and imag'
 
-forwards=[]
-backwards=[]
-evo_times=[]
-delta_Ps=[]
+pointAp=[]
+pointBp=[]
+pointCp=[]
+pointDp=[]
+pointAw=[]
+pointBw=[]
+pointCw=[]
+pointDw=[]
 for i in range(len(mWins)):
     mWin=mWins[i]*1e-3
     sub_path=sf().creat_sub_file(init_path, f'Pd step={round(mWins[i],5)}mW')
@@ -54,7 +58,14 @@ for i in range(len(mWins)):
     ## Delta_+的双稳态求解
     # forward, forwardp, backward, backwardp, unstablep, unstable=Bistability(**para).BS_power_with_unstable()
     forward, forwardp, backward, backwardp, unstable, unstablep=Bistability(**para).BS_power_inside_BS()
-
+    pointAp.append(forwardp[-2])
+    pointBp.append(forwardp[-1])
+    pointCp.append(backwardp[1])
+    pointDp.append(backwardp[0])
+    pointAw.append(forward[-2])
+    pointBw.append(forward[-1])
+    pointCw.append(backward[1])
+    pointDw.append(backward[0])
     ## 双稳态图
     # plt.figure(figsize=(7, 6))
     # axes1 = plt.subplot(111)
@@ -97,6 +108,7 @@ for i in range(len(mWins)):
 #     ## 求解跳跃的演化
     M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,1e7,forwardp[-1],f)
     M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,1e7,backwardp[0],f)
+
     msfsquare = []
     msbsquare = []
     asfsquare = []
@@ -130,6 +142,23 @@ for i in range(len(mWins)):
     sf().save_txt(sub_path1, 'evo_times', Timeu, fmt="%.12f")
     sf().save_txt(sub_path1, 'delta_Ps', delta_p, fmt="%.12f")
 
+sf().save_txt(init_path1, 'A power', pointAp, fmt="%.12f")
+sf().save_txt(init_path1, 'A deltaplus', pointAw, fmt="%.12f")
+sf().save_txt(init_path1, 'B power', pointBp, fmt="%.12f")
+sf().save_txt(init_path1, 'B deltaplus', pointBw, fmt="%.12f")
+sf().save_txt(init_path1, 'C power', pointCp, fmt="%.12f")
+sf().save_txt(init_path1, 'C deltaplus', pointCw, fmt="%.12f")
+sf().save_txt(init_path1, 'D power', pointDp, fmt="%.12f")
+sf().save_txt(init_path1, 'D deltaplus', pointDw, fmt="%.12f")
+
+sf().save_txt(init_path, 'A power', pointAp, fmt="%.12f")
+sf().save_txt(init_path, 'A deltaplus', pointAw, fmt="%.12f")
+sf().save_txt(init_path, 'B power', pointBp, fmt="%.12f")
+sf().save_txt(init_path, 'B deltaplus', pointBw, fmt="%.12f")
+sf().save_txt(init_path, 'C power', pointCp, fmt="%.12f")
+sf().save_txt(init_path, 'C deltaplus', pointCw, fmt="%.12f")
+sf().save_txt(init_path, 'D power', pointDp, fmt="%.12f")
+sf().save_txt(init_path, 'D deltaplus', pointDw, fmt="%.12f")
 # # # xsmall1=0.2e-6
 # # # xlarge1=0.3e-6
 # # # ysmall1=min([-np.abs(M_srf[0]*3),-np.abs(M_sif[0]*3)])
