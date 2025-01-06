@@ -32,6 +32,11 @@ min_for=[]
 max_for=[]
 min_back=[]
 max_back=[]
+
+time_min_for=[]
+time_max_for=[]
+time_min_back=[]
+time_max_back=[]
 for i in range(len(mWins)):
     mWin=mWins[i]*1e-3
     sub_path=sf().creat_sub_file(init_path, f'Pd step={round(mWins[i],5)}mW')
@@ -144,10 +149,16 @@ for i in range(len(mWins)):
     for_min_index=list(msfsquare).index(min(msfsquare))
     back_max_index = list(msbsquare).index(max(msbsquare))
     back_min_index = list(msbsquare).index(min(msbsquare))
-    min_for.append(msfsquare[for_max_index])
-    max_for.append(msfsquare[for_min_index])
-    min_back.append(msbsquare[back_max_index])
-    max_back.append(msbsquare[back_min_index])
+
+    min_for.append(msfsquare[for_min_index])
+    max_for.append(msfsquare[for_max_index])
+    min_back.append(msbsquare[back_min_index])
+    max_back.append(msbsquare[back_max_index])
+
+    time_min_for.append(Timeu[for_min_index])
+    time_max_for.append(Timeu[for_max_index])
+    time_min_back.append(Timeu[back_min_index])
+    time_max_back.append(Timeu[back_max_index])
 
 
     sf().save_txt(sub_path, 'forwards', msfsquare, fmt = "%.12f")
@@ -185,6 +196,10 @@ sf().save_txt(init_path, 'for min', min_for, fmt="%.12f")
 sf().save_txt(init_path, 'for max', max_for, fmt="%.12f")
 sf().save_txt(init_path, 'back min', min_back, fmt="%.12f")
 sf().save_txt(init_path, 'back max', max_back, fmt="%.12f")
+sf().save_txt(init_path, 'for min time', time_min_for, fmt="%.12f")
+sf().save_txt(init_path, 'for max time', time_max_for, fmt="%.12f")
+sf().save_txt(init_path, 'back min time', time_min_back, fmt="%.12f")
+sf().save_txt(init_path, 'back max time', time_max_back, fmt="%.12f")
 # # # xsmall1=0.2e-6
 # # # xlarge1=0.3e-6
 # # # ysmall1=min([-np.abs(M_srf[0]*3),-np.abs(M_sif[0]*3)])

@@ -10,7 +10,7 @@ S=0.4
 beta=0.7
 eta=4.5
 RN0=1.02#um/min
-a_s=np.linspace(20,30,10001)
+a_s=np.linspace(26,27,1001)
 solve_set=[]
 for j,a in enumerate(a_s):
     Dk=D0/np.sqrt(1+4*a**2)
