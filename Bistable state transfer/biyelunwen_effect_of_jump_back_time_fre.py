@@ -1,0 +1,50 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from Needfunctions import Bistability
+from mpl_toolkits.mplot3d import Axes3D
+import os
+from Preparation_WXH import save_file as sf
+
+
+final_evo_forward=[]
+
+mpart2=np.linspace(30,60,31)
+mpart1=np.linspace(0,30,101)
+jump_times = np.hstack((mpart1, np.delete(mpart2, 0)))
+
+for i in range(len(jump_times)):
+    interval = 1e-11
+    jump_time = 1e4 * jump_times[i]
+    forward = np.loadtxt(f'F:\\change fre\\bistable jump back 100mW and 100kHz\\jump back time={round(interval*jump_time*1e9, 10)}ns\\forwards.txt')
+    final_evo_forward.append(forward[-1])
+    # max_evo.append(max(forward))
+    # max_index = list(forward).index(max(forward))
+    # max_position.append(evo_times[max_index])
+
+fig, axes = plt.subplots(1, 1, figsize=(15, 10))
+axes.plot(jump_times,final_evo_forward,'o-',markersize=10,color='blue',markerfacecolor='None')
+axes.set_xlabel(r'$times$ [ns]',fontsize=40)
+axes.set_ylabel(r'$\Delta_{final}$ [MHz]',fontsize=40)
+# plt.xscale('log')
+# plt.yticks([-10,0,10],['-10','0','10'])
+plt.tick_params(labelsize=35)
+plt.show()
+
+final_evo_backward=[]
+for i in range(len(jump_times)):
+    interval = 1e-11
+    jump_time = 1e4 * jump_times[i]
+    forward = np.loadtxt(f'F:\\change fre\\bistable jump back 100mW and 100kHz\\jump back time={round(interval*jump_time*1e9, 10)}ns\\backwards.txt')
+    final_evo_backward.append(forward[-1])
+    # max_evo.append(max(forward))
+    # max_index = list(forward).index(max(forward))
+    # max_position.append(evo_times[max_index])
+
+fig, axes = plt.subplots(1, 1, figsize=(15, 10))
+axes.plot(jump_times,final_evo_backward,'o-',markersize=10,color='blue',markerfacecolor='None')
+axes.set_xlabel(r'$times$ [ns]',fontsize=40)
+axes.set_ylabel(r'$\Delta_{final}$ [MHz]',fontsize=40)
+# plt.xscale('log')
+# plt.yticks([-10,0,10],['-10','0','10'])
+plt.tick_params(labelsize=35)
+plt.show()

@@ -51,44 +51,57 @@ init_path=f'F:\\change fre\\bistable jump back 100mW and 100kHz'
 init_path1=f'F:\\change fre\\bistable jump back 100mW and 100kHz real  and  imag'
 
 #
+#
+# mpart2=np.linspace(30,60,31)
+# mpart1=np.linspace(0,30,101)
+# jump_times = np.hstack((mpart1, np.delete(mpart2, 0)))
 
-mpart2=np.linspace(30,60,31)
-mpart1=np.linspace(0,30,101)
-jump_times = np.hstack((mpart1, np.delete(mpart2, 0)))
-
-# jump_times = np.linspace(0,20,11)
+jump_times = np.linspace(0,600000,60001)
 
 # middle_number=20
-M_srfs2=[]
-M_srbs2=[]
+M_srfstart=[]
+M_srfstop=[]
+
+M_srbstart=[]
+M_srbstop=[]
+Timeneed=[]
 for i in range(len(jump_times)):
     interval=1e-11
-    jump_time=1e4*jump_times[i]
-    sub_path = sf().creat_sub_file(init_path, f'jump back time={round(interval*jump_time*1e9, 10)}ns')
-    sub_path1 = sf().creat_sub_file(init_path1, f'jump back time={round(interval*jump_time*1e9, 10)}ns')
+    jump_time=jump_times[i]
+    # sub_path = sf().creat_sub_file(init_path, f'jump back time={round(interval*jump_time*1e9, 10)}ns')
+    # sub_path1 = sf().creat_sub_file(init_path1, f'jump back time={round(interval*jump_time*1e9, 10)}ns')
 
         ##总2e5
     M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo_and_back_f(msf[-2],asf[-2],interval,jump_time,forwardf[-1],6e5-jump_time,forwardf[-2],P)
     M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo_and_back_f(msb[1],asb[1],interval,jump_time,backwardf[0],6e5-jump_time,backwardf[1],P)
     # Excition=M_srf[::middle_number]**2+M_sif[::middle_number]**2
-    Excitionf = M_srf ** 2 + M_sif ** 2
+    # Excitionf = M_srf ** 2 + M_sif ** 2
     # M_srfs2.append(Excitionf)
+    M_srfstart.append(M_srf[0] ** 2 + M_sif[0] ** 2)
+    M_srfstop.append(M_srf[-1] ** 2 + M_sif[-1] ** 2)
 
-    Excitionb = M_srb ** 2 + M_sib ** 2
+    M_srbstart.append(M_srb[0] ** 2 + M_sib[0] ** 2)
+    M_srbstop.append(M_srb[-1] ** 2 + M_sib[-1] ** 2)
+    Timeneed.append(interval*jump_times[i])
+    # Excitionb = M_srb ** 2 + M_sib ** 2
     # M_srbs2.append(Excitionb)
 
-    sf().save_txt(sub_path, 'forwards', Excitionf, fmt="%.12f")
-    sf().save_txt(sub_path, 'backwards', Excitionb, fmt="%.12f")
+    # sf().save_txt(sub_path, 'forwards', Excitionf, fmt="%.12f")
+    # sf().save_txt(sub_path, 'backwards', Excitionb, fmt="%.12f")
 
-    sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
-    sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
-    sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
-    sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
 
 sf().save_txt(init_path, 'jump back time', jump_times, fmt="%.12f")
-sf().save_txt(init_path, 'evo_times', Timeu, fmt="%.12f")
-sf().save_txt(init_path1, 'jump back time', jump_times, fmt="%.12f")
-sf().save_txt(init_path1, 'evo_times', Timeu, fmt="%.12f")
+sf().save_txt(init_path, 'evo_times', Timeneed, fmt="%.12f")
+sf().save_txt(init_path, 'jump start forward', M_srfstart, fmt="%.12f")
+sf().save_txt(init_path, 'jump stop forward', M_srfstop, fmt="%.12f")
+sf().save_txt(init_path, 'jump start backward', M_srbstart, fmt="%.12f")
+sf().save_txt(init_path, 'jump stop backward', M_srbstop, fmt="%.12f")
+# sf().save_txt(init_path1, 'jump back time', jump_times, fmt="%.12f")
+# sf().save_txt(init_path1, 'evo_times', Timeu, fmt="%.12f")
 
 #
 # plt.figure(figsize=(12,12))

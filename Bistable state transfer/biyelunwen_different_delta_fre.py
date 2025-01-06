@@ -26,6 +26,12 @@ pointWw = []
 pointXw = []
 pointYw = []
 pointZw = []
+W_X=8.206692955
+Y_Z=8.177622725
+min_for=[]
+max_for=[]
+min_back=[]
+max_back=[]
 for i in range(len(fins)):
     fin=fins[i]*1e-6
     sub_path=sf().creat_sub_file(init_path, f'fd step={round(fins[i],5)}kHz')
@@ -35,11 +41,14 @@ for i in range(len(fins)):
     # part2 = np.linspace(8.178, 8.206, 141)
     # part3 = np.linspace(8.206, 8.207, 1001)
 
-    part1 = np.arange(8.177, 8.178, fin)
-    part2 = np.linspace(8.178, 8.206, 141)
-    part3 = np.arange(8.206, 8.207, fin)
-    f = np.hstack((part1, np.delete(part2, 0), np.delete(part3, 0)))
+    # part1 = np.arange(8.177, 8.178, fin)
+    # part2 = np.linspace(8.178, 8.206, 141)
+    # part3 = np.arange(8.206, 8.207, fin)
+    # f = np.hstack((part1, np.delete(part2, 0), np.delete(part3, 0)))
     # P = np.linspace(0, 0.3, 301)
+    part2 = [W_X-fin/2,W_X+fin/2]
+    part1 = [Y_Z-fin/2,Y_Z+fin/2]
+    f = np.hstack((part1, part2))
     P=0.1
     para = {'omega_a': 8.246,
             'omega_m': 8.184,
@@ -128,36 +137,50 @@ for i in range(len(fins)):
         # sumbsquare.append(M_srb[i] ** 2 + M_sib[i] ** 2 + A_srb[i] ** 2 + A_sib[i] ** 2)
 
     delta_f=np.zeros(len(Timeu))+fin
+    for_max_index = list(msfsquare).index(max(msfsquare))
+    for_min_index = list(msfsquare).index(min(msfsquare))
+    back_max_index = list(msbsquare).index(max(msbsquare))
+    back_min_index = list(msbsquare).index(min(msbsquare))
+    min_for.append(msfsquare[for_max_index])
+    max_for.append(msfsquare[for_min_index])
+    min_back.append(msbsquare[back_max_index])
+    max_back.append(msbsquare[back_min_index])
 
-    sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
-    sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
-    sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
-    sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
-    sf().save_txt(sub_path1, 'evo_times', Timeu, fmt="%.12f")
-    sf().save_txt(sub_path1, 'delta_fs', delta_f, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'evo_times', Timeu, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'delta_fs', delta_f, fmt="%.12f")
 
     sf().save_txt(sub_path, 'forwards', msfsquare, fmt = "%.12f")
     sf().save_txt(sub_path, 'backwards', msbsquare, fmt = "%.12f")
     sf().save_txt(sub_path, 'evo_times', Timeu, fmt = "%.12f")
     sf().save_txt(sub_path, 'delta_fs', delta_f, fmt = "%.12f")
 
-sf().save_txt(init_path1, 'W fre', pointWf, fmt="%.12f")
-sf().save_txt(init_path1, 'W deltaplus', pointWw, fmt="%.12f")
-sf().save_txt(init_path1, 'X fre', pointXf, fmt="%.12f")
-sf().save_txt(init_path1, 'X deltaplus', pointXw, fmt="%.12f")
-sf().save_txt(init_path1, 'Y fre', pointYf, fmt="%.12f")
-sf().save_txt(init_path1, 'Y deltaplus', pointYw, fmt="%.12f")
-sf().save_txt(init_path1, 'Z fre', pointZf, fmt="%.12f")
-sf().save_txt(init_path1, 'Z deltaplus', pointZw, fmt="%.12f")
+# sf().save_txt(init_path1, 'W fre', pointWf, fmt="%.12f")
+# sf().save_txt(init_path1, 'W deltaplus', pointWw, fmt="%.12f")
+# sf().save_txt(init_path1, 'X fre', pointXf, fmt="%.12f")
+# sf().save_txt(init_path1, 'X deltaplus', pointXw, fmt="%.12f")
+# sf().save_txt(init_path1, 'Y fre', pointYf, fmt="%.12f")
+# sf().save_txt(init_path1, 'Y deltaplus', pointYw, fmt="%.12f")
+# sf().save_txt(init_path1, 'Z fre', pointZf, fmt="%.12f")
+# sf().save_txt(init_path1, 'Z deltaplus', pointZw, fmt="%.12f")
 
-sf().save_txt(init_path, 'W fre', pointWf, fmt="%.12f")
-sf().save_txt(init_path, 'W deltaplus', pointWw, fmt="%.12f")
-sf().save_txt(init_path, 'X fre', pointXf, fmt="%.12f")
-sf().save_txt(init_path, 'X deltaplus', pointXw, fmt="%.12f")
-sf().save_txt(init_path, 'Y fre', pointYf, fmt="%.12f")
-sf().save_txt(init_path, 'Y deltaplus', pointYw, fmt="%.12f")
-sf().save_txt(init_path, 'Z fre', pointZf, fmt="%.12f")
-sf().save_txt(init_path, 'Z deltaplus', pointZw, fmt="%.12f")
+# sf().save_txt(init_path, 'W fre', pointWf, fmt="%.12f")
+# sf().save_txt(init_path, 'W deltaplus', pointWw, fmt="%.12f")
+# sf().save_txt(init_path, 'X fre', pointXf, fmt="%.12f")
+# sf().save_txt(init_path, 'X deltaplus', pointXw, fmt="%.12f")
+# sf().save_txt(init_path, 'Y fre', pointYf, fmt="%.12f")
+# sf().save_txt(init_path, 'Y deltaplus', pointYw, fmt="%.12f")
+# sf().save_txt(init_path, 'Z fre', pointZf, fmt="%.12f")
+# sf().save_txt(init_path, 'Z deltaplus', pointZw, fmt="%.12f")
+
+sf().save_txt(init_path, 'for min', min_for, fmt="%.12f")
+sf().save_txt(init_path, 'for max', max_for, fmt="%.12f")
+sf().save_txt(init_path, 'back min', min_back, fmt="%.12f")
+sf().save_txt(init_path, 'back max', max_back, fmt="%.12f")
+
 # # # xsmall1=0.2e-6
 # # # xlarge1=0.3e-6
 # # # ysmall1=min([-np.abs(M_srf[0]*3),-np.abs(M_sif[0]*3)])

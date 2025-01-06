@@ -29,10 +29,10 @@ for i in range(len(mWins)):
 
 slopemax,interceptmax=np.polyfit(np.log10(mWins),np.log10(max_position),1)
 nihe1=slopemax*np.log10(mWins)+interceptmax
-
+print(f'slope is {slopemax} and offset is {interceptmax}')
 
 fig, axes = plt.subplots(1, 1, figsize=(15, 10))
-axes.plot(np.log10(mWins),nihe1,'-',linewidth=5,color='blue',markerfacecolor='None')
+axes.plot(np.log10(mWins),nihe1,'-',linewidth=5,color='blue')
 axes.plot(np.log10(mWins),np.log10(max_position),'o',markersize=10,color='deepskyblue',markerfacecolor='None')
 axes.set_xlabel(r'$\Delta P_d$ [mW]',fontsize=40)
 axes.set_ylabel(r'$times$ [ns]',fontsize=40)
@@ -54,10 +54,11 @@ for i in range(len(mWins)):
 
 
 slopemin,interceptmin=np.polyfit(np.log10(mWins),np.log10(min_position),1)
-nihe2=slopemax*np.log10(mWins)+interceptmin
+nihe2=slopemin*np.log10(mWins)+interceptmin
+print(f'slope is {slopemin} and offset is {interceptmin}')
 
 fig, axes = plt.subplots(1, 1, figsize=(15, 10))
-axes.plot(np.log10(mWins), nihe2, '-', linewidth=5, color='red', markerfacecolor='None')
+axes.plot(np.log10(mWins), nihe2, '-', linewidth=5, color='red')
 axes.plot(np.log10(mWins), np.log10(min_position), 'o', markersize=10, color='tomato', markerfacecolor='None')
 axes.set_xlabel(r'$\Delta P_d$ [mW]', fontsize=40)
 axes.set_ylabel(r'$times$ [ns]', fontsize=40)

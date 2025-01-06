@@ -17,7 +17,8 @@ mWins = np.hstack((mpart1, np.delete(mpart2, 0), np.delete(mpart3, 0), np.delete
 
 init_path=f'F:\\change power\\bistable date'
 init_path1=f'F:\\change power\\bistable date real and imag'
-
+A_B=0.21108145
+C_D=0.01552785
 pointAp=[]
 pointBp=[]
 pointCp=[]
@@ -26,19 +27,29 @@ pointAw=[]
 pointBw=[]
 pointCw=[]
 pointDw=[]
+
+min_for=[]
+max_for=[]
+min_back=[]
+max_back=[]
 for i in range(len(mWins)):
     mWin=mWins[i]*1e-3
     sub_path=sf().creat_sub_file(init_path, f'Pd step={round(mWins[i],5)}mW')
     sub_path1=sf().creat_sub_file(init_path1, f'Pd step={round(mWins[i],5)}mW')
 
-    part1=np.arange(0.010,0.020,mWin)
-    part2=np.linspace(0.020,0.205,186)
-    part3=np.arange(0.205,0.215,mWin)
+    # part1=np.arange(0.010,0.020,mWin)
+    # part2=np.linspace(0.020,0.205,186)
+    # part3=np.arange(0.205,0.215,mWin)
 
     # part1 = np.linspace(0.014, 0.018, 201)
     # part2 = np.linspace(0.018, 0.209, 192)
     # part3 = np.linspace(0.209, 0.213, 201)
-    P = np.hstack((part1, np.delete(part2, 0), np.delete(part3, 0)))
+    # P = np.hstack((part1, np.delete(part2, 0), np.delete(part3, 0)))
+    part2 = [A_B-mWin/2,A_B+mWin/2]
+    part1 = [C_D-mWin/2,C_D+mWin/2]
+    P = np.hstack((part1,part2))
+    print(P)
+
     # print(P)
     # P = np.linspace(0, 0.3, 301)
     f=8.18
@@ -58,14 +69,14 @@ for i in range(len(mWins)):
     ## Delta_+的双稳态求解
     # forward, forwardp, backward, backwardp, unstablep, unstable=Bistability(**para).BS_power_with_unstable()
     forward, forwardp, backward, backwardp, unstable, unstablep=Bistability(**para).BS_power_inside_BS()
-    pointAp.append(forwardp[-2])
-    pointBp.append(forwardp[-1])
-    pointCp.append(backwardp[1])
-    pointDp.append(backwardp[0])
-    pointAw.append(forward[-2])
-    pointBw.append(forward[-1])
-    pointCw.append(backward[1])
-    pointDw.append(backward[0])
+    # pointAp.append(forwardp[-2])
+    # pointBp.append(forwardp[-1])
+    # pointCp.append(backwardp[1])
+    # pointDp.append(backwardp[0])
+    # pointAw.append(forward[-2])
+    # pointBw.append(forward[-1])
+    # pointCw.append(backward[1])
+    # pointDw.append(backward[0])
     ## 双稳态图
     # plt.figure(figsize=(7, 6))
     # axes1 = plt.subplot(111)
@@ -129,36 +140,51 @@ for i in range(len(mWins)):
 
     delta_p=np.zeros(len(Timeu))+mWin
 
+    for_max_index=list(msfsquare).index(max(msfsquare))
+    for_min_index=list(msfsquare).index(min(msfsquare))
+    back_max_index = list(msbsquare).index(max(msbsquare))
+    back_min_index = list(msbsquare).index(min(msbsquare))
+    min_for.append(msfsquare[for_max_index])
+    max_for.append(msfsquare[for_min_index])
+    min_back.append(msbsquare[back_max_index])
+    max_back.append(msbsquare[back_min_index])
+
 
     sf().save_txt(sub_path, 'forwards', msfsquare, fmt = "%.12f")
     sf().save_txt(sub_path, 'backwards', msbsquare, fmt = "%.12f")
     sf().save_txt(sub_path, 'evo_times', Timeu, fmt="%.12f")
     sf().save_txt(sub_path, 'delta_Ps', delta_p, fmt="%.12f")
 
-    sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
-    sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
-    sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
-    sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
-    sf().save_txt(sub_path1, 'evo_times', Timeu, fmt="%.12f")
-    sf().save_txt(sub_path1, 'delta_Ps', delta_p, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'evo_times', Timeu, fmt="%.12f")
+    # sf().save_txt(sub_path1, 'delta_Ps', delta_p, fmt="%.12f")
+#
+# sf().save_txt(init_path1, 'A power', pointAp, fmt="%.12f")
+# sf().save_txt(init_path1, 'A deltaplus', pointAw, fmt="%.12f")
+# sf().save_txt(init_path1, 'B power', pointBp, fmt="%.12f")
+# sf().save_txt(init_path1, 'B deltaplus', pointBw, fmt="%.12f")
+# sf().save_txt(init_path1, 'C power', pointCp, fmt="%.12f")
+# sf().save_txt(init_path1, 'C deltaplus', pointCw, fmt="%.12f")
+# sf().save_txt(init_path1, 'D power', pointDp, fmt="%.12f")
+# sf().save_txt(init_path1, 'D deltaplus', pointDw, fmt="%.12f")
+#
+# sf().save_txt(init_path, 'A power', pointAp, fmt="%.12f")
+# sf().save_txt(init_path, 'A deltaplus', pointAw, fmt="%.12f")
+# sf().save_txt(init_path, 'B power', pointBp, fmt="%.12f")
+# sf().save_txt(init_path, 'B deltaplus', pointBw, fmt="%.12f")
+# sf().save_txt(init_path, 'C power', pointCp, fmt="%.12f")
+# sf().save_txt(init_path, 'C deltaplus', pointCw, fmt="%.12f")
+# sf().save_txt(init_path, 'D power', pointDp, fmt="%.12f")
+# sf().save_txt(init_path, 'D deltaplus', pointDw, fmt="%.12f")
 
-sf().save_txt(init_path1, 'A power', pointAp, fmt="%.12f")
-sf().save_txt(init_path1, 'A deltaplus', pointAw, fmt="%.12f")
-sf().save_txt(init_path1, 'B power', pointBp, fmt="%.12f")
-sf().save_txt(init_path1, 'B deltaplus', pointBw, fmt="%.12f")
-sf().save_txt(init_path1, 'C power', pointCp, fmt="%.12f")
-sf().save_txt(init_path1, 'C deltaplus', pointCw, fmt="%.12f")
-sf().save_txt(init_path1, 'D power', pointDp, fmt="%.12f")
-sf().save_txt(init_path1, 'D deltaplus', pointDw, fmt="%.12f")
 
-sf().save_txt(init_path, 'A power', pointAp, fmt="%.12f")
-sf().save_txt(init_path, 'A deltaplus', pointAw, fmt="%.12f")
-sf().save_txt(init_path, 'B power', pointBp, fmt="%.12f")
-sf().save_txt(init_path, 'B deltaplus', pointBw, fmt="%.12f")
-sf().save_txt(init_path, 'C power', pointCp, fmt="%.12f")
-sf().save_txt(init_path, 'C deltaplus', pointCw, fmt="%.12f")
-sf().save_txt(init_path, 'D power', pointDp, fmt="%.12f")
-sf().save_txt(init_path, 'D deltaplus', pointDw, fmt="%.12f")
+sf().save_txt(init_path, 'for min', min_for, fmt="%.12f")
+sf().save_txt(init_path, 'for max', max_for, fmt="%.12f")
+sf().save_txt(init_path, 'back min', min_back, fmt="%.12f")
+sf().save_txt(init_path, 'back max', max_back, fmt="%.12f")
 # # # xsmall1=0.2e-6
 # # # xlarge1=0.3e-6
 # # # ysmall1=min([-np.abs(M_srf[0]*3),-np.abs(M_sif[0]*3)])

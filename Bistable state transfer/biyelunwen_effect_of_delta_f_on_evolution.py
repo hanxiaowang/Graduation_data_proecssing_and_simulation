@@ -22,19 +22,19 @@ min_evo=[]
 evo_times=np.loadtxt(r'F:\change fre\bistable date\fd step=1.0kHz\evo_times.txt')
 ## 正向演化
 for i in range(len(fins)):
-    forward = np.loadtxt(f'F:\\change fre\\bistable date\\fd step={round(fins[i],5)}kHz\\backforwards.txt')
-    max_evo.append(max(forward))
-    max_index = list(forward).index(max(forward))
-    max_position.append(evo_times[max_index])
+    forward = np.loadtxt(f'F:\\change fre\\bistable date\\fd step={round(fins[i],5)}kHz\\forwards.txt')
+    min_evo.append(min(forward))
+    min_index = list(forward).index(min(forward))
+    min_position.append(evo_times[min_index])
 
-slopemax,interceptmax=np.polyfit(np.log10(fins),np.log10(max_position),1)
-nihe1=slopemax*np.log10(fins)+interceptmax
-
-
+slopemin,interceptmin=np.polyfit(np.log10(fins),np.log10(min_position),1)
+nihe1=slopemin*np.log10(fins)+interceptmin
+print(f'slope is {slopemin} and offset is {interceptmin}')
+np.savetxt(f'F:\\change fre\\bistable date\\min.txt',min_position)
 fig, axes = plt.subplots(1, 1, figsize=(15, 10))
-axes.plot(np.log10(fins),nihe1,'-',linewidth=5,color='red',markerfacecolor='None')
-axes.plot(np.log10(fins),np.log10(max_position),'o',markersize=10,color='tomato',markerfacecolor='None')
-axes.set_xlabel(r'$\Delta f_d$ [mW]',fontsize=40)
+axes.plot(np.log10(fins),nihe1,'-',linewidth=5,color='blue')
+axes.plot(np.log10(fins),np.log10(min_position),'o',markersize=10,color='tomato',markerfacecolor='None')
+axes.set_xlabel(r'$\Delta f_d$ [kHz]',fontsize=40)
 axes.set_ylabel(r'$times$ [ns]',fontsize=40)
 # plt.xscale('log')
 # plt.yscale('log')
@@ -43,25 +43,25 @@ plt.tick_params(labelsize=35)
 plt.show()
 
 ## 反向演化
-for i in range(len(fins)):
-    backward = np.loadtxt(f'F:\\change fre\\bistable date\\fd step={round(fins[i],5)}kHz\\forwards.txt')
-    min_evo.append(min(backward))
-    min_index = list(backward).index(min(backward))
-    min_position.append(evo_times[min_index])
-
-slopemin,interceptmin=np.polyfit(np.log10(fins),np.log10(min_position),1)
-nihe2=slopemax*np.log10(fins)+interceptmin
-
-fig, axes = plt.subplots(1, 1, figsize=(15, 10))
-axes.plot(np.log10(fins), nihe2, '-', linewidth=5, color='blue', markerfacecolor='None')
-axes.plot(np.log10(fins), np.log10(min_position), 'o', markersize=10, color='deepskyblue', markerfacecolor='None')
-axes.set_xlabel(r'$\Delta P_d$ [mW]', fontsize=40)
-axes.set_ylabel(r'$times$ [ns]', fontsize=40)
-# plt.xscale('log')
-# plt.yscale('log')
-# plt.yticks([-10,0,10],['-10','0','10'])
-plt.tick_params(labelsize=35)
-plt.show()
+# for i in range(len(fins)):
+#     backward = np.loadtxt(f'F:\\change fre\\bistable date\\fd step={round(fins[i],5)}kHz\\backwards.txt')
+#     max_evo.append(max(backward))
+#     max_index = list(backward).index(max(backward))
+#     max_position.append(evo_times[max_index])
+#
+# slopemax,interceptmax=np.polyfit(np.log10(fins),np.log10(max_position),1)
+# nihe2=slopemax*np.log10(fins)+interceptmax
+# print(f'slope is {slopemax} and offset is {interceptmax}')
+# fig, axes = plt.subplots(1, 1, figsize=(15, 10))
+# axes.plot(np.log10(fins), nihe2, '-', linewidth=5, color='blue')
+# axes.plot(np.log10(fins), np.log10(max_position), 'o', markersize=10, color='deepskyblue', markerfacecolor='None')
+# axes.set_xlabel(r'$\Delta f_d$ [kHz]', fontsize=40)
+# axes.set_ylabel(r'$times$ [ns]', fontsize=40)
+# # plt.xscale('log')
+# # plt.yscale('log')
+# # plt.yticks([-10,0,10],['-10','0','10'])
+# plt.tick_params(labelsize=35)
+# plt.show()
 
 
 
