@@ -166,12 +166,12 @@ for i in range(len(mWins)):
     sf().save_txt(sub_path, 'evo_times', Timeu, fmt="%.12f")
     sf().save_txt(sub_path, 'delta_Ps', delta_p, fmt="%.12f")
 
-    # sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
-    # sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
-    # sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
-    # sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
-    # sf().save_txt(sub_path1, 'evo_times', Timeu, fmt="%.12f")
-    # sf().save_txt(sub_path1, 'delta_Ps', delta_p, fmt="%.12f")
+    sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
+    sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
+    sf().save_txt(sub_path1, 'evo_times', Timeu, fmt="%.12f")
+    sf().save_txt(sub_path1, 'delta_Ps', delta_p, fmt="%.12f")
 #
 # sf().save_txt(init_path1, 'A power', pointAp, fmt="%.12f")
 # sf().save_txt(init_path1, 'A deltaplus', pointAw, fmt="%.12f")
@@ -200,6 +200,7 @@ sf().save_txt(init_path, 'for min time', time_min_for, fmt="%.12f")
 sf().save_txt(init_path, 'for max time', time_max_for, fmt="%.12f")
 sf().save_txt(init_path, 'back min time', time_min_back, fmt="%.12f")
 sf().save_txt(init_path, 'back max time', time_max_back, fmt="%.12f")
+
 # # # xsmall1=0.2e-6
 # # # xlarge1=0.3e-6
 # # # ysmall1=min([-np.abs(M_srf[0]*3),-np.abs(M_sif[0]*3)])

@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 xneed=[0.034]
 rneed=[0.0578]
-steps=1000001
+steps=100001
 start=36*np.pi/180
 thetas=np.linspace(start,0,steps)
 
@@ -28,8 +28,18 @@ plt.figure(figsize=(10, 6))
 axes1 = plt.subplot(111)
 # axes1.plot(thetas, xneed, '-o',  markersize=4,label=r'x',markerfacecolor='None')
 # axes1.plot(thetas, rneed, '-o',  markersize=4,label=r'r',markerfacecolor='None')
+# axes1.plot(thetas, xs, '-o',  markersize=4,label=r'xs',markerfacecolor='None')
+# axes1.plot(thetas, zs, '-o',  markersize=4,label=r'zs',markerfacecolor='None')
+# axes1.plot(rneed, zs, '-o',  markersize=4,label=r'zs',markerfacecolor='None')
+# axes1.plot(rneed, xs, '-o',  markersize=4,label=r'zs',markerfacecolor='None')
+# axes1.plot(zs, rneed, '-o',  markersize=4,label=r'zs',markerfacecolor='None')
 axes1.plot(zs, xs, '-o',  markersize=4,label=r'zs',markerfacecolor='None')
-axes1.set_xlabel(r'theta', fontsize=20)
+
+axes1.set_xlabel(r'zs', fontsize=20)
+axes1.set_ylabel(r'xs', fontsize=20)
+# axes1.set_xlabel(r'theta', fontsize=20)
+# axes1.set_ylabel(r'r', fontsize=20)
+
 # axes1.set_ylabel(r'x', fontsize=20)
 # axes1.set_ylabel(r'r', fontsize=20)
 

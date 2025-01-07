@@ -31,7 +31,7 @@ min_evo=[]
 # nihe1=slopemax*np.log10(mWins)+interceptmax
 # print(f'slope is {slopemax} and offset is {interceptmax}')
 #
-# fig, axes = plt.subplots(1, 1, figsize=(15, 10))
+# fig, axes = plt.subplots(1, 1, figsize=(8, 6))
 # axes.plot(np.log10(mWins),nihe1,'-',linewidth=5,color='blue')
 # axes.plot(np.log10(mWins),np.log10(max_position),'o',markersize=10,color='deepskyblue',markerfacecolor='None')
 # axes.set_xlabel(r'$\Delta P_d$ [mW]',fontsize=40)
@@ -57,7 +57,7 @@ min_evo=[]
 # nihe2=slopemin*np.log10(mWins)+interceptmin
 # print(f'slope is {slopemin} and offset is {interceptmin}')
 #
-# fig, axes = plt.subplots(1, 1, figsize=(15, 10))
+# fig, axes = plt.subplots(1, 1, figsize=(8, 6))
 # axes.plot(np.log10(mWins), nihe2, '-', linewidth=5, color='red')
 # axes.plot(np.log10(mWins), np.log10(min_position), 'o', markersize=10, color='tomato', markerfacecolor='None')
 # axes.set_xlabel(r'$\Delta P_d$ [mW]', fontsize=40)
@@ -94,15 +94,38 @@ for_max=np.loadtxt(r'F:\change power\bistable date\for max time.txt')
 for_min=np.loadtxt(r'F:\change power\bistable date\for min time.txt')
 back_max=np.loadtxt(r'F:\change power\bistable date\back max time.txt')
 back_min=np.loadtxt(r'F:\change power\bistable date\back min time.txt')
-## A to B
-fig, axes = plt.subplots(1, 1, figsize=(15, 10))
-# axes.plot(np.log10(mWins), np.log10(for_max), 'o', markersize=10, color='deepskyblue', markerfacecolor='None')
-axes.plot(mWins, for_min, 'o', markersize=10, color='deepskyblue', markerfacecolor='None')
 
-axes.set_xlabel(r'$\Delta P_d$ [mW]', fontsize=40)
-axes.set_ylabel(r'$times$ [ns]', fontsize=40)
+## A to B
+slopemax,interceptmax=np.polyfit(np.log10(mWins),np.log10(for_max),1)
+nihe1=slopemax*np.log10(mWins)+interceptmax
+print(f'slope is {slopemax} and offset is {interceptmax}')
+fig, axes = plt.subplots(1, 1, figsize=(8, 6))
+axes.plot(np.log10(mWins), nihe1, '-', linewidth=5, color='blue', markerfacecolor='None',label=r'${lg(t_{A \longrightarrow B})=-0.427lg(\Delta P_d)-6.160}$')
+axes.plot(np.log10(mWins), np.log10(for_max), 'o', markersize=15, color='deepskyblue',markeredgewidth=3, markerfacecolor='None')
+
+axes.set_xlabel(r'$\Delta P_d$ [mW]', fontsize=20)
+axes.set_ylabel(r'$times$ [ns]', fontsize=20)
 # plt.xscale('log')
 # plt.yscale('log')
 # plt.yticks([-10,0,10],['-10','0','10'])
-plt.tick_params(labelsize=35)
+plt.tick_params(labelsize=20)
+plt.legend(loc=0,prop={'family':'Times New Roman','size':12})
+plt.show()
+
+
+## C to D
+slopemin,interceptmin=np.polyfit(np.log10(mWins),np.log10(back_min),1)
+nihe2=slopemin*np.log10(mWins)+interceptmin
+print(f'slope is {slopemin} and offset is {interceptmin}')
+fig, axes = plt.subplots(1, 1, figsize=(8, 6))
+axes.plot(np.log10(mWins), nihe2, '-', linewidth=5, color='red', markerfacecolor='None',label=r'${lg(t_{C \longrightarrow D})=-0.408lg(\Delta f_d)-6.006}$')
+axes.plot(np.log10(mWins), np.log10(back_min), 'o', markersize=15, color='tomato',markeredgewidth=3, markerfacecolor='None')
+
+axes.set_xlabel(r'$\Delta P_d$ [mW]', fontsize=20)
+axes.set_ylabel(r'$times$ [ns]', fontsize=20)
+# plt.xscale('log')
+# plt.yscale('log')
+# plt.yticks([-10,0,10],['-10','0','10'])
+plt.tick_params(labelsize=20)
+plt.legend(loc=0,prop={'family':'Times New Roman','size':12})
 plt.show()

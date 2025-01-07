@@ -157,12 +157,12 @@ for i in range(len(fins)):
     time_min_back.append(Timeu[back_min_index])
     time_max_back.append(Timeu[back_max_index])
 
-    # sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
-    # sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
-    # sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
-    # sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
-    # sf().save_txt(sub_path1, 'evo_times', Timeu, fmt="%.12f")
-    # sf().save_txt(sub_path1, 'delta_fs', delta_f, fmt="%.12f")
+    sf().save_txt(sub_path1, 'forwards real', M_srf, fmt="%.12f")
+    sf().save_txt(sub_path1, 'forwards imag', M_sif, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards real', M_srb, fmt="%.12f")
+    sf().save_txt(sub_path1, 'backwards imag', M_sib, fmt="%.12f")
+    sf().save_txt(sub_path1, 'evo_times', Timeu, fmt="%.12f")
+    sf().save_txt(sub_path1, 'delta_fs', delta_f, fmt="%.12f")
 
     sf().save_txt(sub_path, 'forwards', msfsquare, fmt = "%.12f")
     sf().save_txt(sub_path, 'backwards', msbsquare, fmt = "%.12f")
