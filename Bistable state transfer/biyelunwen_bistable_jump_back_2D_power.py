@@ -57,7 +57,7 @@ init_path1=f'F:\\change power\\bistable jump back 8.18 and 1mW real and imag'
 # jump_times = np.hstack((mpart1, np.delete(mpart2, 0)))
 
 
-jump_times = np.linspace(0,600000,60001)
+jump_times = np.linspace(0,600000,6001)
 
 # middle_number=20
 M_srfstart=[]
@@ -67,6 +67,7 @@ M_srbstart=[]
 M_srbstop=[]
 Timeneed=[]
 for i in range(len(jump_times)):
+    print(i)
     interval=1e-11
     jump_time=jump_times[i]
     # sub_path = sf().creat_sub_file(init_path, f'jump back time={round(interval*jump_time*1e9, 10)}ns')

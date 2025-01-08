@@ -4,7 +4,12 @@ from Needfunctions import Bistability
 from mpl_toolkits.mplot3d import Axes3D
 import os
 from Preparation_WXH import save_file as sf
-
+# mpart5=np.linspace(1,10,10)
+# mpart4=np.linspace(0.1,1,10)
+# mpart3=np.linspace(0.01,0.1,10)
+# mpart2=np.linspace(0.001,0.01,10)
+# mpart1=np.linspace(0.0001,0.001,10)
+# mWins = np.hstack((mpart1, np.delete(mpart2, 0), np.delete(mpart3, 0), np.delete(mpart4, 0), np.delete(mpart5, 0)))
 
 # #  2D演化图
 # forwardsin1=np.loadtxt(r'F:\change power\bistable date\Pd step=10.0mW\forwards.txt')
@@ -55,65 +60,89 @@ from Preparation_WXH import save_file as sf
 # plt.show()
 
 # #  3D演化图
-Pd=0.01
-
-forwardsin1r=np.loadtxt(f'F:\\change power\\bistable date real and imag\\Pd step={Pd}mW\\forwards real.txt')
-forwardsin1i=np.loadtxt(f'F:\\change power\\bistable date real and imag\\Pd step={Pd}mW\\forwards imag.txt')
-backwardsin1r=np.loadtxt(f'F:\\change power\\bistable date real and imag\\Pd step={Pd}mW\\backwards real.txt')
-backwardsin1i=np.loadtxt(f'F:\\change power\\bistable date real and imag\\Pd step={Pd}mW\\backwards imag.txt')
-evo_timesin1=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.0001mW\evo_times.txt')
-delta_Psin1=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.0001mW\delta_Ps.txt')
+# mWins=[0.0001,0.001,0.01,0.1,1.0,10.0]
+mWins=[0.001,0.01]
 #
-# # forwardsin2r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.01mW\forwards.txt')
-# # forwardsin2i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.01mW\forwards.txt')
-# # backwardsin2r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.01mW\backwards.txt')
-# # backwardsin2i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.01mW\backwards.txt')
-# #
-# # forwardsin3r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=1.0mW\forwards.txt')
-# # forwardsin3i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=1.0mW\forwards.txt')
-# # backwardsin3r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=1.0mW\backwards.txt')
-# # backwardsin3i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=1.0mW\backwards.txt')
-# # #
-# # forwardsin4r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=10mW\forwards.txt')
-# # forwardsin4i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=10mW\forwards.txt')
-# # backwardsin4r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=10mW\backwards.txt')
-# # backwardsin4i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=10mW\backwards.txt')
-#
-middle_number=50
+for i in range(len(mWins)):
+    Pd=mWins[i]
+    print(Pd)
 
-fig=plt.figure(figsize=(12, 6))
-ax=fig.add_subplot(1,1,1,projection='3d')
-ax=Axes3D(fig)
-fig.add_axes(ax)
-ax.set_box_aspect([1,2,1])
-ax.plot(forwardsin1i[::middle_number],evo_timesin1[::middle_number],forwardsin1r[::middle_number],'-o', color='blue',markersize=4,markerfacecolor='None',label='$A \longrightarrow B$')
-ax.set_xlabel(r'Imag', fontsize=10)
-ax.set_ylabel(r'time', fontsize=10)
-ax.set_zlabel(r'Real', fontsize=10)
-# ax.set_ylim(0,10)
-# ax.set_xlim(-60,60)
-# plt.xticks([-50,0,50],['-50','0','50'])
-# ax.grid(None)
-ax.view_init(elev=25, azim=40)
-plt.legend(loc=0)
-plt.show()
+    middle_number=200
 
-fig=plt.figure(figsize=(12, 6))
-ax=fig.add_subplot(1,1,1,projection='3d')
-ax=Axes3D(fig)
-fig.add_axes(ax)
-ax.set_box_aspect([1,2,1])
-ax.plot(backwardsin1i[::middle_number],evo_timesin1[::middle_number],backwardsin1r[::middle_number],'-o', color='red',markersize=4,markerfacecolor='None',label='$C \longrightarrow D$')
-ax.set_xlabel(r'Imag', fontsize=10)
-ax.set_ylabel(r'time', fontsize=10)
-ax.set_zlabel(r'Real', fontsize=10)
-# ax.set_ylim(0,10)
-# ax.set_xlim(-60,60)
-# plt.xticks([-50,0,50],['-50','0','50'])
-# ax.grid(None)
-ax.view_init(elev=25, azim=40)
-plt.legend(loc=0)
-plt.show()
+    if Pd==0.0001:
+        length_A_to_B=8e6
+        length_C_to_D=8e6
+    elif Pd==0.001:
+        length_A_to_B = 3e6
+        length_C_to_D = 3e6
+    elif Pd == 0.01:
+        length_A_to_B = 8e5
+        length_C_to_D = 8e5
+    elif Pd == 0.1:
+        length_A_to_B = 4e5
+        length_C_to_D = 4e5
+    elif Pd == 1.0:
+        length_A_to_B = 2e5
+        length_C_to_D = 2e5
+    elif Pd == 10.0:
+        length_A_to_B = 2e5
+        length_C_to_D = 2e5
+    forwardsin1r=np.loadtxt(f'F:\\change power\\bistable date real and imag\\Pd step={Pd}mW\\forwards real.txt')
+    forwardsin1i=np.loadtxt(f'F:\\change power\\bistable date real and imag\\Pd step={Pd}mW\\forwards imag.txt')
+    backwardsin1r=np.loadtxt(f'F:\\change power\\bistable date real and imag\\Pd step={Pd}mW\\backwards real.txt')
+    backwardsin1i=np.loadtxt(f'F:\\change power\\bistable date real and imag\\Pd step={Pd}mW\\backwards imag.txt')
+    evo_timesin1=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.0001mW\evo_times.txt')
+    delta_Psin1=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.0001mW\delta_Ps.txt')
+    #
+    # # forwardsin2r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.01mW\forwards.txt')
+    # # forwardsin2i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.01mW\forwards.txt')
+    # # backwardsin2r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.01mW\backwards.txt')
+    # # backwardsin2i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=0.01mW\backwards.txt')
+    # #
+    # # forwardsin3r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=1.0mW\forwards.txt')
+    # # forwardsin3i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=1.0mW\forwards.txt')
+    # # backwardsin3r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=1.0mW\backwards.txt')
+    # # backwardsin3i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=1.0mW\backwards.txt')
+    # # #
+    # # forwardsin4r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=10mW\forwards.txt')
+    # # forwardsin4i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=10mW\forwards.txt')
+    # # backwardsin4r=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=10mW\backwards.txt')
+    # # backwardsin4i=np.loadtxt(r'F:\change power\bistable date real and imag\Pd step=10mW\backwards.txt')
+    #
+
+    fig=plt.figure(figsize=(12, 6))
+    ax=fig.add_subplot(1,1,1,projection='3d')
+    ax=Axes3D(fig)
+    fig.add_axes(ax)
+    ax.set_box_aspect([1,2,1])
+    ax.plot(forwardsin1i[0:int(length_A_to_B):middle_number],evo_timesin1[0:int(length_A_to_B):middle_number],forwardsin1r[0:int(length_A_to_B):middle_number],'-o', color='blue',markersize=4,markerfacecolor='None',label='$A \longrightarrow B$')
+    ax.set_xlabel(r'Imag', fontsize=10)
+    ax.set_ylabel(r'time', fontsize=10)
+    ax.set_zlabel(r'Real', fontsize=10)
+    # ax.set_ylim(0,10)
+    # ax.set_xlim(-60,60)
+    # plt.xticks([-50,0,50],['-50','0','50'])
+    # ax.grid(None)
+    ax.view_init(elev=14, azim=25)
+    plt.legend(loc=0)
+    plt.show()
+
+    fig=plt.figure(figsize=(12, 6))
+    ax=fig.add_subplot(1,1,1,projection='3d')
+    ax=Axes3D(fig)
+    fig.add_axes(ax)
+    ax.set_box_aspect([1,2,1])
+    ax.plot(backwardsin1i[0:int(length_C_to_D):middle_number],evo_timesin1[0:int(length_C_to_D):middle_number],backwardsin1r[0:int(length_C_to_D):middle_number],'-o', color='red',markersize=4,markerfacecolor='None',label='$C \longrightarrow D$')
+    ax.set_xlabel(r'Imag', fontsize=10)
+    ax.set_ylabel(r'time', fontsize=10)
+    ax.set_zlabel(r'Real', fontsize=10)
+    # ax.set_ylim(0,10)
+    # ax.set_xlim(-60,60)
+    # plt.xticks([-50,0,50],['-50','0','50'])
+    # ax.grid(None)
+    ax.view_init(elev=14 ,azim=25)
+    plt.legend(loc=0)
+    plt.show()
 #
 # # fig=plt.figure(figsize=(12, 6))
 # # ax=fig.add_subplot(1,1,1,projection='3d')
