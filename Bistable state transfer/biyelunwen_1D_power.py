@@ -75,8 +75,8 @@ msu,asu=Bistability(**para).cal_ms_as_P(wmu-wminf,unstablep)
 
 
 ## 求解跳跃的演化
-M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,6e5,forwardp[-1],f)
-M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,6e5,backwardp[0],f)
+M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,4e5,forwardp[-1],f)
+M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,4e5,backwardp[0],f)
 
 
 ## m和a的跳跃演化图 3D
@@ -117,7 +117,7 @@ M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,6e
 # ysmall4=min([min(A_srb),min(A_sib)])*aaa
 # ylarge4=max([max(A_srb),max(A_sib)])*aaa
 # #
-middle_number=20
+middle_number=50
 # #
 # # ## m和a的跳跃演化图 2D
 # plt.figure(figsize=(8, 6))
@@ -195,14 +195,16 @@ deltamsb2=(Bistability(**para).branch_fre(wminf+np.array(msb2))-wpinf)/(1e6*2*np
 ## 激发数|m|^2,|a|^2,两者之和
 plt.figure(figsize=(8, 6))
 axes1 = plt.subplot(111)
-axes1.plot(Timeu[::middle_number], msfsquare[::middle_number], 's', markersize=4, label=r'$A \longrightarrow B,|m|^2$',color='royalblue')
+axes1.plot(Timeu[::middle_number], msfsquare[::middle_number], 's', markersize=4, label=r'$A \longrightarrow B,|m|^2$',color='blue')
+
+# axes1.plot(Timeu[::middle_number], msfsquare[::middle_number], 's', markersize=4, label=r'$A \longrightarrow B,|m|^2$',color='royalblue')
 # axes1.plot(Timeu[::middle_number], asfsquare[::middle_number], '^', markersize=4, label=r'$A \longrightarrow B,|a|^2$',color='deepskyblue')
 # axes1.plot(Timeu[::middle_number], sumfsquare[::middle_number], '--', linewidth=5, label=r'$A \longrightarrow B,|m|^2+|a|^2$',color='green')
 # axes1.plot(Timeu[::middle_number], msbsquare[::middle_number], 's', markersize=4, label=r'$C \longrightarrow D,|m|^2$',color='fuchsia')
 # axes1.plot(Timeu[::middle_number], asbsquare[::middle_number], '^', markersize=4, label=r'$C \longrightarrow D,|a|^2$',color='tomato')
 # axes1.plot(Timeu[::middle_number], sumbsquare[::middle_number], '--', linewidth=5, label=r'$C \longrightarrow D,|m|^2+|a|^2$',color='green')
 # plt.xlim(xsmall1,xlarge1)
-plt.legend(loc=0)
+plt.legend(loc=0,fontsize=15)
 plt.show()
 
 plt.figure(figsize=(8, 6))
@@ -210,11 +212,13 @@ axes1 = plt.subplot(111)
 # axes1.plot(Timeu[::middle_number], msfsquare[::middle_number], 's', markersize=4, label=r'$A \longrightarrow B,|m|^2$',color='royalblue')
 # axes1.plot(Timeu[::middle_number], asfsquare[::middle_number], '^', markersize=4, label=r'$A \longrightarrow B,|a|^2$',color='deepskyblue')
 # axes1.plot(Timeu[::middle_number], sumfsquare[::middle_number], '--', linewidth=5, label=r'$A \longrightarrow B,|m|^2+|a|^2$',color='green')
-axes1.plot(Timeu[::middle_number], msbsquare[::middle_number], 's', markersize=4, label=r'$C \longrightarrow D,|m|^2$',color='fuchsia')
+# axes1.plot(Timeu[::middle_number], msbsquare[::middle_number], 's', markersize=4, label=r'$C \longrightarrow D,|m|^2$',color='fuchsia')
+axes1.plot(Timeu[::middle_number], msbsquare[::middle_number], 's', markersize=4, label=r'$C \longrightarrow D,|m|^2$',color='red')
+
 # axes1.plot(Timeu[::middle_number], asbsquare[::middle_number], '^', markersize=4, label=r'$C \longrightarrow D,|a|^2$',color='tomato')
 # axes1.plot(Timeu[::middle_number], sumbsquare[::middle_number], '--', linewidth=5, label=r'$C \longrightarrow D,|m|^2+|a|^2$',color='green')
 # plt.xlim(xsmall2,xlarge2)
-plt.legend(loc=0)
+plt.legend(loc=0,fontsize=15)
 plt.show()
 
 # print(deltamsf2[0])

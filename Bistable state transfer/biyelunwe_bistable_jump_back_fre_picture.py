@@ -20,13 +20,13 @@ forwardsin3=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump 
 backwardsin3=np.loadtxt(r'F:\change fre\bistable jump back 100mW and 100kHz\jump back time=6000.0ns\backwards.txt')
 
 
-middle_number=1
+middle_number=100
 # print(np.shape(forwardsin1))
 plt.figure(figsize=(12,12))
 ax1 = plt.subplot(111)
-ax1.plot(evo_timesin[::middle_number], forwardsin1[::middle_number], 's',  markersize=4, label=r'$Re[m,W \longrightarrow X],0$',markerfacecolor='None')
-ax1.plot(evo_timesin[::middle_number], forwardsin2[::middle_number], 's',  markersize=4, label=r'$Re[m,W \longrightarrow X],5ns$',markerfacecolor='None')
-ax1.plot(evo_timesin[::middle_number], forwardsin3[::middle_number], 's',  markersize=4, label=r'$Re[m,W \longrightarrow X],300ns$',markerfacecolor='None')
+ax1.plot(evo_timesin[::middle_number], forwardsin1[::middle_number], 's',  markersize=4, label=r'$$',markerfacecolor='None')
+ax1.plot(evo_timesin[::middle_number], forwardsin2[::middle_number], 's',  markersize=4, label=r'$$',markerfacecolor='None')
+ax1.plot(evo_timesin[::middle_number], forwardsin3[::middle_number], 's',  markersize=4, label=r'$$',markerfacecolor='None')
 
 ax1.set_xlabel(r'$times$ [s]',fontsize=20)
 ax1.set_ylabel(r'$\Delta_+/2\pi$',fontsize=20)
@@ -36,9 +36,9 @@ plt.show()
 
 plt.figure(figsize=(12,12))
 ax1 = plt.subplot(111)
-ax1.plot(evo_timesin[::middle_number], backwardsin1[::middle_number], 's',  markersize=4, label=r'$Re[m,Y \longrightarrow Z]$',markerfacecolor='None')
-ax1.plot(evo_timesin[::middle_number], backwardsin2[::middle_number], 's',  markersize=4, label=r'$Re[m,Y \longrightarrow Z],5ns$',markerfacecolor='None')
-ax1.plot(evo_timesin[::middle_number], backwardsin3[::middle_number], 's',  markersize=4, label=r'$Re[m,Y \longrightarrow Z],300ns$',markerfacecolor='None')
+ax1.plot(evo_timesin[::middle_number], backwardsin1[::middle_number], 's',  markersize=4, label=r'$$',markerfacecolor='None')
+ax1.plot(evo_timesin[::middle_number], backwardsin2[::middle_number], 's',  markersize=4, label=r'$$',markerfacecolor='None')
+ax1.plot(evo_timesin[::middle_number], backwardsin3[::middle_number], 's',  markersize=4, label=r'$$',markerfacecolor='None')
 ax1.set_xlabel(r'$times$ [s]',fontsize=20)
 ax1.set_ylabel(r'$\Delta_+/2\pi$',fontsize=20)
 plt.tick_params(labelsize=20)

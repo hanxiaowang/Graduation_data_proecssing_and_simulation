@@ -427,6 +427,47 @@ class Bistability():
 
         return M_sr,M_si,A_sr,A_si,Time
 
+    def m_a_evo_Periodic_P(self,m_s0,a_s0,interval,steps,P_start,P_stop,f_d,f_P_d):
+        omega_D = f_d * 1e9 * 2 * np.pi
+        delta_a = self.omega_a - omega_D
+        delta_m = self.omega_m - omega_D
+        S_a = -1j * delta_a - self.ka / 2
+        S_m = -1j * delta_m - self.km / 2
+        M_s=[]
+        A_s=[]
+        M_s.append(m_s0)
+        A_s.append(a_s0)
+        M_sr = []
+        A_sr = []
+        M_si = []
+        A_si = []
+        M_sr.append(m_s0.real)
+        A_sr.append(a_s0.real)
+        M_si.append(m_s0.imag)
+        A_si.append(a_s0.imag)
+        Time=[]
+        Time.append(0)
+        P_ds=[]
+        P_ds.append(P_start)
+        for i in range(round(steps)):
+            P_d=P_start+(P_stop-P_start)*np.sin(f_P_d*2*np.pi*Time[-1])
+            da=S_a*A_s[i]-1j*self.g_ma*M_s[i]+np.sqrt(self.kaed) * np.sqrt(P_d / (hbar * omega_D))
+            dm=S_m*M_s[i]-1j*self.g_ma*A_s[i]-1j*self.K*(2*np.abs(M_s[i])**2+1)*M_s[i]
+
+            anext = da * interval + A_s[i]
+            mnext = dm * interval + M_s[i]
+
+            A_s.append(anext)
+            M_s.append(mnext)
+            M_sr.append(mnext.real)
+            A_sr.append(anext.real)
+            M_si.append(mnext.imag)
+            A_si.append(anext.imag)
+
+            Time.append(interval*(i+1))
+
+        return M_sr,M_si,A_sr,A_si,Time,P_ds
+
 class Combination():
     def __init__(self):
         pass

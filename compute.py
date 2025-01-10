@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 xneed=[0.034]
 rneed=[0.0578]
-steps=100001
+steps=10000001*36
 start=36*np.pi/180
 thetas=np.linspace(start,0,steps)
 

@@ -114,7 +114,7 @@ print('Here is OK!2')
 # ysmall4=min([min(A_srb),min(A_sib)])*aaa
 # ylarge4=max([max(A_srb),max(A_sib)])*aaa
 # # #
-middle_number=20
+middle_number=50
 # #
 # # ## m和a的跳跃演化图 2D
 # plt.figure(figsize=(8, 6))
@@ -197,22 +197,25 @@ deltamsb2=(Bistability(**para).branch_fre(wminf+np.array(msb2))-wpinf)/(1e6*2*np
 
 plt.figure(figsize=(8, 6))
 axes1 = plt.subplot(111)
-axes1.plot(Timeu[::middle_number], msfsquare[::middle_number], 's', markersize=4, label=r'$W \longrightarrow X,|m|^2$',color='fuchsia')
+axes1.plot(Timeu[::middle_number], msfsquare[::middle_number], 's', markersize=4, label=r'$W \longrightarrow X,|m|^2$',color='red')
+
+# axes1.plot(Timeu[::middle_number], msfsquare[::middle_number], 's', markersize=4, label=r'$W \longrightarrow X,|m|^2$',color='fuchsia')
 # axes1.plot(Timeu[::middle_number], asfsquare[::middle_number], '^', markersize=4, label=r'$W \longrightarrow X,|a|^2$',color='tomato')
 # axes1.plot(Timeu[::middle_number], sumfsquare[::middle_number], '--', linewidth=5, label=r'$W \longrightarrow X,|m|^2+|a|^2$',color='green')
 # plt.xlim(xsmall1,xlarge1)
-plt.legend(loc=0)
+plt.legend(loc=0,fontsize=15)
 plt.show()
 
 
 plt.figure(figsize=(8, 6))
 axes1 = plt.subplot(111)
-axes1.plot(Timeu[::middle_number], msbsquare[::middle_number], 's', markersize=4, label=r'$Y \longrightarrow Z,|m|^2$',color='royalblue')
+axes1.plot(Timeu[::middle_number], msbsquare[::middle_number], 's', markersize=4, label=r'$Y \longrightarrow Z,|m|^2$',color='blue')
+# axes1.plot(Timeu[::middle_number], msbsquare[::middle_number], 's', markersize=4, label=r'$Y \longrightarrow Z,|m|^2$',color='royalblue')
 # axes1.plot(Timeu[::middle_number], asbsquare[::middle_number], '^', markersize=4, label=r'$Y \longrightarrow Z,|a|^2$',color='deepskyblue')
 # axes1.plot(Timeu[::middle_number], sumbsquare[::middle_number], '--', linewidth=5, label=r'$Y \longrightarrow Z,|m|^2+|a|^2$',color='green')
 # plt.xlim(xsmall2,xlarge2)
 
-plt.legend(loc=0)
+plt.legend(loc=0,fontsize=15)
 plt.show()
 
 

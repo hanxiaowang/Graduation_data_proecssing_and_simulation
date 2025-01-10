@@ -108,13 +108,13 @@ plt.legend(loc=0,prop={'family':'Times New Roman','size':12})
 plt.show()
 
 ## Y to Z
-slopemax,interceptmax=np.polyfit(np.log10(fins),np.log10(back_max),1)
+slopemax,interceptmax=np.polyfit(np.log10(fins),(np.log10(back_max)),1)
 nihe2=slopemax*np.log10(fins)+interceptmax
+
 print(f'slope is {slopemax} and offset is {interceptmax}')
 fig, axes = plt.subplots(1, 1, figsize=(8, 6))
 axes.plot(np.log10(fins), nihe2, '-', linewidth=5, color='blue', markerfacecolor='None',label=r'${lg(t_{Y \longrightarrow Z})=-0.421lg(\Delta f_d)-5.479n}$')
 axes.plot(np.log10(fins), np.log10(back_max), 'o', markersize=15, color='deepskyblue', markeredgewidth=3,markerfacecolor='None')
-
 axes.set_xlabel(r'$\Delta f_d$ [kHz]', fontsize=20)
 axes.set_ylabel(r'$times$ [ns]', fontsize=20)
 # plt.xscale('log')
