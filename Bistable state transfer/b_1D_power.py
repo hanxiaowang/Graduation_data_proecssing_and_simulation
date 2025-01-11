@@ -33,7 +33,7 @@ para = {'omega_a': 8.246,
 
 ## Delta_+的双稳态求解
 # forward, forwardp, backward, backwardp, unstablep, unstable=Bistability(**para).BS_power_with_unstable()
-forward, forwardp, backward, backwardp, unstable, unstablep=Bistability(**para).BS_power_inside_BS()
+forward, forwardp, backward, backwardp, unstable, unstablep=Bistability(**para).BS_power_with_unstable()
 
 # 双稳态图
 # plt.figure(figsize=(7, 6))

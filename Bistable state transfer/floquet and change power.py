@@ -19,3 +19,4 @@ para = {'omega_a': 8.246,
         'omega_d': f,
         'P_d': P,
         }
+forward, forwardp, backward, backwardp, unstablep,unstable=Bistability(**para).BS_power_inside_BS()
