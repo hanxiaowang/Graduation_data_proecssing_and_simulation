@@ -26,15 +26,26 @@ g = 8e6
 # phis = np.linspace(-0.5, 1.5, 361)
 #
 # deltas = np.linspace(0, 10, 1001)
-phis = np.linspace(-0.5, 1.5, 181)
+phis = np.linspace(-0.5, 1.5, 3601)
 
-deltas = np.linspace(0, 7, 141)
+deltas = np.linspace(0, 7, 1401)
 
 
 Iso = []
+S12_max=[]
+S21_max=[]
+
+S12_0_delta=[]
+S12_0_phi=[]
+
+S21_0_delta=[]
+S21_0_phi=[]
+
 for i in range(len(phis)):
     phi = phis[i]
     isos = []
+    s12_max = []
+    s21_max = []
     for c in range(len(deltas)):
         delta = deltas[c]
         # T12 = []
@@ -59,6 +70,17 @@ for i in range(len(phis)):
         S12=rf.mag_2_db(np.abs(t12))
         S21=rf.mag_2_db(np.abs(t21))
 
+        s12_max.append(max(S12))
+        s21_max.append(max(S21))
+        wucha1=5e-3
+        wucha2 = 3e-3
+        if (np.abs(max(S12))<=wucha1):
+            S12_0_delta.append(deltas[c])
+            S12_0_phi.append(phis[i])
+
+        if (np.abs(max(S21))<=wucha2):
+            S21_0_delta.append(deltas[c])
+            S21_0_phi.append(phis[i])
         iso=S12-S21
         isoabs=np.abs(S12-S21)
 
@@ -66,18 +88,58 @@ for i in range(len(phis)):
         need = iso[index][0]
         isos.append(need)
     Iso.append(isos)
+    S12_max.append(s12_max)
+    S21_max.append(s21_max)
 
 pai=[]
 for i in range(len(deltas)):
     pai.append(0.5)
 
-plt.figure(figsize=(14, 6))
-ax1 = plt.subplot(111)
-gci1 = ax1.pcolor(deltas, phis, Iso,cmap='bwr')
-ax1.plot(deltas,pai,'--',color='black',linewidth=5)
-ax1.set_xlabel(r'$\delta$',fontsize=30)
-ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=30)
-plt.tick_params(labelsize=30)
-cbar = plt.colorbar(gci1)
+print(len(S12_0_delta))
+print(len(S21_0_delta))
+extents=[deltas[0], deltas[-1], phis[0],phis[-1]]
 
+plt.figure(figsize=(12,6))
+# ax1 = plt.subplot(111)
+# gci1 = ax1.pcolor(deltas, phis, Iso,cmap='bwr')
+# ax1.plot(deltas,pai,'--',color='black',linewidth=5)
+# ax1.set_xlabel(r'$\delta$',fontsize=10)
+# ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=10)
+# plt.tick_params(labelsize=10)
+# cbar = plt.colorbar(gci1)
+ax1 = plt.subplot(111)
+im = ax1.imshow(Iso, extent=extents, cmap="bwr",aspect='auto',origin='lower')
+ax1.plot(deltas,pai,'--',color='black',linewidth=5)
+plt.colorbar(im)
+plt.show()
+
+plt.figure(figsize=(12,6))
+# ax1 = plt.subplot(111)
+# gci1 = ax1.pcolor(deltas, phis, S12_max)
+# ax1.plot(deltas,pai,'--',color='black',linewidth=5)
+# ax1.plot(S12_0_delta,S12_0_phi,'--',color='red',linewidth=5)
+# ax1.set_xlabel(r'$\delta$',fontsize=10)
+# ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=10)
+# plt.tick_params(labelsize=10)
+# cbar = plt.colorbar(gci1)
+ax2 = plt.subplot(111)
+im = ax2.imshow(S12_max, extent=extents,aspect='auto',origin='lower')
+ax2.plot(S12_0_delta,S12_0_phi,'--',color='red',linewidth=5)
+plt.colorbar(im)
+plt.show()
+# #
+
+plt.figure(figsize=(12,6))
+ax3 = plt.subplot(111)
+# gci1 = ax1.pcolor(deltas, phis, S21_max)
+# # ax1.plot(deltas,pai,'--',color='black',linewidth=5)
+# ax1.plot(S21_0_delta,S21_0_phi,'--',color='red',linewidth=5)
+# ax1.set_xlabel(r'$\delta$',fontsize=10)
+# ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=10)
+# plt.tick_params(labelsize=10)
+# cbar = plt.colorbar(gci1)
+ax3 = plt.subplot(111)
+im = ax3.imshow(S21_max, extent=extents,aspect='auto',origin='lower')
+ax3.plot(S21_0_delta,S21_0_phi,'--',color='red',linewidth=5)
+plt.colorbar(im)
 plt.show()

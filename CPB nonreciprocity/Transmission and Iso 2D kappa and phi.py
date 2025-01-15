@@ -8,7 +8,7 @@ k_int = 1.4e6
 
 # k_1 = 40e6
 k_2 = 4.5e6
-rates=np.linspace(0.1,100,1000)
+rates=np.linspace(0.01,15,1500)
 k_1 = rates*k_2
 # k_3 = 1.33e6
 k_3 = 0e6
@@ -24,7 +24,7 @@ omega_a = 8.25e9
 omega_m=omega_a
 
 delta=3
-phis=np.linspace(0,2,361)
+phis=np.linspace(-0.5,1.5,361)
 
 omega_ps=omega_a
 
@@ -90,35 +90,50 @@ print(rates[0])
 phi_0=[]
 for i in range(len(rates)):
     phi_0.append(0.5)
+no_non=[]
+for j in range(len(phis)):
+    no_non.append(1)
+plt.figure(figsize=(6,6))
+# ax1 = plt.subplot(231)
+# gci1 = ax1.pcolor(phis,rates, np.transpose(S12s1))
+# ax1.plot(phi_0,rates,'--',color='red')
+# # ax1.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
+# ax1.set_ylabel(r'$\kappa_1/\kappa_2$',fontsize=20)
+# ax1.set_xlabel(r'$\varphi/\pi$',fontsize=20)
+# ax1.set_ylim(0,max(rates))
+# plt.tick_params(labelsize=20)
+# cbar = plt.colorbar(gci1)
+#
+# ax2 = plt.subplot(232)
+# gci2 = ax2.pcolor(phis,rates,np.transpose(S21s1))
+# ax2.plot(phi_0,rates,'--',color='red')
+# # ax2.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
+# # ax2.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# ax2.set_ylim(0,max(rates))
+# plt.tick_params(labelsize=20)
+# cbar = plt.colorbar(gci2)
 
-plt.figure(figsize=(18,12))
-ax1 = plt.subplot(231)
-gci1 = ax1.pcolor(phis,rates, np.transpose(S12s1))
-ax1.plot(phi_0,rates,'--',color='red')
-# ax1.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
-ax1.set_ylabel(r'$\kappa_1/\kappa_2$',fontsize=20)
-ax1.set_xlabel(r'$\varphi/\pi$',fontsize=20)
-ax1.set_ylim(0,max(rates))
-plt.tick_params(labelsize=20)
-cbar = plt.colorbar(gci1)
-
-ax2 = plt.subplot(232)
-gci2 = ax2.pcolor(phis,rates,np.transpose(S21s1))
-ax2.plot(phi_0,rates,'--',color='red')
-# ax2.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
-# ax2.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-ax2.set_ylim(0,max(rates))
-plt.tick_params(labelsize=20)
-cbar = plt.colorbar(gci2)
-
-ax3 = plt.subplot(233)
-gci3 = ax3.pcolor(phis, rates,np.transpose(Isos1))
-ax3.plot(phi_0,rates,'--',color='red')
-# ax3.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
-# ax3.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-ax3.set_ylim(0,max(rates))
-
-plt.tick_params(labelsize=20)
-cbar = plt.colorbar(gci3)
+# ax3 = plt.subplot(111)
+# gci3 = ax3.pcolor(phis, rates,np.transpose(Isos1),cmap='bwr')
+# ax3.plot(phi_0,rates,'--',color='green',linewidth=3)
+# ax3.plot(phis,no_non,'--',color='black',linewidth=3)
+#
+# ax3.set_xlabel(r'$\varphi$[$\pi$]',fontsize=10)
+# ax3.set_ylabel(r'$\kappa_1/\kappa_2$ ',fontsize=10)
+# ax3.set_ylim(0,max(rates))
+#
+# plt.tick_params(labelsize=10)
+# cbar = plt.colorbar(gci3)
+extents=[rates[0],rates[-1],phis[0],phis[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow((Isos1), extent=extents, cmap="bwr",aspect='auto',origin='lower')
+plt.colorbar(im)
+# ax1.plot(rates,phi_0,'--',color='green',linewidth=3)
+ax1.plot(no_non,phis,'--',color='black',linewidth=3)
+ax1.set_xlabel(r'$\kappa_1/\kappa_2$ ',fontsize=10)
+ax1.set_ylabel(r'$\varphi$[$\pi$]',fontsize=10)
+plt.tick_params(labelsize=10)
+plt.show()
+#
 
 plt.show()

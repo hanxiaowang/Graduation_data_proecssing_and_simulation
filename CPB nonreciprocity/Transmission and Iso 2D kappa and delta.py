@@ -9,7 +9,7 @@ k_2 = 4.5e6
 # k_2 = 50e6
 
 # rates=np.linspace(0.01,50,501)
-rates=np.linspace(0.1,15,150)
+rates=np.linspace(0.01,15,1500)
 k_1 = rates*k_2
 # k_1 = 40e6
 
@@ -26,7 +26,7 @@ g = 8e6
 omega_a = 8.25e9
 omega_m=omega_a
 
-deltas=np.linspace(0,7,351)
+deltas=np.linspace(0,7,701)
 phi=0.5
 
 omega_ps=omega_a
@@ -245,6 +245,9 @@ print(Imin[0])
 # cbar = plt.colorbar(gci3)
 # #
 # plt.show()
+no_non=[]
+for j in range(len(deltas)):
+    no_non.append(1)
 
 plt.figure(figsize=(6, 6))
 ax1 = plt.subplot(111)
@@ -256,14 +259,16 @@ ax1 = plt.subplot(111)
 # # ax1.plot(rates,Imax,'--',color='red')
 # ax1.plot(zerorate21,zerodelta21,'-',linewidth=3,color='blue')
 #
-gci1 = ax1.pcolor(rates, deltas,(Isos1),cmap='bwr')
+extents=[rates[0],rates[-1],deltas[0],deltas[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow((Isos1), extent=extents, cmap="bwr",aspect='auto',origin='lower')
+plt.colorbar(im)
 ax1.plot(rates,Imax,'--',color='red',alpha=0.5,linewidth=5)
 ax1.plot(rates,Imin,'--',color='blue',alpha=0.5,linewidth=5)
-
-ax1.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
-ax1.set_ylabel(r'$\delta$',fontsize=20)
-plt.tick_params(labelsize=20)
-cbar = plt.colorbar(gci1)
+ax1.plot(no_non,deltas,'--',color='black',linewidth=3)
+ax1.set_ylabel(r'$\delta$',fontsize=10)
+ax1.set_xlabel(r'$\kappa_1/\kappa_2$',fontsize=10)
+plt.tick_params(labelsize=10)
 plt.show()
 #
 # np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\try txt\S21\rates.txt',rates)

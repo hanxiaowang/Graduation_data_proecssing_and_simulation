@@ -206,6 +206,31 @@ S1211,S2111,ISO11,delta_s11=S_and_Iso(delta11)
 # # ax.view_init(elev=7, azim=18)
 # plt.show()
 
+fig=plt.figure(figsize=(12, 6))
+ax=fig.add_subplot(1,1,1,projection='3d')
+ax=Axes3D(fig)
+fig.add_axes(ax)
+ax.set_box_aspect([2,3,1])
+ax.plot((8.25-omega_ps/1e9)*1e3,delta_s1,ISO1)
+ax.plot((8.25-omega_ps/1e9)*1e3,delta_s2,ISO2)
+ax.plot((8.25-omega_ps/1e9)*1e3,delta_s3,ISO3)
+ax.plot((8.25-omega_ps/1e9)*1e3,delta_s4,ISO4)
+ax.plot((8.25-omega_ps/1e9)*1e3,delta_s5,ISO5)
+ax.plot((8.25-omega_ps/1e9)*1e3,delta_s6,ISO6)
+ax.plot((8.25-omega_ps/1e9)*1e3,delta_s7,ISO7)
+ax.plot((8.25-omega_ps/1e9)*1e3,delta_s8,ISO8)
+ax.plot((8.25-omega_ps/1e9)*1e3,delta_s9,ISO9)
+ax.plot((8.25-omega_ps/1e9)*1e3,delta_s10,ISO10)
+ax.plot((8.25-omega_ps/1e9)*1e3,delta_s11,ISO11)
+ax.set_ylim(0,10)
+ax.set_xlim(-60,60)
+plt.xticks([-50,0,50],['-50','0','50'])
+# ax.grid(None)
+ax.view_init(elev=15, azim=17)
+# ax.view_init(elev=7, azim=18)
+plt.show()
+
+
 # np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\try txt\S21 amp 1d\omega_ps.txt',omega_ps)
 # np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\try txt\S21 amp 1d\delta_s1.txt',delta_s1)
 # np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\try txt\S21 amp 1d\S211.txt',S211)
@@ -229,45 +254,45 @@ S1211,S2111,ISO11,delta_s11=S_and_Iso(delta11)
 # print(S126[1000])
 # print(S127[1000])
 
-delta_ss=np.linspace(0,10,1001)
-S12ss=[]
-S21ss=[]
-Isoss=[]
-zeross=[]
-for i in range(len(delta_ss)):
-    S12s, S21s, ISOs, delta_s = S_and_Iso(delta_ss[i])
-    S12ss.append(S12s[1000])
-    S21ss.append(S21s[1000])
-    Isoss.append(S12s[1000]-S21s[1000])
-    zeross.append(0)
+# delta_ss=np.linspace(0,10,1001)
+# S12ss=[]
+# S21ss=[]
+# Isoss=[]
+# zeross=[]
+# for i in range(len(delta_ss)):
+#     S12s, S21s, ISOs, delta_s = S_and_Iso(delta_ss[i])
+#     S12ss.append(S12s[1000])
+#     S21ss.append(S21s[1000])
+#     Isoss.append(S12s[1000]-S21s[1000])
+#     zeross.append(0)
+#
+# index7 = list(delta_ss).index(7)
+# print('max')
+# print(Isoss[index7])
+#
+# plt.figure(figsize=(7, 6))
+# axes1 = plt.subplot(111)
+# # axes1.plot(delta_ss,S12ss,'-',linewidth=5,label=r'$S_{12}$',alpha=0.5)
+# # axes1.plot(delta_ss,S21ss,'-',linewidth=5,label=r'$S_{21}$',alpha=0.5)
+# # axes1.plot(delta_ss,zeross,'--',linewidth=2,color='black')
+# axes1.plot(delta_ss,Isoss,'-',linewidth=5,label=r'Iso.',alpha=0.5)
+# axes1.set_xlabel(r'$\delta$',fontsize=20)
+# axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
+# plt.tick_params(labelsize=20)
+# plt.legend(loc=4,prop={'family':'Cambria','size':20})
+# plt.show()
 
-index7 = list(delta_ss).index(7)
-print('max')
-print(Isoss[index7])
 
-plt.figure(figsize=(7, 6))
-axes1 = plt.subplot(111)
-# axes1.plot(delta_ss,S12ss,'-',linewidth=5,label=r'$S_{12}$',alpha=0.5)
-# axes1.plot(delta_ss,S21ss,'-',linewidth=5,label=r'$S_{21}$',alpha=0.5)
-# axes1.plot(delta_ss,zeross,'--',linewidth=2,color='black')
-axes1.plot(delta_ss,Isoss,'-',linewidth=5,label=r'Iso.',alpha=0.5)
-axes1.set_xlabel(r'$\delta$',fontsize=20)
-axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
-plt.tick_params(labelsize=20)
-plt.legend(loc=4,prop={'family':'Cambria','size':20})
-plt.show()
-
-
-print(S121[1000])
-print(S1211[1000])
-print(S211[1000])
-print(S2111[1000])
-
-# print(min(S12ss))
-# print(min(S21ss))
-
-print(S12ss[-1])
-print(S21ss[-1])
+# print(S121[1000])
+# print(S1211[1000])
+# print(S211[1000])
+# print(S2111[1000])
+#
+# # print(min(S12ss))
+# # print(min(S21ss))
+#
+# print(S12ss[-1])
+# print(S21ss[-1])
 
 
 

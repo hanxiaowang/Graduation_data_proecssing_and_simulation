@@ -19,13 +19,13 @@ gamma = gamma_int + gamma_e
 g = 8e6
 
 omega_a = 8.25e9
-omega_ms=omega_a+np.linspace(-250,250,251)*1e6
+omega_ms=omega_a+np.linspace(-50,50,251)*1e6
 
 delta1=3
 delta2=0.28
 phi=0.5
 
-omega_ps=omega_a+np.linspace(-250,250,251)*1e6
+omega_ps=omega_a+np.linspace(-50,50,251)*1e6
 
 
 S12s1=[]
@@ -85,23 +85,31 @@ for i,omega_m in enumerate(omega_ms):
 
 
 
+# plt.figure(figsize=(6,6))
+# ax1 = plt.subplot(111)
+# # gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S12s1),cmap='spring')
+# # gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S21s1),cmap='spring')
+# # gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(Isos1),cmap='spring')
+# # gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S12s2),cmap='spring')
+# # gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S21s2),cmap='spring')
+# gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(Isos2),cmap='spring')
+# ax1.plot(omega_ms/1e9,omega_ms/1e9,'--',color='black',alpha=0.5,linewidth=5)
+# ax1.set_xlabel(r'$\omega_m/2\pi$[GHz]',fontsize=20)
+# ax1.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# plt.tick_params(labelsize=20)
+# plt.xticks([8,8.5],['8','8.5'])
+
+# cbar = plt.colorbar(gci1)
+# plt.show()
+
+extents=[omega_ms[0]/1e9, omega_ms[-1]/1e9, omega_ps[0]/1e9,omega_ps[-1]/1e9]
 plt.figure(figsize=(6,6))
-ax1 = plt.subplot(111)
-# gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S12s1),cmap='spring')
-# gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S21s1),cmap='spring')
-# gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(Isos1),cmap='spring')
-# gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S12s2),cmap='spring')
-# gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S21s2),cmap='spring')
-gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(Isos2),cmap='spring')
-ax1.plot(omega_ms/1e9,omega_ms/1e9,'--',color='black',alpha=0.5,linewidth=5)
-ax1.set_xlabel(r'$\omega_m/2\pi$[GHz]',fontsize=20)
-ax1.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-plt.tick_params(labelsize=20)
-plt.xticks([8,8.5],['8','8.5'])
-
-cbar = plt.colorbar(gci1)
+ax2 = plt.subplot(111)
+# im = ax2.imshow(np.transpose(Isos2), extent=extents,aspect='auto',origin='lower',cmap='bwr')
+im = ax2.imshow(np.transpose(Isos1), extent=extents,aspect='auto',origin='lower',cmap='bwr')
+ax2.plot(omega_ms/1e9,omega_ms/1e9,'--',color='green',alpha=1,linewidth=5)
+plt.colorbar(im)
 plt.show()
-
 # np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\try txt\Iso1\omega_ms.txt',omega_ms/1e9)
 # np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\try txt\Iso1\omega_ps.txt',omega_ps/1e9)
 # np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\try txt\Iso1\Isos1.txt',Isos1)
