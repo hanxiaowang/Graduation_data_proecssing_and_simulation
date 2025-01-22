@@ -25,7 +25,7 @@ omega_m=omega_a-0e6
 
 omega_ps=np.linspace(8.2,8.3,2001)*1e9
 
-delta=2
+delta=3
 
 def S_and_Iso(phi):
     delta_m = omega_m - omega_ps
@@ -119,16 +119,16 @@ for i in range(9):
 #
 #
 #
-# ax.plot((8.25-omega_ps/1e9)*1e3,phi_s1,ISO1)
-# ax.plot((8.25-omega_ps/1e9)*1e3,phi_s2,ISO2)
-# ax.plot((8.25-omega_ps/1e9)*1e3,phi_s3,ISO3)
-# ax.plot((8.25-omega_ps/1e9)*1e3,phi_s4,ISO4)
-# ax.plot((8.25-omega_ps/1e9)*1e3,phi_s5,ISO5)
-# ax.plot((8.25-omega_ps/1e9)*1e3,phi_s6,ISO6)
-# ax.plot((8.25-omega_ps/1e9)*1e3,phi_s7,ISO7)
-# ax.plot((8.25-omega_ps/1e9)*1e3,phi_s8,ISO8)
-# ax.plot((8.25-omega_ps/1e9)*1e3,phi_s9,ISO9)
-# ax.plot((8.25-np.array(deltaline)/1e9)*1e3,philine,ISOline,'-s',markersize=5,color='black')
+# # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s1,ISO1)
+# # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s2,ISO2)
+# # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s3,ISO3)
+# # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s4,ISO4)
+# # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s5,ISO5)
+# # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s6,ISO6)
+# # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s7,ISO7)
+# # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s8,ISO8)
+# # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s9,ISO9)
+# # ax.plot((8.25-np.array(deltaline)/1e9)*1e3,philine,ISOline,'-s',markersize=5,color='black')
 #
 # ax.set_ylim(0,2)
 # ax.set_xlim(-60,60)
@@ -154,18 +154,18 @@ for i in range(9):
 # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s7,ISO7)
 # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s8,ISO8)
 # ax.plot((8.25-omega_ps/1e9)*1e3,phi_s9,ISO9)
-# ax.set_ylim(0,10)
+# ax.set_ylim(0,2)
 # ax.set_xlim(-60,60)
 # plt.xticks([-50,0,50],['-50','0','50'])
-#
-# # ax.grid(None)
+
+# ax.grid(None)
 # ax.view_init(elev=15, azim=17)
-# # ax.view_init(elev=7, azim=18)
-# plt.show()
-picture1=np.linspace(-15,25,401)
-p1sy=[]
-for i in range(len(picture1)):
-    p1sy.append(0)
+# ax.view_init(elev=7, azim=18)
+plt.show()
+# picture1=np.linspace(-15,25,401)
+# p1sy=[]
+# for i in range(len(picture1)):
+#     p1sy.append(0)
 
 
 # fig, axes = plt.subplots(1, 1, figsize=(15, 10))
@@ -205,18 +205,21 @@ for i in range(len(picture1)):
 # print((8.25-omega_ps[min_index3]/1e9)*1e3)
 # print(ISO3[min_index3])
 
-max_index7 = list(ISO7).index(max(ISO7))
-min_index7 = list(ISO7).index(min(ISO7))
-print('max')
-print((8.25-omega_ps[max_index7]/1e9)*1e3)
-print(ISO7[max_index7])
-print('min')
-print((8.25-omega_ps[min_index7]/1e9)*1e3)
-print(ISO7[min_index7])
+# max_index7 = list(ISO7).index(max(ISO7))
+# min_index7 = list(ISO7).index(min(ISO7))
+# print('max')
+# print((8.25-omega_ps[max_index7]/1e9)*1e3)
+# print(ISO7[max_index7])
+# print('min')
+# print((8.25-omega_ps[min_index7]/1e9)*1e3)
+# print(ISO7[min_index7])
+#
+print(max(ISO3))
+print(max(ISO7))
 
 fig, axes = plt.subplots(1, 1, figsize=(15, 10))
 # axes.plot((8.25-omega_ps/1e9)*1e3,ISO1,'-',alpha=0.5,label=r'$\varphi=0$',linewidth=10)
-# axes.plot((8.25-omega_ps/1e9)*1e3,ISO3,'-',alpha=0.5,label=r'$\varphi=0.5\pi$',linewidth=10)
+axes.plot((8.25-omega_ps/1e9)*1e3,ISO3,'-',alpha=0.5,label=r'$\varphi=0.5\pi$',linewidth=10)
 axes.plot((8.25-omega_ps/1e9)*1e3,ISO7,'-',alpha=0.5,label=r'$\varphi=1.5\pi$',linewidth=10)
 
 # axes.plot((8.25-omega_ps/1e9)*1e3,ISO5,'-',alpha=0.5,label=r'$\varphi=\pi$',linewidth=10)

@@ -22,7 +22,7 @@ omega_a = 8.25e9
 omega_m=omega_a
 
 deltas=np.linspace(0,7,1401)
-phi=0.5
+phi=0.75
 
 omega_ps=8.25e9+np.linspace(-50,50,5001)*1e6
 
@@ -31,6 +31,11 @@ S21s1=[]
 Isos1=[]
 Isom=[]
 max_deltaa=[]
+min_deltaa=[]
+max_Iso=[]
+min_Iso=[]
+max_deltaa_delta=[]
+min_deltaa_delta=[]
 for i,delta in enumerate(deltas):
     delta_m = omega_m - omega_ps
     delta_a = omega_a - omega_ps
@@ -54,15 +59,23 @@ for i,delta in enumerate(deltas):
     Iso_opt=np.abs(ISO)
     max_index = list(Iso_opt).index(max(Iso_opt))
     # Isom.append(ISO[1001])
-    max_deltaa.append(omega_ps[max_index])
+    if ISO[max_index] >= 0:
+        max_deltaa.append(omega_ps[max_index])
+        max_deltaa_delta.append(delta)
+        max_Iso.append(ISO[max_index])
+    if ISO[max_index] < 0:
+        min_deltaa.append(omega_ps[max_index])
+        min_deltaa_delta.append(delta)
+        min_Iso.append(ISO[max_index])
+#
 # max_index = list(Isos1).index(max(Isom))
 # min_index = list(Isos1).index(min(Isom))
-#
+
 # print(phis[max_index])
 # print(phis[min_index])
 
 
-## ISO at wp=wm vs phi
+# ISO at wp=wm vs phi
 # plt.figure(figsize=(15, 10))
 # axes1 = plt.subplot(121)
 # axes1.plot(phis,Isom,'-',linewidth=5,label='Iso')
@@ -73,7 +86,7 @@ for i,delta in enumerate(deltas):
 #
 # plt.show()
 
-## ISO at some phi vs wp
+# ISO at some phi vs wp
 #
 # plt.figure(figsize=(15, 10))
 # axes1 = plt.subplot(121)
@@ -86,13 +99,12 @@ for i,delta in enumerate(deltas):
 # plt.legend(loc=0,fontsize=10)
 # plt.show()
 
-X,Y=np.meshgrid(deltas,(omega_a-omega_ps)/1e9)
 
 ## S12,S21 and ISO vs phi and wm
 #
 extents=[deltas[0],deltas[-1],(omega_a-omega_ps)[0]/1e9,(omega_a-omega_ps)[-1]/1e9]
 
-# plt.figure(figsize=(6,6))
+plt.figure(figsize=(6,6))
 # ax1=plt.subplot(111)
 # im = ax1.imshow(np.transpose(S12s1), extent=extents,aspect='auto',origin='lower')
 # plt.tick_params(labelsize=10)
@@ -112,14 +124,100 @@ extents=[deltas[0],deltas[-1],(omega_a-omega_ps)[0]/1e9,(omega_a-omega_ps)[-1]/1
 # plt.colorbar(im)
 # plt.show()
 # #
-plt.figure(figsize=(6,6))
+# plt.figure(figsize=(6,6))
 
 ax3 = plt.subplot(111)
 im = ax3.imshow(np.transpose(Isos1),cmap='bwr', extent=extents,aspect='auto',origin='lower')
-ax3.plot(deltas,(omega_a-np.array(max_deltaa))/1e9,'s',color='green',markersize=1)
+# ax3.plot(max_deltaa_delta,(omega_a-np.array(max_deltaa))/1e9,'o',color='green',markersize=1)
+# ax3.plot(min_deltaa_delta,(omega_a-np.array(min_deltaa))/1e9,'o',color='green',markersize=1,alpha=0.5)
+
 ax3.set_xlabel(r'$\delta$',fontsize=10)
 ax3.set_ylabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
 plt.tick_params(labelsize=10)
 plt.colorbar(im)
 
 plt.show()
+
+
+
+max_index1=list(max_Iso).index(max(max_Iso))
+print(omega_a-max_deltaa[max_index1])
+print(max_deltaa_delta[max_index1])
+print(max_Iso[max_index1])
+
+min_index1=list(min_Iso).index(min(min_Iso))
+print(omega_a-min_deltaa[min_index1])
+print(min_deltaa_delta[min_index1])
+print(min_Iso[min_index1])
+
+
+# phis=np.linspace(-0.5,1.5,3601)
+# phi_max=[]
+# omega_max=[]
+# phi_min=[]
+# omega_min=[]
+# for j in range(len(phis)):
+#     S12s1=[]
+#     S21s1=[]
+#     Isos1=[]
+#     Isom=[]
+#     max_deltaa=[]
+#     min_deltaa=[]
+#     max_Iso=[]
+#     min_Iso=[]
+#     max_deltaa_delta=[]
+#     min_deltaa_delta=[]
+#     for i,delta in enumerate(deltas):
+#         delta_m = omega_m - omega_ps
+#         delta_a = omega_a - omega_ps
+#         chi_a = 1j * delta_a + k_c / 2
+#         chi_m = 1j * delta_m + gamma / 2
+#         fenmu = chi_a * chi_m + g ** 2
+#
+#         fenzi21 = chi_m * np.sqrt(k_1 * k_2) - 1j * g * np.sqrt(k_2 * gamma_e) * delta * np.exp(
+#             -1j * phis[j] * np.pi)
+#         fenzi12 = chi_m * np.sqrt(k_1 * k_2) - 1j * g * np.sqrt(k_1 * gamma_e) * delta * np.exp(
+#             -1j * phis[j] * np.pi)
+#
+#         t12 = fenzi12 / fenmu
+#         t21 = fenzi21 / fenmu
+#         S12 = rf.mag_2_db(np.abs(t12))
+#         S21 = rf.mag_2_db(np.abs(t21))
+#         ISO=S12-S21
+#         S12s1.append(S12)
+#         S21s1.append(S21)
+#         Isos1.append(ISO)
+#         Iso_opt=np.abs(ISO)
+#         max_index = list(Iso_opt).index(max(Iso_opt))
+#         # Isom.append(ISO[1001])
+#         if ISO[max_index] >= 0:
+#             max_deltaa.append(omega_ps[max_index])
+#             max_deltaa_delta.append(delta)
+#             max_Iso.append(ISO[max_index])
+#         if ISO[max_index] < 0:
+#             min_deltaa.append(omega_ps[max_index])
+#             min_deltaa_delta.append(delta)
+#             min_Iso.append(ISO[max_index])
+#
+#     if len(max_Iso)!=0:
+#         max_index1 = list(max_Iso).index(max(max_Iso))
+#         phi_max.append(phis[j])
+#         omega_max.append(max_deltaa[max_index1])
+#     if len(min_Iso)!=0:
+#         min_index1 = list(min_Iso).index(min(min_Iso))
+#         phi_min.append(phis[j])
+#         omega_min.append(min_deltaa[min_index1])
+# # print(max_deltaa)
+# # print(max_index1)
+# # print(min_index1)
+# print(min_deltaa)
+# plt.figure(figsize=(6,6))
+# #
+# plt.plot(phi_max,(omega_a-np.array(omega_max))/1e9,'s',color='red',markersize=5,markerfacecolor='None')
+# plt.plot(phi_min,(omega_a-np.array(omega_min))/1e9,'o',color='green',markersize=5,markerfacecolor='None')
+#
+# # plt.xlabel(r'$\delta$',fontsize=10)
+# # plt.ylabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
+# plt.tick_params(labelsize=10)
+#
+# plt.show()

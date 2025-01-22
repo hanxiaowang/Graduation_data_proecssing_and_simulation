@@ -22,7 +22,7 @@ omega_a = 8.25e9
 omega_m=omega_a
 
 delta=3
-phis=np.linspace(0,2,3601)
+phis=np.linspace(-0.5,1.5,3601)
 
 omega_ps=8.25e9+np.linspace(-50,50,5001)*1e6
 
@@ -31,6 +31,9 @@ S21s1=[]
 Isos1=[]
 Isom=[]
 max_deltaa=[]
+min_deltaa=[]
+max_deltaa_phi=[]
+min_deltaa_phi=[]
 for i,phi in enumerate(phis):
     delta_m = omega_m - omega_ps
     delta_a = omega_a - omega_ps
@@ -51,7 +54,12 @@ for i,phi in enumerate(phis):
     Iso_opt = np.abs(ISO)
     max_index = list(Iso_opt).index(max(Iso_opt))
     # Isom.append(ISO[1001])
-    max_deltaa.append(omega_ps[max_index])
+    if ISO[max_index]>=0:
+        max_deltaa.append(omega_ps[max_index])
+        max_deltaa_phi.append(phi)
+    if ISO[max_index] <0:
+        min_deltaa.append(omega_ps[max_index])
+        min_deltaa_phi.append(phi)
     S12s1.append(S12)
     S21s1.append(S21)
     Isos1.append(ISO)
@@ -116,7 +124,8 @@ plt.figure(figsize=(6,6))
 
 ax3 = plt.subplot(111)
 im = ax3.imshow(np.transpose(Isos1), extent=extents, cmap="bwr",aspect='auto',origin='lower')
-ax3.plot(phis,(omega_a-np.array(max_deltaa))/1e9,'s',color='green',markersize=1)
+# ax3.plot(max_deltaa_phi,(omega_a-np.array(max_deltaa))/1e9,'o',color='green',markersize=1,alpha=0.5)
+# ax3.plot(min_deltaa_phi,(omega_a-np.array(min_deltaa))/1e9,'o',color='green',markersize=1,alpha=0.5)
 
 ax3.set_xlabel(r'$\varphi$[$\pi$]',fontsize=10)
 ax3.set_ylabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
