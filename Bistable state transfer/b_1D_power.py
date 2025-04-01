@@ -75,8 +75,12 @@ msu,asu=Bistability(**para).cal_ms_as_P(wmu-wminf,unstablep)
 
 
 ## 求解跳跃的演化
+# M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,4e5,forwardp[-1],f)
+# M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,4e5,backwardp[0],f)
+
 M_srf,M_sif,A_srf,A_sif,Timeu=Bistability(**para).m_a_evo(msf[-2],asf[-2],1e-11,4e5,forwardp[-1],f)
-M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,4e5,backwardp[0],f)
+# M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[-1],asb[-1],1e-11,4e5,0,f)
+M_srb,M_sib,A_srb,A_sib,Timeb=Bistability(**para).m_a_evo(msb[1],asb[1],1e-11,4e5,0,f)
 
 
 ## m和a的跳跃演化图 3D

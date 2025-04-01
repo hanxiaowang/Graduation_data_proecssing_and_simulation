@@ -48,11 +48,11 @@ for i,omega_m in enumerate(omega_ms):
     t21 = fenzi21 / fenmu
     S12 = rf.mag_2_db(np.abs(t12))
     S21 = rf.mag_2_db(np.abs(t21))
-    ISO=S12-S21
+    ISO=S21-S12
     S12s1.append(S12)
     S21s1.append(S21)
     Isos1.append(ISO)
-    Isom1.append(max(ISO))
+    Isom1.append(min(ISO))
 
 
 S12s2=[]
@@ -75,11 +75,11 @@ for i,omega_m in enumerate(omega_ms):
     t21 = fenzi21 / fenmu
     S12 = rf.mag_2_db(np.abs(t12))
     S21 = rf.mag_2_db(np.abs(t21))
-    ISO=S12-S21
+    ISO=S21-S12
     S12s2.append(S12)
     S21s2.append(S21)
     Isos2.append(ISO)
-    Isom2.append(min(ISO))
+    Isom2.append(max(ISO))
 
 
 
@@ -103,11 +103,19 @@ for i,omega_m in enumerate(omega_ms):
 # plt.show()
 
 extents=[omega_ms[0]/1e9, omega_ms[-1]/1e9, omega_ps[0]/1e9,omega_ps[-1]/1e9]
+
 plt.figure(figsize=(6,6))
 ax2 = plt.subplot(111)
-# im = ax2.imshow(np.transpose(Isos2), extent=extents,aspect='auto',origin='lower',cmap='bwr')
 im = ax2.imshow(np.transpose(Isos1), extent=extents,aspect='auto',origin='lower',cmap='bwr')
-ax2.plot(omega_ms/1e9,omega_ms/1e9,'--',color='green',alpha=1,linewidth=5)
+ax2.plot(omega_ms/1e9,omega_ms/1e9,'--',color='yellow',alpha=1,linewidth=5)
+plt.colorbar(im)
+plt.show()
+
+plt.figure(figsize=(6,6))
+ax2 = plt.subplot(111)
+im = ax2.imshow(np.transpose(Isos2), extent=extents,aspect='auto',origin='lower',cmap='bwr')
+# im = ax2.imshow(np.transpose(Isos1), extent=extents,aspect='auto',origin='lower',cmap='bwr')
+ax2.plot(omega_ms/1e9,omega_ms/1e9,'--',color='yellow',alpha=1,linewidth=5)
 plt.colorbar(im)
 plt.show()
 # np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\try txt\Iso1\omega_ms.txt',omega_ms/1e9)
@@ -119,23 +127,23 @@ plt.show()
 # np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\try txt\Iso2\Isos2.txt',Isos2)
 
 # plt.figure(figsize=(18,12))
-# # ax1 = plt.subplot(231)
-# # gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S12s1))
-# # ax1.plot(omega_ms/1e9,omega_ms/1e9,'--',color='red',alpha=0.5,linewidth=5)
-# # # ax1.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
-# # ax1.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-# # plt.tick_params(labelsize=20)
-# # cbar = plt.colorbar(gci1)
-# # # cmap='bwr'
-# # #
-# # ax2 = plt.subplot(232)
-# # gci2 = ax2.pcolor(omega_ms/1e9, omega_ps/1e9,np.transpose(S21s1))
-# # ax2.plot(omega_ms/1e9,omega_ms/1e9,'--',color='red',alpha=0.5,linewidth=5)
-# # # ax2.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
-# # # ax2.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-# # plt.tick_params(labelsize=20)
-# # cbar = plt.colorbar(gci2)
+# ax1 = plt.subplot(231)
+# gci1 = ax1.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S12s1))
+# ax1.plot(omega_ms/1e9,omega_ms/1e9,'--',color='red',alpha=0.5,linewidth=5)
+# # ax1.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
+# ax1.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# plt.tick_params(labelsize=20)
+# cbar = plt.colorbar(gci1)
+# # cmap='bwr'
 # #
+# ax2 = plt.subplot(232)
+# gci2 = ax2.pcolor(omega_ms/1e9, omega_ps/1e9,np.transpose(S21s1))
+# ax2.plot(omega_ms/1e9,omega_ms/1e9,'--',color='red',alpha=0.5,linewidth=5)
+# # ax2.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
+# # ax2.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# plt.tick_params(labelsize=20)
+# cbar = plt.colorbar(gci2)
+#
 # ax3 = plt.subplot(233)
 # gci3 = ax3.pcolor(omega_ms/1e9, omega_ps/1e9,np.transpose(Isos1))
 # ax3.plot(omega_ms/1e9,omega_ms/1e9,'--',color='red',alpha=0.5,linewidth=5)
@@ -143,24 +151,24 @@ plt.show()
 # # ax3.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
 # plt.tick_params(labelsize=20)
 # cbar = plt.colorbar(gci3)
+#
+# ax4 = plt.subplot(234)
+# gci4 = ax4.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S12s2))
+# ax4.plot(omega_ms/1e9,omega_ms/1e9,'--',color='red',alpha=0.5,linewidth=5)
+# # ax1.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
+# ax4.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# plt.tick_params(labelsize=20)
+# cbar = plt.colorbar(gci4)
+# # cmap='bwr'
 # #
-# # ax4 = plt.subplot(234)
-# # gci4 = ax4.pcolor(omega_ms/1e9,omega_ps/1e9, np.transpose(S12s2))
-# # ax4.plot(omega_ms/1e9,omega_ms/1e9,'--',color='red',alpha=0.5,linewidth=5)
-# # # ax1.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
-# # ax4.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-# # plt.tick_params(labelsize=20)
-# # cbar = plt.colorbar(gci4)
-# # # cmap='bwr'
-# # #
-# # ax5 = plt.subplot(235)
-# # gci5 = ax5.pcolor(omega_ms/1e9, omega_ps/1e9,np.transpose(S21s2))
-# # ax5.plot(omega_ms/1e9,omega_ms/1e9,'--',color='red',alpha=0.5,linewidth=5)
-# # # ax2.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
-# # # ax2.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-# # plt.tick_params(labelsize=20)
-# # cbar = plt.colorbar(gci5)
-# #
+# ax5 = plt.subplot(235)
+# gci5 = ax5.pcolor(omega_ms/1e9, omega_ps/1e9,np.transpose(S21s2))
+# ax5.plot(omega_ms/1e9,omega_ms/1e9,'--',color='red',alpha=0.5,linewidth=5)
+# # ax2.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
+# # ax2.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# plt.tick_params(labelsize=20)
+# cbar = plt.colorbar(gci5)
+#
 # ax6 = plt.subplot(236)
 # gci6 = ax6.pcolor(omega_ms/1e9, omega_ps/1e9,np.transpose(Isos2))
 # ax6.plot(omega_ms/1e9,omega_ms/1e9,'--',color='red',alpha=0.5,linewidth=5)
@@ -171,17 +179,17 @@ plt.show()
 # #
 # #
 # plt.show()
-# #
-# plt.figure(figsize=(12, 6))
-# axes1 = plt.subplot(111)
-# axes1.plot(omega_ms/1e9,Isom1,'-',linewidth=5,label='$\delta=3$')
-# axes1.plot(omega_ms/1e9,Isom2,'-',linewidth=5,label='$\delta=0.28$')
-# axes1.set_xlabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-# axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
-# plt.tick_params(labelsize=20)
-# axes1.set_ylim(-40,20)
-# plt.legend(loc=0,prop={'family':'Cambria','size':20})
-# plt.show()
+#
+plt.figure(figsize=(12, 6))
+axes1 = plt.subplot(111)
+axes1.plot(omega_ms/1e9,Isom1,'-',linewidth=5,label='$\delta=3$')
+axes1.plot(omega_ms/1e9,Isom2,'-',linewidth=5,label='$\delta=0.28$')
+axes1.set_xlabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
+plt.tick_params(labelsize=20)
+axes1.set_ylim(-20,40)
+plt.legend(loc=0,prop={'family':'Cambria','size':20})
+plt.show()
 # #
 
 

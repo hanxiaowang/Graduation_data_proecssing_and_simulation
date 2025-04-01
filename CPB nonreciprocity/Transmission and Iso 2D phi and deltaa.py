@@ -24,8 +24,8 @@ omega_m=omega_a
 delta=3
 phis=np.linspace(-0.5,1.5,3601)
 
-omega_ps=8.25e9+np.linspace(-50,50,5001)*1e6
-
+omega_ps=8.25e9+np.linspace(-50,50,100001)*1e6
+print(omega_ps)
 S12s1=[]
 S21s1=[]
 Isos1=[]
@@ -34,6 +34,13 @@ max_deltaa=[]
 min_deltaa=[]
 max_deltaa_phi=[]
 min_deltaa_phi=[]
+max_Iso=[]
+min_Iso=[]
+max_S12=[]
+min_S12=[]
+max_S21=[]
+min_S21=[]
+
 for i,phi in enumerate(phis):
     delta_m = omega_m - omega_ps
     delta_a = omega_a - omega_ps
@@ -50,16 +57,24 @@ for i,phi in enumerate(phis):
     t21 = fenzi21 / fenmu
     S12 = rf.mag_2_db(np.abs(t12))
     S21 = rf.mag_2_db(np.abs(t21))
-    ISO=S12-S21
+    ISO=S21-S12
     Iso_opt = np.abs(ISO)
     max_index = list(Iso_opt).index(max(Iso_opt))
     # Isom.append(ISO[1001])
-    if ISO[max_index]>=0:
+    if ISO[max_index]>0:
         max_deltaa.append(omega_ps[max_index])
         max_deltaa_phi.append(phi)
+        max_Iso.append(ISO[max_index])
+        max_S12.append(S12[max_index])
+        max_S21.append(S21[max_index])
+
     if ISO[max_index] <0:
         min_deltaa.append(omega_ps[max_index])
         min_deltaa_phi.append(phi)
+        min_Iso.append(ISO[max_index])
+        min_S12.append(S12[max_index])
+        min_S21.append(S21[max_index])
+
     S12s1.append(S12)
     S21s1.append(S21)
     Isos1.append(ISO)
@@ -70,6 +85,31 @@ for i,phi in enumerate(phis):
 #
 # print(phis[max_index])
 # print(phis[min_index])
+max_deltaa_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\phi', 'max_deltaa.txt')
+max_deltaa_phi_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\phi', 'max_deltaa_phi.txt')
+max_Iso_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\phi', 'max_Iso.txt')
+min_deltaa_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\phi', 'min_deltaa.txt')
+min_deltaa_phi_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\phi', 'min_deltaa_phi.txt')
+min_Iso_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\phi', 'min_Iso.txt')
+max_S12_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\phi', 'max_S12.txt')
+min_S12_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\phi', 'min_S12.txt')
+max_S21_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\phi', 'max_S21.txt')
+min_S21_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\phi', 'min_S21.txt')
+
+np.savetxt(max_deltaa_path, max_deltaa, fmt='%.4f')
+np.savetxt(max_deltaa_phi_path, max_deltaa_phi, fmt='%.4f')
+np.savetxt(max_Iso_path, max_Iso, fmt='%.4f')
+np.savetxt(min_deltaa_path, min_deltaa, fmt='%.4f')
+np.savetxt(min_deltaa_phi_path, min_deltaa_phi, fmt='%.4f')
+np.savetxt(min_Iso_path, min_Iso, fmt='%.4f')
+np.savetxt(max_S12_path, max_S12, fmt='%.4f')
+np.savetxt(min_S12_path, min_S12, fmt='%.4f')
+np.savetxt(max_S21_path, max_S21, fmt='%.4f')
+np.savetxt(min_S21_path, min_S21, fmt='%.4f')
+
+
+
+
 
 
 ## ISO at wp=wm vs phi
@@ -96,29 +136,28 @@ for i,phi in enumerate(phis):
 # plt.legend(loc=0,fontsize=10)
 # plt.show()
 
-X,Y=np.meshgrid(phis,(omega_a-omega_ps)/1e9)
 
 ## S12,S21 and ISO vs phi and wm
 #
 extents=[phis[0],phis[-1],(omega_a-omega_ps)[0]/1e9,(omega_a-omega_ps)[-1]/1e9]
-# plt.figure(figsize=(6,6))
-# ax1=plt.subplot(111)
-# im = ax1.imshow(np.transpose(S12s1), extent=extents,aspect='auto',origin='lower')
-# plt.colorbar(im)
-# ax1.set_ylabel(r'$\varphi$[$\pi$]',fontsize=10)
-# ax1.set_xlabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
-# plt.tick_params(labelsize=10)
-# plt.show()
-#
-# plt.figure(figsize=(6,6))
-#
-# ax2 = plt.subplot(111)
-# im = ax2.imshow(np.transpose(S21s1), extent=extents,aspect='auto',origin='lower')
-# ax2.set_xlabel(r'$\varphi$[$\pi$]',fontsize=10)
-# ax2.set_ylabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
-# plt.tick_params(labelsize=10)
-# plt.colorbar(im)#
-# plt.show()
+plt.figure(figsize=(6,6))
+ax1=plt.subplot(111)
+im = ax1.imshow(np.transpose(S12s1), extent=extents,aspect='auto',origin='lower')
+plt.colorbar(im)
+ax1.set_ylabel(r'$\varphi$[$\pi$]',fontsize=10)
+ax1.set_xlabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
+plt.tick_params(labelsize=10)
+plt.show()
+
+plt.figure(figsize=(6,6))
+
+ax2 = plt.subplot(111)
+im = ax2.imshow(np.transpose(S21s1), extent=extents,aspect='auto',origin='lower')
+ax2.set_xlabel(r'$\varphi$[$\pi$]',fontsize=10)
+ax2.set_ylabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
+plt.tick_params(labelsize=10)
+plt.colorbar(im)#
+plt.show()
 
 plt.figure(figsize=(6,6))
 

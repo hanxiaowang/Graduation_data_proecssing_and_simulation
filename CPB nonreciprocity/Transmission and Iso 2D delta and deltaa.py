@@ -21,10 +21,10 @@ g = 8e6
 omega_a = 8.25e9
 omega_m=omega_a
 
-deltas=np.linspace(0,7,1401)
+deltas=np.linspace(0,7,14001)
 phi=0.75
 
-omega_ps=8.25e9+np.linspace(-50,50,5001)*1e6
+omega_ps=8.25e9+np.linspace(-50,50,100001)*1e6
 
 S12s1=[]
 S21s1=[]
@@ -34,6 +34,12 @@ max_deltaa=[]
 min_deltaa=[]
 max_Iso=[]
 min_Iso=[]
+
+max_S12=[]
+min_S12=[]
+max_S21=[]
+min_S21=[]
+
 max_deltaa_delta=[]
 min_deltaa_delta=[]
 for i,delta in enumerate(deltas):
@@ -52,7 +58,7 @@ for i,delta in enumerate(deltas):
     t21 = fenzi21 / fenmu
     S12 = rf.mag_2_db(np.abs(t12))
     S21 = rf.mag_2_db(np.abs(t21))
-    ISO=S12-S21
+    ISO=S21-S12
     S12s1.append(S12)
     S21s1.append(S21)
     Isos1.append(ISO)
@@ -63,10 +69,15 @@ for i,delta in enumerate(deltas):
         max_deltaa.append(omega_ps[max_index])
         max_deltaa_delta.append(delta)
         max_Iso.append(ISO[max_index])
+        max_S12.append(S12[max_index])
+        max_S21.append(S21[max_index])
+
     if ISO[max_index] < 0:
         min_deltaa.append(omega_ps[max_index])
         min_deltaa_delta.append(delta)
         min_Iso.append(ISO[max_index])
+        min_S12.append(S12[max_index])
+        min_S21.append(S21[max_index])
 #
 # max_index = list(Isos1).index(max(Isom))
 # min_index = list(Isos1).index(min(Isom))
@@ -74,6 +85,28 @@ for i,delta in enumerate(deltas):
 # print(phis[max_index])
 # print(phis[min_index])
 
+max_deltaa_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\delta', 'max_deltaa.txt')
+max_deltaa_delta_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\delta', 'max_deltaa_delta.txt')
+max_Iso_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\delta', 'max_Iso.txt')
+min_deltaa_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\delta', 'min_deltaa.txt')
+min_deltaa_delta_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\delta', 'min_deltaa_delta.txt')
+min_Iso_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\delta', 'min_Iso.txt')
+max_S12_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\delta', 'max_S12.txt')
+min_S12_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\delta', 'min_S12.txt')
+max_S21_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\delta', 'max_S21.txt')
+min_S21_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\delta', 'min_S21.txt')
+
+
+np.savetxt(max_deltaa_path, max_deltaa, fmt='%.4f')
+np.savetxt(max_deltaa_delta_path, max_deltaa_delta, fmt='%.4f')
+np.savetxt(max_Iso_path, max_Iso, fmt='%.4f')
+np.savetxt(min_deltaa_path, min_deltaa, fmt='%.4f')
+np.savetxt(min_deltaa_delta_path, min_deltaa_delta, fmt='%.4f')
+np.savetxt(min_Iso_path, min_Iso, fmt='%.4f')
+np.savetxt(max_S12_path, max_S12, fmt='%.4f')
+np.savetxt(min_S12_path, min_S12, fmt='%.4f')
+np.savetxt(max_S21_path, max_S21, fmt='%.4f')
+np.savetxt(min_S21_path, min_S21, fmt='%.4f')
 
 # ISO at wp=wm vs phi
 # plt.figure(figsize=(15, 10))
@@ -104,7 +137,7 @@ for i,delta in enumerate(deltas):
 #
 extents=[deltas[0],deltas[-1],(omega_a-omega_ps)[0]/1e9,(omega_a-omega_ps)[-1]/1e9]
 
-plt.figure(figsize=(6,6))
+# plt.figure(figsize=(6,6))
 # ax1=plt.subplot(111)
 # im = ax1.imshow(np.transpose(S12s1), extent=extents,aspect='auto',origin='lower')
 # plt.tick_params(labelsize=10)
@@ -112,46 +145,45 @@ plt.figure(figsize=(6,6))
 # ax1.set_ylabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
 # plt.colorbar(im)
 # plt.show()
+#
+plt.figure(figsize=(6,6))
+
+ax2 = plt.subplot(111)
+im = ax2.imshow(np.transpose(S21s1), extent=extents,aspect='auto',origin='lower')
+
+ax2.set_xlabel(r'$\delta$',fontsize=10)
+ax2.set_ylabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
+plt.tick_params(labelsize=10)
+plt.colorbar(im)
+plt.show()
 # #
 # plt.figure(figsize=(6,6))
 #
-# ax2 = plt.subplot(111)
-# im = ax2.imshow(np.transpose(S21s1), extent=extents,aspect='auto',origin='lower')
+# ax3 = plt.subplot(111)
+# im = ax3.imshow(np.transpose(Isos1),cmap='bwr', extent=extents,aspect='auto',origin='lower')
+# # ax3.plot(max_deltaa_delta,(omega_a-np.array(max_deltaa))/1e9,'o',color='green',markersize=1)
+# # ax3.plot(min_deltaa_delta,(omega_a-np.array(min_deltaa))/1e9,'o',color='green',markersize=1,alpha=0.5)
 #
-# ax2.set_xlabel(r'$\delta$',fontsize=10)
-# ax2.set_ylabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
+# ax3.set_xlabel(r'$\delta$',fontsize=10)
+# ax3.set_ylabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
 # plt.tick_params(labelsize=10)
 # plt.colorbar(im)
 # plt.show()
-# #
-# plt.figure(figsize=(6,6))
-
-ax3 = plt.subplot(111)
-im = ax3.imshow(np.transpose(Isos1),cmap='bwr', extent=extents,aspect='auto',origin='lower')
-# ax3.plot(max_deltaa_delta,(omega_a-np.array(max_deltaa))/1e9,'o',color='green',markersize=1)
-# ax3.plot(min_deltaa_delta,(omega_a-np.array(min_deltaa))/1e9,'o',color='green',markersize=1,alpha=0.5)
-
-ax3.set_xlabel(r'$\delta$',fontsize=10)
-ax3.set_ylabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
-plt.tick_params(labelsize=10)
-plt.colorbar(im)
-
-plt.show()
 
 
 
-max_index1=list(max_Iso).index(max(max_Iso))
-print(omega_a-max_deltaa[max_index1])
-print(max_deltaa_delta[max_index1])
-print(max_Iso[max_index1])
+# max_index1=list(max_Iso).index(max(max_Iso))
+# print(omega_a-max_deltaa[max_index1])
+# print(max_deltaa_delta[max_index1])
+# print(max_Iso[max_index1])
+#
+# min_index1=list(min_Iso).index(min(min_Iso))
+# print(omega_a-min_deltaa[min_index1])
+# print(min_deltaa_delta[min_index1])
+# print(min_Iso[min_index1])
 
-min_index1=list(min_Iso).index(min(min_Iso))
-print(omega_a-min_deltaa[min_index1])
-print(min_deltaa_delta[min_index1])
-print(min_Iso[min_index1])
 
-
-# phis=np.linspace(-0.5,1.5,3601)
+# phis=np.linspace(-0.5,1.5,361)
 # phi_max=[]
 # omega_max=[]
 # phi_min=[]
@@ -183,7 +215,7 @@ print(min_Iso[min_index1])
 #         t21 = fenzi21 / fenmu
 #         S12 = rf.mag_2_db(np.abs(t12))
 #         S21 = rf.mag_2_db(np.abs(t21))
-#         ISO=S12-S21
+#         ISO=S21-S12
 #         S12s1.append(S12)
 #         S21s1.append(S21)
 #         Isos1.append(ISO)
@@ -210,7 +242,7 @@ print(min_Iso[min_index1])
 # # print(max_deltaa)
 # # print(max_index1)
 # # print(min_index1)
-# print(min_deltaa)
+# # print(min_deltaa)
 # plt.figure(figsize=(6,6))
 # #
 # plt.plot(phi_max,(omega_a-np.array(omega_max))/1e9,'s',color='red',markersize=5,markerfacecolor='None')
@@ -219,5 +251,4 @@ print(min_Iso[min_index1])
 # # plt.xlabel(r'$\delta$',fontsize=10)
 # # plt.ylabel(r'$\delta_a/2\pi$ [MHz]',fontsize=10)
 # plt.tick_params(labelsize=10)
-#
 # plt.show()

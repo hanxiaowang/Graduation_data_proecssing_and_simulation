@@ -161,7 +161,7 @@ for i in range(9):
 # ax.grid(None)
 # ax.view_init(elev=15, azim=17)
 # ax.view_init(elev=7, azim=18)
-plt.show()
+# plt.show()
 # picture1=np.linspace(-15,25,401)
 # p1sy=[]
 # for i in range(len(picture1)):
@@ -217,7 +217,7 @@ plt.show()
 print(max(ISO3))
 print(max(ISO7))
 
-fig, axes = plt.subplots(1, 1, figsize=(15, 10))
+fig, axes = plt.subplots(1, 1, figsize=(7,6))
 # axes.plot((8.25-omega_ps/1e9)*1e3,ISO1,'-',alpha=0.5,label=r'$\varphi=0$',linewidth=10)
 axes.plot((8.25-omega_ps/1e9)*1e3,ISO3,'-',alpha=0.5,label=r'$\varphi=0.5\pi$',linewidth=10)
 axes.plot((8.25-omega_ps/1e9)*1e3,ISO7,'-',alpha=0.5,label=r'$\varphi=1.5\pi$',linewidth=10)

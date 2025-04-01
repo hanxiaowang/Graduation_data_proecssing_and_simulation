@@ -8,7 +8,7 @@ omega_a = 8.25e9
 # delta_ms=np.linspace(-100,100,41)
 
 omega_m = omega_a
-omega_s = np.linspace(omega_m - 50e6, omega_m + 50e6, 2001)
+omega_s = np.linspace(omega_m - 50e6, omega_m + 50e6, 10001)
 # omega_s = np.linspace(8.16e9, 8.36e9, 20001)
 
 k_int = 1.4e6
@@ -81,11 +81,13 @@ for i in range(len(phis)):
         if (np.abs(max(S21))<=wucha2):
             S21_0_delta.append(deltas[c])
             S21_0_phi.append(phis[i])
-        iso=S12-S21
-        isoabs=np.abs(S12-S21)
-
+        ISO=S21-S12
+        isoabs=np.abs(ISO)
+        #
         index = np.where(isoabs==max(isoabs))
-        need = iso[index][0]
+        # print(index)
+        # print(index[0][0])
+        need = ISO[index[0][0]]
         isos.append(need)
     Iso.append(isos)
     S12_max.append(s12_max)
@@ -95,51 +97,57 @@ pai=[]
 for i in range(len(deltas)):
     pai.append(0.5)
 
+
+omega_p_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\iso', 'omega_s.txt')
+phis_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\iso', 'phis.txt')
+deltas_delta_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\iso', 'deltas.txt')
+Iso_path = os.path.join(r'C:\Users\AORUS\OneDrive\桌面\cpb nonreciprocity data\iso', 'Iso.txt')
+
+
+np.savetxt(omega_p_path , omega_s, fmt='%.4f')
+np.savetxt(phis_path, phis, fmt='%.4f')
+np.savetxt(deltas_delta_path, deltas, fmt='%.4f')
+np.savetxt(Iso_path, Iso, fmt='%.4f')
+
+
 print(len(S12_0_delta))
 print(len(S21_0_delta))
 extents=[deltas[0], deltas[-1], phis[0],phis[-1]]
-
 plt.figure(figsize=(12,6))
-# ax1 = plt.subplot(111)
-# gci1 = ax1.pcolor(deltas, phis, Iso,cmap='bwr')
-# ax1.plot(deltas,pai,'--',color='black',linewidth=5)
-# ax1.set_xlabel(r'$\delta$',fontsize=10)
-# ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=10)
-# plt.tick_params(labelsize=10)
-# cbar = plt.colorbar(gci1)
 ax1 = plt.subplot(111)
 im = ax1.imshow(Iso, extent=extents, cmap="bwr",aspect='auto',origin='lower')
 ax1.plot(deltas,pai,'--',color='black',linewidth=5)
 plt.colorbar(im)
 plt.show()
 
-plt.figure(figsize=(12,6))
-# ax1 = plt.subplot(111)
-# gci1 = ax1.pcolor(deltas, phis, S12_max)
-# ax1.plot(deltas,pai,'--',color='black',linewidth=5)
-# ax1.plot(S12_0_delta,S12_0_phi,'--',color='red',linewidth=5)
-# ax1.set_xlabel(r'$\delta$',fontsize=10)
-# ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=10)
-# plt.tick_params(labelsize=10)
-# cbar = plt.colorbar(gci1)
-ax2 = plt.subplot(111)
-im = ax2.imshow(S12_max, extent=extents,aspect='auto',origin='lower')
-ax2.plot(S12_0_delta,S12_0_phi,'--',color='red',linewidth=5)
-plt.colorbar(im)
-plt.show()
-# #
 
-plt.figure(figsize=(12,6))
-ax3 = plt.subplot(111)
-# gci1 = ax1.pcolor(deltas, phis, S21_max)
+# plt.figure(figsize=(12,6))
+# # ax1 = plt.subplot(111)
+# # gci1 = ax1.pcolor(deltas, phis, S12_max)
 # # ax1.plot(deltas,pai,'--',color='black',linewidth=5)
-# ax1.plot(S21_0_delta,S21_0_phi,'--',color='red',linewidth=5)
-# ax1.set_xlabel(r'$\delta$',fontsize=10)
-# ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=10)
-# plt.tick_params(labelsize=10)
-# cbar = plt.colorbar(gci1)
-ax3 = plt.subplot(111)
-im = ax3.imshow(S21_max, extent=extents,aspect='auto',origin='lower')
-ax3.plot(S21_0_delta,S21_0_phi,'--',color='red',linewidth=5)
-plt.colorbar(im)
-plt.show()
+# # ax1.plot(S12_0_delta,S12_0_phi,'--',color='red',linewidth=5)
+# # ax1.set_xlabel(r'$\delta$',fontsize=10)
+# # ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=10)
+# # plt.tick_params(labelsize=10)
+# # cbar = plt.colorbar(gci1)
+# ax2 = plt.subplot(111)
+# im = ax2.imshow(S12_max, extent=extents,aspect='auto',origin='lower')
+# ax2.plot(S12_0_delta,S12_0_phi,'--',color='red',linewidth=5)
+# plt.colorbar(im)
+# plt.show()
+# # #
+# #
+# plt.figure(figsize=(12,6))
+# ax3 = plt.subplot(111)
+# # gci1 = ax1.pcolor(deltas, phis, S21_max)
+# # # ax1.plot(deltas,pai,'--',color='black',linewidth=5)
+# # ax1.plot(S21_0_delta,S21_0_phi,'--',color='red',linewidth=5)
+# # ax1.set_xlabel(r'$\delta$',fontsize=10)
+# # ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=10)
+# # plt.tick_params(labelsize=10)
+# # cbar = plt.colorbar(gci1)
+# ax3 = plt.subplot(111)
+# im = ax3.imshow(S21_max, extent=extents,aspect='auto',origin='lower')
+# ax3.plot(S21_0_delta,S21_0_phi,'--',color='red',linewidth=5)
+# plt.colorbar(im)
+# plt.show()

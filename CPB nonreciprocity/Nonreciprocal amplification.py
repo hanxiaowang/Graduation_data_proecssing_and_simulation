@@ -43,6 +43,8 @@ phi=0.5
 # phi=0.91#point3
 # phi=0.09#point4
 
+delta_ss=np.linspace(0,7,70001)
+
 
 
 # omega_ps=8.25e9+np.linspace(-50,50,2001)*1e6
@@ -56,16 +58,16 @@ def S_and_Iso(delta):
     chi_m = 1j * delta_m + gamma / 2
     fenmu = chi_a * chi_m + g ** 2
 
-    fenzi21 = chi_m * np.sqrt(k_1 * k_2) - 1j * g * np.sqrt(k_2 * gamma_e) * delta * np.exp(
-        -1j * phi * np.pi)
     fenzi12 = chi_m * np.sqrt(k_1 * k_2) - 1j * g * np.sqrt(k_1 * gamma_e) * delta * np.exp(
+        -1j * phi * np.pi)
+    fenzi21 = chi_m * np.sqrt(k_1 * k_2) - 1j * g * np.sqrt(k_2 * gamma_e) * delta * np.exp(
         -1j * phi * np.pi)
 
     t12 = fenzi12 / fenmu
     t21 = fenzi21 / fenmu
     S12 = rf.mag_2_db(np.abs(t12))
     S21 = rf.mag_2_db(np.abs(t21))
-    ISO=S12-S21
+    ISO=S21-S12
     delta_s=[]
     for i in range(len(omega_ps)):
         delta_s.append(delta)
@@ -128,30 +130,30 @@ S1211,S2111,ISO11,delta_s11=S_and_Iso(delta11)
 # plt.show()
 
 
-fig=plt.figure(figsize=(12, 6))
-ax=fig.add_subplot(projection='3d')
-ax=Axes3D(fig)
-fig.add_axes(ax)
-ax.set_box_aspect([2,3,1])
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s1,S121)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s2,S122)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s3,S123)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s4,S124)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s5,S125)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s6,S126)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s7,S127)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s8,S128)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s9,S129)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s10,S1210)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s11,S1211)
-ax.set_ylim(0,10)
-ax.set_xlim(-60,60)
-plt.xticks([-50,0,50],['-50','0','50'])
-
-# ax.grid(None)
-ax.view_init(elev=15, azim=17)
-# ax.view_init(elev=7, azim=18)
-plt.show()
+# fig=plt.figure(figsize=(12, 6))
+# ax=fig.add_subplot(projection='3d')
+# ax=Axes3D(fig)
+# fig.add_axes(ax)
+# ax.set_box_aspect([2,3,1])
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s1,S121)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s2,S122)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s3,S123)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s4,S124)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s5,S125)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s6,S126)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s7,S127)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s8,S128)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s9,S129)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s10,S1210)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s11,S1211)
+# ax.set_ylim(0,10)
+# ax.set_xlim(-60,60)
+# plt.xticks([-50,0,50],['-50','0','50'])
+#
+# # ax.grid(None)
+# ax.view_init(elev=15, azim=17)
+# # ax.view_init(elev=7, azim=18)
+# plt.show()
 
 
 # np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\try txt\S12 amp 1d\omega_ps.txt',omega_ps)
@@ -182,29 +184,29 @@ plt.show()
 # plt.legend(loc=4,prop={'family':'Cambria','size':20})
 # plt.show()
 
-fig=plt.figure(figsize=(12, 6))
-ax=fig.add_subplot(1,1,1,projection='3d')
-ax=Axes3D(fig)
-fig.add_axes(ax)
-ax.set_box_aspect([2,3,1])
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s1,S211)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s2,S212)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s3,S213)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s4,S214)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s5,S215)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s6,S216)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s7,S217)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s8,S218)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s9,S219)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s10,S2110)
-ax.plot((8.25-omega_ps/1e9)*1e3,delta_s11,S2111)
-ax.set_ylim(0,10)
-ax.set_xlim(-60,60)
-plt.xticks([-50,0,50],['-50','0','50'])
-# ax.grid(None)
-ax.view_init(elev=15, azim=17)
-# ax.view_init(elev=7, azim=18)
-plt.show()
+# fig=plt.figure(figsize=(12, 6))
+# ax=fig.add_subplot(1,1,1,projection='3d')
+# ax=Axes3D(fig)
+# fig.add_axes(ax)
+# ax.set_box_aspect([2,3,1])
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s1,S211)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s2,S212)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s3,S213)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s4,S214)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s5,S215)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s6,S216)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s7,S217)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s8,S218)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s9,S219)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s10,S2110)
+# ax.plot((8.25-omega_ps/1e9)*1e3,delta_s11,S2111)
+# ax.set_ylim(0,10)
+# ax.set_xlim(-60,60)
+# plt.xticks([-50,0,50],['-50','0','50'])
+# # ax.grid(None)
+# ax.view_init(elev=15, azim=17)
+# # ax.view_init(elev=7, azim=18)
+# plt.show()
 
 # fig=plt.figure(figsize=(12, 6))
 # ax=fig.add_subplot(1,1,1,projection='3d')
@@ -254,46 +256,61 @@ plt.show()
 # print(S126[1000])
 # print(S127[1000])
 
-# delta_ss=np.linspace(0,700,70001)
-# S12ss=[]
-# S21ss=[]
-# Isoss=[]
-# zeross=[]
-# for i in range(len(delta_ss)):
-#     S12s, S21s, ISOs, delta_s = S_and_Iso(delta_ss[i])
-#     S12ss.append(S12s[5000])
-#     S21ss.append(S21s[5000])
-#     Isoss.append(S12s[5000]-S21s[5000])
-#     zeross.append(0)
-# #
-# # index7 = list(delta_ss).index(7)
-# # print('max')
-# # print(Isoss[index7])
-# #
-# index12min = list(S12ss).index(min(S12ss))
-# index21min = list(S21ss).index(min(S21ss))
+# delta_ss=np.linspace(0.2,0.4,50001)
+S12ss=[]
+S21ss=[]
+Isoss=[]
+zeross=[]
+Isomin=[]
+Isomax=[]
+for i in range(len(delta_ss)):
+    S12s, S21s, ISOs, delta_s = S_and_Iso(delta_ss[i])
+    # S12ss.append(S12s[5000])
+    # S21ss.append(S21s[5000])
+    # Isoss.append(S12s[5000]-S21s[5000])
+    Iso_abs=np.abs(ISOs)
+    indexisoabsmax = list(Iso_abs).index(max(Iso_abs))
+    S12ss.append(S12s[indexisoabsmax])
+    S21ss.append(S21s[indexisoabsmax])
+    Isoss.append(ISOs[indexisoabsmax])
+    Isomin.append(min(ISOs))
+    Isomax.append(max(ISOs))
+    zeross.append(0)
 #
-# print(delta_ss[index12min])
-# print(delta_ss[index21min])
+# index7 = list(delta_ss).index(7)
+# print('max')
+# print(Isoss[index7])
 #
-# print(min(Isoss))
-# print(max(Isoss))
-# print(min(S12ss))
-# print(min(S21ss))
+index12min = list(S12ss).index(min(S12ss))
+index21min = list(S21ss).index(min(S21ss))
 
-# plt.figure(figsize=(12, 6))
-# axes1 = plt.subplot(111)
+indexisomin = list(Isoss).index(min(Isoss))
+indexisomax = list(Isoss).index(max(Isoss))
+
+print(delta_ss[index12min])
+print(delta_ss[index21min])
+
+print(f'min isolation {min(Isoss)}')
+print(f'max isolation {max(Isoss)}')
+print(min(S12ss))
+print(min(S21ss))
+
+plt.figure(figsize=(12, 6))
+axes1 = plt.subplot(111)
 # axes1.plot(delta_ss,S12ss,'-',linewidth=5,label=r'$S_{12}$',alpha=0.5)
 # axes1.plot(delta_ss,S21ss,'-',linewidth=5,label=r'$S_{21}$',alpha=0.5)
 # axes1.plot(delta_ss,zeross,'--',linewidth=2,color='black')
-# # axes1.plot(delta_ss,Isoss,'-',linewidth=5,label=r'$\text{Iso.   }$',color='green')
-# axes1.set_xlabel(r'$\delta$',fontsize=20)
-# axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
-# plt.tick_params(labelsize=20)
-# plt.legend(loc=4,prop={'family':'Cambria','size':20})
-# plt.show()
+axes1.plot(delta_ss,Isoss,'-',linewidth=5,label=r'$\text{Iso.   }$',color='green')
+# axes1.plot(delta_ss,Isomin,'-',linewidth=5,label=r'$\text{Iso.min   }$')
+# axes1.plot(delta_ss,Isomax,'-',linewidth=5,label=r'$\text{Iso.max   }$')
+
+axes1.set_xlabel(r'$\delta$',fontsize=20)
+axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
+plt.tick_params(labelsize=20)
+plt.legend(loc=4,prop={'family':'Cambria','size':20})
+plt.show()
 # print(Isoss[-1])
-# print(S21ss[0])
+print(S21ss[0])
 
 # print(S121[1000])
 # print(S1211[1000])

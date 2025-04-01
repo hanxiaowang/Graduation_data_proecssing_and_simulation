@@ -50,14 +50,14 @@ print(len(step_up10))
 
 
 # plot_p_and_f(step_up10,drive_power_up10,delta_m_up10)
-plot_p_and_f(step_down3,drive_power_down3,delta_m_down3)
+# plot_p_and_f(step_down3,drive_power_down3,delta_m_down3)
 
 
 
 
 
 
-# plot_polar(step_down3,cpf_down3)
-# plot_polar(step_down3[::-1],cfp_down3)
-# plot_polar(step_up10,cpf_up10)
-# plot_polar(step_up10[::-1],cfp_up10)
+plot_polar(step_down3,cpf_down3)
+plot_polar(step_down3[::-1],cfp_down3)
+plot_polar(step_up10,cpf_up10)
+plot_polar(step_up10[::-1],cfp_up10)

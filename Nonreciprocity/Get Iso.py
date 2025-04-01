@@ -34,7 +34,7 @@ print(np.shape(Iso))
 
 # np.savetxt(f'F:\\Nonreciprocity\\20210701\\Isore.txt',Iso)
 
-plt.figure(figsize=(12,12))
+plt.figure(figsize=(6,6))
 ax1 = plt.subplot(111)
 gci1 = ax1.pcolor(voltage,phi1, np.transpose(Iso))
 ax1.set_xlabel(r'$voltage$',fontsize=20)

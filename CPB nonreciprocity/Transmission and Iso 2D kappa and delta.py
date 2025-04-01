@@ -9,7 +9,9 @@ k_2 = 4.5e6
 # k_2 = 50e6
 
 # rates=np.linspace(0.01,50,501)
-rates=np.linspace(0.01,15,1500)
+# rates=np.linspace(0.01,15,1500)
+rates=np.logspace(-2,2,2001)
+
 k_1 = rates*k_2
 # k_1 = 40e6
 
@@ -59,7 +61,7 @@ for i, delta in enumerate(deltas):
     t21 = fenzi21 / fenmu
     S12 = rf.mag_2_db(np.abs(t12))
     S21 = rf.mag_2_db(np.abs(t21))
-    ISO=S12-S21
+    ISO=S21-S12
     S12s1.append(S12)
     S21s1.append(S21)
     Isos1.append(ISO)
@@ -249,8 +251,8 @@ no_non=[]
 for j in range(len(deltas)):
     no_non.append(1)
 
-plt.figure(figsize=(6, 6))
-ax1 = plt.subplot(111)
+# plt.figure(figsize=(6, 6))
+# ax1 = plt.subplot(111)
 # gci1 = ax1.pcolor(rates,deltas, (S12s1),cmap='spring')
 # # ax1.plot(rates,Imin,'--',color='red')
 # ax1.plot(zerorate12,zerodelta12,'-',linewidth=3,color='blue')
@@ -260,14 +262,16 @@ ax1 = plt.subplot(111)
 # ax1.plot(zerorate21,zerodelta21,'-',linewidth=3,color='blue')
 #
 extents=[rates[0],rates[-1],deltas[0],deltas[-1]]
+plt.figure(figsize=(6,6))
 ax1 = plt.subplot(111)
 im = ax1.imshow((Isos1), extent=extents, cmap="bwr",aspect='auto',origin='lower')
 plt.colorbar(im)
-ax1.plot(rates,Imax,'--',color='red',alpha=0.5,linewidth=5)
-ax1.plot(rates,Imin,'--',color='blue',alpha=0.5,linewidth=5)
+# ax1.plot(rates,Imax,'--',color='red',alpha=0.5,linewidth=5)
+# ax1.plot(rates,Imin,'--',color='blue',alpha=0.5,linewidth=5)
 ax1.plot(no_non,deltas,'--',color='black',linewidth=3)
 ax1.set_ylabel(r'$\delta$',fontsize=10)
 ax1.set_xlabel(r'$\kappa_1/\kappa_2$',fontsize=10)
+ax1.set_xscale('log')
 plt.tick_params(labelsize=10)
 plt.show()
 #
