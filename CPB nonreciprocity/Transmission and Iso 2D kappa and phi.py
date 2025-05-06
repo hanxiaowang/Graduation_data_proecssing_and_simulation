@@ -9,7 +9,7 @@ k_int = 1.4e6
 # k_1 = 40e6
 k_2 = 4.5e6
 # rates=np.linspace(0.01,15,1500)
-rates=np.logspace(-2,2,2001)
+rates=np.logspace(-1,1,101)
 k_1 = rates*k_2
 # k_3 = 1.33e6
 k_3 = 0e6
@@ -26,7 +26,7 @@ omega_m=omega_a
 delta=3
 phis=np.linspace(-0.5,1.5,361)
 
-omega_ps=omega_a+np.linspace(- 50e6,50e6, 10001)
+omega_ps=omega_a+np.linspace(-50e6,50e6, 10001)
 
 
 

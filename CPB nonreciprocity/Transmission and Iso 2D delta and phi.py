@@ -116,7 +116,7 @@ extents=[deltas[0], deltas[-1], phis[0],phis[-1]]
 plt.figure(figsize=(12,6))
 ax1 = plt.subplot(111)
 im = ax1.imshow(Iso, extent=extents, cmap="bwr",aspect='auto',origin='lower')
-ax1.plot(deltas,pai,'--',color='black',linewidth=5)
+ax1.plot(deltas,pai,'--',color='green',linewidth=5)
 plt.colorbar(im)
 plt.show()
 

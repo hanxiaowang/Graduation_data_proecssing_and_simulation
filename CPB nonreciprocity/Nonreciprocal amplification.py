@@ -310,7 +310,7 @@ plt.tick_params(labelsize=20)
 plt.legend(loc=4,prop={'family':'Cambria','size':20})
 plt.show()
 # print(Isoss[-1])
-print(S21ss[0])
+# print(S21ss[0])
 
 # print(S121[1000])
 # print(S1211[1000])
@@ -319,8 +319,9 @@ print(S21ss[0])
 #
 
 #
-# print(S12ss[-1])
-# print(S21ss[-1])
+print(S12ss[-1])
+print(S21ss[-1])
+print(Isoss[-1])
 
 
 

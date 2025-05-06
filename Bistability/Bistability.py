@@ -41,17 +41,17 @@ plt.tick_params(labelsize=40)
 plt.legend(loc=5,fontsize=30)
 plt.show()
 
-# fig, axes = plt.subplots(1, 1, figsize=(15, 10))
-# axes.scatter(fre[::-1],Dfref,label='Scan forward',color='none',edgecolors='blue',s=100,linewidth=3)
-# axes.scatter(fre,Dfreb,label='Scan backward',color='none',edgecolors='red',s=100,linewidth=3)
-#
-# axes.plot(fx0,fy0,'.',label='Simulation',color='black',markersize=15)
-# axes.plot(fx1,fy1,'.',label='',color='black',markersize=15)
-# axes.plot(fx2,fy2,'.',label='',color='black',markersize=15)
-#
-# axes.set_xlabel(r'$f_d$ [GHz]',fontsize=40)
-# axes.set_ylabel(r'$\Delta_+/2\pi$ [MHz]',fontsize=40)
-# plt.tick_params(labelsize=40)
-# plt.legend(loc=5,fontsize=30)
-# plt.show()
+fig, axes = plt.subplots(1, 1, figsize=(15, 10))
+axes.scatter(fre[::-1],Dfref,label='Scan forward',color='none',edgecolors='blue',s=100,linewidth=3)
+axes.scatter(fre,Dfreb,label='Scan backward',color='none',edgecolors='red',s=100,linewidth=3)
+
+axes.plot(fx0,fy0,'.',label='Simulation',color='black',markersize=15)
+axes.plot(fx1,fy1,'.',label='',color='black',markersize=15)
+axes.plot(fx2,fy2,'.',label='',color='black',markersize=15)
+
+axes.set_xlabel(r'$f_d$ [GHz]',fontsize=40)
+axes.set_ylabel(r'$\Delta_+/2\pi$ [MHz]',fontsize=40)
+plt.tick_params(labelsize=40)
+plt.legend(loc=5,fontsize=30)
+plt.show()
 

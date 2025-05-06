@@ -17,6 +17,17 @@ Exp=[]
 Isose = np.loadtxt(r'F:\Nonreciprocity\20210703\m smaller than a\Isos.txt')
 Isole = np.loadtxt(r'F:\Nonreciprocity\20210703\m lager than a\Isol.txt')
 Isore = np.loadtxt(r'F:\Nonreciprocity\20210701\Isor.txt')
+# print(type(Isose))
+# print(np.shape(Isose))
+
+print(np.min(Isose))
+print(np.max(Isose))
+
+print(np.min(Isole))
+print(np.max(Isole))
+
+print(np.min(Isore))
+print(np.max(Isore))
 
 Exp.append(np.transpose(Isose))
 Exp.append(np.transpose(Isore))

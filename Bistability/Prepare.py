@@ -50,12 +50,30 @@ def plot_polar(x1,y):
 
 
 def plot_p_and_f(steps,power,fre):
-    plt.figure(figsize=(12, 6))
+    plt.figure(figsize=(18, 9))
     ax1 = plt.subplot(111)
     ax1.scatter(steps,power,color='blue',edgecolors='blue',s=10,linewidth=0,label=r'$P_d$')
     ax1.set_ylabel(r'$P_d$ [mW]',fontsize=30,color='blue')
     ax2=ax1.twinx()
     ax2.scatter(steps,fre*1e3,color='none',edgecolors='red',s=20,linewidth=1,label=r'$\delta_m/2\pi$')
+    ax2.set_ylabel(r'$\delta_m/2\pi$ [MHz]',fontsize=30,color='red')
+    ax1.set_xlabel(r'Step',fontsize=30)
+    ax1.tick_params(axis='y',labelsize=30,colors='blue')
+    ax2.tick_params(axis='y',labelsize=30,colors='red')
+    ax1.tick_params(axis='x',labelsize=30,colors='black')
+
+    # plt.legend(loc=0,fontsize=20)
+    plt.show()
+
+
+
+def plot_clock_and_cclock(steps,clock,cclock):
+    plt.figure(figsize=(18, 9))
+    ax1 = plt.subplot(111)
+    ax1.scatter(steps,clock,color='blue',edgecolors='blue',s=10,linewidth=0,label=r'$P_d$')
+    ax1.set_ylabel(r'$P_d$ [mW]',fontsize=30,color='blue')
+    ax2=ax1.twinx()
+    ax2.scatter(steps[::-1],cclock[::-1],color='none',edgecolors='red',s=20,linewidth=1,label=r'$\delta_m/2\pi$')
     ax2.set_ylabel(r'$\delta_m/2\pi$ [MHz]',fontsize=30,color='red')
     ax1.set_xlabel(r'Step',fontsize=30)
     ax1.tick_params(axis='y',labelsize=30,colors='blue')

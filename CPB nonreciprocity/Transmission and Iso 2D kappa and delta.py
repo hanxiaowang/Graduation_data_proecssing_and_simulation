@@ -10,7 +10,7 @@ k_2 = 4.5e6
 
 # rates=np.linspace(0.01,50,501)
 # rates=np.linspace(0.01,15,1500)
-rates=np.logspace(-2,2,2001)
+rates=np.logspace(-1,1,101)
 
 k_1 = rates*k_2
 # k_1 = 40e6
@@ -31,6 +31,7 @@ omega_m=omega_a
 deltas=np.linspace(0,7,701)
 phi=0.5
 
+# omega_ps=omega_a+np.linspace(-50e6,50e6, 10001)
 omega_ps=omega_a
 
 S12s1=[]
@@ -271,7 +272,7 @@ plt.colorbar(im)
 ax1.plot(no_non,deltas,'--',color='black',linewidth=3)
 ax1.set_ylabel(r'$\delta$',fontsize=10)
 ax1.set_xlabel(r'$\kappa_1/\kappa_2$',fontsize=10)
-ax1.set_xscale('log')
+# ax1.set_xscale('log')
 plt.tick_params(labelsize=10)
 plt.show()
 #
