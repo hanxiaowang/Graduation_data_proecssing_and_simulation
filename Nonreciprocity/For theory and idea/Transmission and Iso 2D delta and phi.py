@@ -42,6 +42,7 @@ S21_0_delta=[]
 S21_0_phi=[]
 
 for i in range(len(phis)):
+    print(i)
     phi = phis[i]
     isos = []
     s12_max = []
@@ -81,7 +82,7 @@ for i in range(len(phis)):
         if (np.abs(max(S21))<=wucha2):
             S21_0_delta.append(deltas[c])
             S21_0_phi.append(phis[i])
-        ISO=S21-S12
+        ISO=S12-S21
         isoabs=np.abs(ISO)
         #
         index = np.where(isoabs==max(isoabs))
@@ -112,13 +113,14 @@ np.savetxt(Iso_path, Iso, fmt='%.4f')
 
 print(len(S12_0_delta))
 print(len(S21_0_delta))
+
 extents=[deltas[0], deltas[-1], phis[0],phis[-1]]
-plt.figure(figsize=(12,6))
-ax1 = plt.subplot(111)
-im = ax1.imshow(Iso, extent=extents, cmap="bwr",aspect='auto',origin='lower')
-ax1.plot(deltas,pai,'--',color='green',linewidth=5)
-plt.colorbar(im)
-plt.show()
+# plt.figure(figsize=(12,6))
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(Iso, extent=extents, cmap="bwr",aspect='auto',origin='lower')
+# ax1.plot(deltas,pai,'--',color='green',linewidth=5)
+# plt.colorbar(im)
+# plt.show()
 
 
 # plt.figure(figsize=(12,6))
@@ -135,19 +137,19 @@ plt.show()
 # ax2.plot(S12_0_delta,S12_0_phi,'--',color='red',linewidth=5)
 # plt.colorbar(im)
 # plt.show()
-# # #
 # #
-# plt.figure(figsize=(12,6))
-# ax3 = plt.subplot(111)
-# # gci1 = ax1.pcolor(deltas, phis, S21_max)
-# # # ax1.plot(deltas,pai,'--',color='black',linewidth=5)
-# # ax1.plot(S21_0_delta,S21_0_phi,'--',color='red',linewidth=5)
-# # ax1.set_xlabel(r'$\delta$',fontsize=10)
-# # ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=10)
-# # plt.tick_params(labelsize=10)
-# # cbar = plt.colorbar(gci1)
-# ax3 = plt.subplot(111)
-# im = ax3.imshow(S21_max, extent=extents,aspect='auto',origin='lower')
-# ax3.plot(S21_0_delta,S21_0_phi,'--',color='red',linewidth=5)
-# plt.colorbar(im)
-# plt.show()
+#
+plt.figure(figsize=(12,6))
+ax3 = plt.subplot(111)
+# gci1 = ax1.pcolor(deltas, phis, S21_max)
+# # ax1.plot(deltas,pai,'--',color='black',linewidth=5)
+# ax1.plot(S21_0_delta,S21_0_phi,'--',color='red',linewidth=5)
+# ax1.set_xlabel(r'$\delta$',fontsize=10)
+# ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=10)
+# plt.tick_params(labelsize=10)
+# cbar = plt.colorbar(gci1)
+ax3 = plt.subplot(111)
+im = ax3.imshow(S21_max, extent=extents,aspect='auto',origin='lower')
+ax3.plot(S21_0_delta,S21_0_phi,'--',color='red',linewidth=5)
+plt.colorbar(im)
+plt.show()

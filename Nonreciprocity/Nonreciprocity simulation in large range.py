@@ -70,7 +70,7 @@ for i in range(len(phis)):
 
     T12s.append(S12)
     T21s.append(S21)
-    Isos.append(S12-S21)
+    Isos.append(S21-S12)
 
 T12l = []
 T21l = []
@@ -104,7 +104,7 @@ for i in range(len(phis)):
 
     T12l.append(S12)
     T21l.append(S21)
-    Isol.append(S12-S21)
+    Isol.append(S21-S12)
 
 plt.figure(figsize=(18,12))
 ax1 = plt.subplot(231)
@@ -153,3 +153,88 @@ cbar = plt.colorbar(gci6)
 #
 
 plt.show()
+
+# plt.figure(figsize=(18,12))
+# ax1 = plt.subplot(231)
+# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+# im = ax1.imshow(np.transpose(T12), extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+#
+# # cmap='bwr'
+# #
+# ax2 = plt.subplot(232)
+# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+# im = ax2.imshow(np.transpose(T21), extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+#
+# ax3 = plt.subplot(233)
+# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+# im = ax3.imshow(np.transpose(Iso), extent=extents, cmap="bwr",aspect='auto',origin='lower')
+# plt.colorbar(im)
+# #
+#
+# ax4 = plt.subplot(234)
+# extents=[phis[0],phis[-1],fe[0],fe[-1]]
+# im = ax4.imshow(S12e, extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+#
+# #
+# ax5 = plt.subplot(235)
+# extents=[phis[0],phis[-1],fe[0],fe[-1]]
+# im = ax5.imshow(S21e, extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+#
+# ax6 = plt.subplot(236)
+# extents=[phis[0],phis[-1],fe[0],fe[-1]]
+# im = ax6.imshow(Isoe, extent=extents, cmap="bwr",aspect='auto',origin='lower')
+# plt.colorbar(im)
+#
+# plt.show()
+
+
+
+# plt.figure(figsize=(6,6))
+# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(np.transpose(T12), extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+#
+#
+# plt.figure(figsize=(6,6))
+# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(np.transpose(T21), extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+#
+# plt.figure(figsize=(6,6))
+# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(np.transpose(Iso), extent=extents, cmap="bwr",aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+#
+# ##### resonant
+# plt.figure(figsize=(6,6))
+# extents=[phis[0],phis[-1],fe[0],fe[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(S12e, extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+#
+#
+# plt.figure(figsize=(6,6))
+# extents=[phis[0],phis[-1],fe[0],fe[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(S21e, extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+#
+#
+# plt.figure(figsize=(6,6))
+# extents=[phis[0],phis[-1],fe[0],fe[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(Isoe, extent=extents, cmap="bwr",aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()

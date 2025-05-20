@@ -27,6 +27,11 @@ Pfbl=8.184-np.loadtxt(r'F:\Chirality of encycling bistability critical point(202
 PPbs=np.loadtxt(r'F:\Chirality of encycling bistability critical point(20220726-20230503)\power critical point\jump point small Power.txt')
 Pfbs=8.184-np.loadtxt(r'F:\Chirality of encycling bistability critical point(20220726-20230503)\power critical point\jump point small.txt')
 
+#1
+Ploop1=np.loadtxt(r'F:\Chirality of encycling bistability critical point(20220726-20230503)\20230403\CP in change power first 11-17-18\drive power.txt')
+floop1=8.184-np.loadtxt(r'F:\Chirality of encycling bistability critical point(20220726-20230503)\20230403\CP in change power first 11-17-18\drive fre.txt')
+
+
 #2 20~-50
 Ploop2=np.loadtxt(r'F:\Chirality of encycling bistability critical point(20220726-20230503)\20230403\CP out and cross no side change frequency first 15-29-24\drive power.txt')
 floop2=8.184-np.loadtxt(r'F:\Chirality of encycling bistability critical point(20220726-20230503)\20230403\CP out and cross no side change frequency first 15-29-24\drive fre.txt')
@@ -70,27 +75,30 @@ floop10=8.184-np.loadtxt(r'F:\Chirality of encycling bistability critical point(
 # print(max(floop10)*1e3)
 # print(min(floop10)*1e3)
 
-fig, axes = plt.subplots(1, 1, figsize=(15, 10))
-axes.scatter(fPbl,ffbl*1e3,marker='s',color='blue',s=100,edgecolors='blue')
-axes.scatter(fPbs,ffbs*1e3,marker='s',color='blue',s=100,edgecolors='blue')
-axes.scatter(PPbl,Pfbl*1e3,marker='o',color='red',s=100,edgecolors='red')
-axes.scatter(PPbs,Pfbs*1e3,marker='o',color='red',s=100,edgecolors='red')
+fig, axes = plt.subplots(1, 1, figsize=(6, 6))
+axes.scatter(fPbl,ffbl*1e3,marker='s',color='blue',s=50,edgecolors='blue')
+axes.scatter(fPbs,ffbs*1e3,marker='s',color='blue',s=50,edgecolors='blue')
+axes.scatter(PPbl,Pfbl*1e3,marker='o',color='red',s=50,edgecolors='red')
+axes.scatter(PPbs,Pfbs*1e3,marker='o',color='red',s=50,edgecolors='red')
 
-# axes.plot(Ploop2,floop2*1e3,'--',label='Loop 2',color='black',linewidth=5)
-# axes.plot(Ploop3,floop3*1e3,'--',label='Loop 3',color='black',linewidth=5)
-# axes.plot(Ploop4,floop4*1e3,'--',label='Loop 4',color='black',linewidth=5)
-# axes.plot(Ploop5,floop5*1e3,'--',label='Loop 5',color='black',linewidth=5)
-# axes.plot(Ploop6,floop6*1e3,'--',label='Loop 6',color='black',linewidth=5)
-# axes.plot(Ploop7,floop7*1e3,'--',label='Loop 7',color='black',linewidth=5)
-axes.plot(Ploop8,floop8*1e3,'--',label='Loop 8',color='black',linewidth=5)
-# axes.plot(Ploop9,floop9*1e3,'--',label='Loop 9',color='black',linewidth=5)
-# axes.plot(Ploop10,floop10*1e3,'--',label='Loop 10',color='black',linewidth=5)
+# axes.plot(Ploop1,floop1*1e3,'--',label='Loop 1',color='black',linewidth=2)
+# axes.plot(Ploop1,floop1*1e3,'--',color='black',linewidth=2)
 
-axes.set_xlabel(r'$P_d$ [mW]',fontsize=40)
-axes.set_ylabel(r'$\delta_m/2\pi$ [MHz]',fontsize=40)
+axes.plot(Ploop2,floop2*1e3,'--',label='Loop 2',color='black',linewidth=2)
+# axes.plot(Ploop3,floop3*1e3,'--',label='Loop 3',color='black',linewidth=2)
+# axes.plot(Ploop4,floop4*1e3,'--',label='Loop 4',color='black',linewidth=2)
+# axes.plot(Ploop5,floop5*1e3,'--',label='Loop 5',color='black',linewidth=2)
+# axes.plot(Ploop6,floop6*1e3,'--',label='Loop 6',color='black',linewidth=2)
+# axes.plot(Ploop7,floop7*1e3,'--',label='Loop 7',color='black',linewidth=2)
+# axes.plot(Ploop8,floop8*1e3,'--',label='Loop 8',color='black',linewidth=2)
+# axes.plot(Ploop9,floop9*1e3,'--',label='Loop 9',color='black',linewidth=2)
+# axes.plot(Ploop10,floop10*1e3,'--',label='Loop 10',color='black',linewidth=2)
+
+axes.set_xlabel(r'$P_d$ [mW]',fontsize=20)
+axes.set_ylabel(r'$\delta_m/2\pi$ [MHz]',fontsize=20)
 plt.ylim(-80,40)
-plt.tick_params(labelsize=40)
-plt.legend(loc=5,fontsize=40)
+plt.tick_params(labelsize=20)
+# plt.legend(loc=5,fontsize=20)
 plt.show()
 
 

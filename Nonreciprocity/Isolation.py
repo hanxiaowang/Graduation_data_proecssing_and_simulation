@@ -23,19 +23,20 @@ Isore = np.loadtxt(r'F:\Nonreciprocity\20210701\Isor.txt')
 print(np.min(Isose))
 print(np.max(Isose))
 
+print(np.min(Isore))
+print(np.max(Isore))
+
 print(np.min(Isole))
 print(np.max(Isole))
 
-print(np.min(Isore))
-print(np.max(Isore))
 
 Exp.append(np.transpose(Isose))
 Exp.append(np.transpose(Isore))
 Exp.append(np.transpose(Isole))
 
-de = 1
+de = 2
 omega_m = omega_a+delta_ms[de]
-print(omega_m)
+# print(omega_m)
 Isoe=Exp[de]
 omega_s = np.linspace(omega_m - 50e6, omega_m + 50e6, 10001)
 # omega_s = np.linspace(8.16e9, 8.36e9, 20001)
@@ -55,13 +56,21 @@ g = 8e6
 phis = np.linspace(0, 2, 361)
 voltage = np.linspace(20, 110, 19)
 
+
+
 # deltas = 0.97 * voltage / 50  #63
 # deltas = 0.97 * voltage / 45  #-32 -2
-deltas = 0.97 * voltage / 45  #-2
+# deltas = 0.97 * voltage / 45  #-2
+
+deltass=[45,45,50]
+deltas=0.97*voltage/deltass[de]
 
 phi1 = 0.75
 # delta1 = 0.92 #63
-delta1 = 0.97 #-32 -2
+# delta1 = 0.97 #-32 -2
+
+delta1s=[0.97,0.97,0.92]
+delta1=delta1s[de]
 
 
 # zhengti=-0.26
@@ -70,20 +79,26 @@ delta1 = 0.97 #-32 -2
 # zhengti=-0.18
 # chazhi=0.08 #-32
 
-zhengti=-0.2
-chazhi=0.1 #-2
+# zhengti=-0.2
+# chazhi=0.1 #-2
 
-phi21=(zhengti+chazhi)
-phi12=(zhengti)
+zhengtis=[-0.18,-0.2,-0.26]
+chazhis=[0.08,0.1,0.06]
+
+
+phi21=(zhengtis[de]+chazhis[de])
+phi12=(zhengtis[de])
 
 Iso = []
+S12c = []
+S21c = []
 for i in range(len(phis)):
     phi = phis[i]
     isos = []
+    s12c = []
+    s21c = []
     for c in range(len(deltas)):
         delta = deltas[c]
-        T12 = []
-        T21 = []
         iso = []
         isoabs = []
 
@@ -93,27 +108,28 @@ for i in range(len(phis)):
         chi_m = 1j * delta_m + gamma / 2
         fenmu = chi_a * chi_m + g ** 2
 
-        fenzi21 =  (chi_m * (np.sqrt(k_1*k_2) + np.sqrt(k_2*k_3) * delta1 * delta * np.exp(
-            -1j * (phi + phi1 + phi21)*np.pi)) - 1j * g * np.sqrt(k_2*gamma_e) * delta * np.exp(-1j * (phi + phi21)*np.pi))
-        fenzi12 = (chi_m * (np.sqrt(k_1*k_2) + np.sqrt(k_1*k_3) * delta1 * delta * np.exp(
-            -1j * (phi + phi1 + phi12)*np.pi)) - 1j * g * np.sqrt(k_1*gamma_e) * delta * np.exp(-1j * (phi + phi12)*np.pi))
+        fenzi12 = (chi_m * (np.sqrt(k_1 * k_2) + np.sqrt(k_1 * k_3) * delta1 * delta * np.exp(-1j * (phi + phi1 + phi12) * np.pi))
+                   - 1j * g * np.sqrt(k_1 * gamma_e) * delta * np.exp(-1j * (phi + phi12) * np.pi))
+
+        fenzi21 = (chi_m * (np.sqrt(k_1 * k_2) + np.sqrt(k_2 * k_3) * delta1 * delta * np.exp(-1j * (phi + phi1 + phi21) * np.pi))
+                   - 1j * g * np.sqrt(k_2 * gamma_e) * delta * np.exp(-1j * (phi + phi21) * np.pi))
 
         t12 = fenzi12 / fenmu
         t21 = fenzi21 / fenmu
 
-        # T12.append(rf.mag_2_db(np.abs(t12)))
-        # T21.append(rf.mag_2_db(np.abs(t21)))
-        S12=rf.mag_2_db(np.abs(t12))
-        S21=rf.mag_2_db(np.abs(t21))
+        S12 = rf.mag_2_db(np.abs(t12))
+        S21 = rf.mag_2_db(np.abs(t21))
 
-        iso=S12-S21
-        isoabs=np.abs(S12-S21)
-
-        index = np.where(isoabs==max(isoabs))
-        need = iso[index][0]
+        iso=(S12-S21)
+        isoabs=np.abs(iso)
+        index = list(isoabs).index(max(isoabs))
+        need = iso[index]
         isos.append(need)
+        s12c.append(S12[index])
+        s21c.append(S21[index])
     Iso.append(isos)
-
+    S12c.append(s12c)
+    S21c.append(s21c)
 # -0.032
 # +0.063
 
@@ -156,30 +172,44 @@ picture_path = os.path.join(path, 'Iso.png')
 
 
 # Vs = np.linspace(20, 110, 19)
-Vs = np.linspace(0, 200, 21)
 
-phie = np.linspace(0, 2, 361)
 #
-# plt.figure(figsize=(12, 6))
-# ax1 = plt.subplot(121)
-# gci1 = ax1.pcolor(deltas, phis, Iso,cmap='bwr')
-# ax1.set_xlabel(r'$\delta$',fontsize=30)
-# ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=30)
-# plt.tick_params(labelsize=30)
+# plt.figure(figsize=(12, 12))
+# ax1 = plt.subplot(221)
+# gci1 = ax1.pcolor(deltas, phis,Iso,cmap='bwr')
+# ax1.set_xlabel(r'$\delta$',fontsize=15)
+# ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=15)
+# plt.tick_params(labelsize=15)
 # cbar = plt.colorbar(gci1)
 #
 # #
-# ax2 = plt.subplot(122)
-# gci2 = ax2.pcolor(deltas, phie,Isoe,cmap='bwr')
-# ax2.set_xlabel(r'$\delta$',fontsize=30)
-# ax2.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=30)
-# plt.tick_params(labelsize=30)
+# ax2 = plt.subplot(222)
+# gci2 = ax2.pcolor(deltas, phis,Isoe,cmap='bwr')
+# ax2.set_xlabel(r'$\delta$',fontsize=15)
+# ax2.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=15)
+# plt.tick_params(labelsize=15)
 # cbar = plt.colorbar(gci2)
-# plt.savefig(picture_path)
-
+# # plt.savefig(picture_path)
+#
+#
+# ax1 = plt.subplot(223)
+# gci1 = ax1.pcolor(deltas, phis,S12c,cmap='bwr')
+# ax1.set_xlabel(r'$\delta$',fontsize=15)
+# ax1.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=15)
+# plt.tick_params(labelsize=15)
+# cbar = plt.colorbar(gci1)
+#
+# #
+# ax2 = plt.subplot(224)
+# gci2 = ax2.pcolor(deltas, phis,S21c,cmap='bwr')
+# ax2.set_xlabel(r'$\delta$',fontsize=15)
+# ax2.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=15)
+# plt.tick_params(labelsize=15)
+# cbar = plt.colorbar(gci2)
+#
 # plt.show()
 #
-plt.figure(figsize=(12, 6))
+# plt.figure(figsize=(12, 6))
 # ax1 = plt.subplot(111)
 # gci1 = ax1.pcolor(deltas, phis, Iso,cmap='bwr')
 # ax1.set_xlabel(r'$\delta$',fontsize=30)
@@ -187,13 +217,51 @@ plt.figure(figsize=(12, 6))
 # plt.tick_params(labelsize=30)
 # cbar = plt.colorbar(gci1)
 
-
-ax2 = plt.subplot(111)
-gci2 = ax2.pcolor(deltas, phie,Isoe,cmap='bwr')
-ax2.set_xlabel(r'$\delta$',fontsize=30)
-ax2.set_ylabel(r'$\varphi$ [$\pi$]',fontsize=30)
-plt.tick_params(labelsize=30)
-cbar = plt.colorbar(gci2)
-
 #
+# plt.figure(figsize=(12,6))
+# extents=[deltas[0],deltas[-1],phis[0],phis[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(Isoe, extent=extents, cmap="bwr",aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+#
+# plt.figure(figsize=(12,6))
+# extents=[deltas[0],deltas[-1],phis[0],phis[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(Iso, extent=extents, cmap="bwr",aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+
+# plt.figure(figsize=(12,6))
+# extents=[deltas[0],deltas[-1],phis[0],phis[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(Isoe, extent=extents, cmap="bwr",aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+#
+# plt.figure(figsize=(12,6))
+# extents=[deltas[0],deltas[-1],phis[0],phis[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(Iso, extent=extents, cmap="bwr",aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+
+# plt.figure(figsize=(18,12))
+# ax1 = plt.subplot(231)
+# gci1 = ax1.pcolor(phis, fe, S12l)
+# # ax1.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
+# ax1.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# plt.tick_params(labelsize=20)
+# cbar = plt.colorbar(gci1)
+
+plt.figure(figsize=(12,6))
+ax1 = plt.subplot(111)
+gci1 = ax1.pcolor(deltas, phis, Isoe, cmap="bwr")
+cbar = plt.colorbar(gci1)
+plt.show()
+
+plt.figure(figsize=(12,6))
+ax1 = plt.subplot(111)
+gci1 = ax1.pcolor(deltas, phis, Iso, cmap="bwr")
+cbar = plt.colorbar(gci1)
 plt.show()
