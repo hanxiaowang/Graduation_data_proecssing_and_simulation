@@ -108,8 +108,10 @@ for i in range(len(tneed)):
 
 plt.figure(figsize=(7, 6))
 axes1 = plt.subplot(111)
-axes1.plot((8.25-omega_ps/1e9)*1e3,S12,'-',linewidth=5,label=r'$S_{12}$',alpha=0.5)
-axes1.plot((8.25-omega_ps/1e9)*1e3,S21,'-',linewidth=5,label=r'$S_{21}$',alpha=0.5)
+# axes1.plot((8.25-omega_ps/1e9)*1e3,S12,'-',linewidth=5,label=r'$S_{12}$',alpha=0.5)
+# axes1.plot((8.25-omega_ps/1e9)*1e3,S21,'-',linewidth=5,label=r'$S_{21}$',alpha=0.5)
+axes1.plot((8.25-omega_ps/1e9)*1e3,S12,'-',linewidth=5,label=r'$S_{12}$')
+axes1.plot((8.25-omega_ps/1e9)*1e3,S21,'-',linewidth=5,label=r'$S_{21}$')
 # axes1.plot(was,tneed,'--',linewidth=2,color='black')
 axes1.set_xlabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
 axes1.set_ylabel(r'$S$ [dB]',fontsize=20)

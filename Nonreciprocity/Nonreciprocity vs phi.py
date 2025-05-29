@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import skrf as rf
-de = 2
+de = 1
 
 if de==0:
     start =0
