@@ -15,19 +15,24 @@ delta_ms = [-32*1e6, -2*1e6, 63*1e6]
 Exp=[]
 
 Isose = np.loadtxt(r'F:\Nonreciprocity\20210703\m smaller than a\Isos.txt')
-rs, cs = np.where(Isose == np.max(Isose))
+# rs, cs = np.where(Isose == np.max(Isose))
+rs, cs = np.where(Isose == np.min(Isose))
+
 print(f'rs={rs}')
 print(f'cs={cs}')
 
-Isole = np.loadtxt(r'F:\Nonreciprocity\20210703\m lager than a\Isol.txt')
-rl, cl = np.where(Isole == np.max(Isole))
+Isole = np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\Isol.txt')
+# rl, cl = np.where(Isole == np.max(Isole))
+rl, cl = np.where(Isole == np.min(Isole))
 print(f'rl={rl}')
 print(f'cl={cl}')
 
 Isore = np.loadtxt(r'F:\Nonreciprocity\20210701\Isor.txt')
-rr, cr = np.where(Isore == np.max(Isore))
-print(f'rr={rr}')
-print(f'cr={cr}')
+# rr, cr = np.where(Isore == np.max(Isore))
+# rr, cr = np.where(Isore == np.min(Isore))
+# print(f'rr={rr}')
+# print(f'cr={cr}')
+
 # print(type(Isose))
 # print(np.shape(Isose))
 
@@ -45,7 +50,7 @@ Exp.append(np.transpose(Isose))
 Exp.append(np.transpose(Isore))
 Exp.append(np.transpose(Isole))
 
-de = 1
+de = 2
 omega_m = omega_a+delta_ms[de]
 # print(omega_m)
 Isoe=Exp[de]
@@ -76,13 +81,14 @@ voltage = np.linspace(20, 110, 19)
 deltass=[45,45,50]
 deltas=0.97*voltage/deltass[de]
 
+
 phi1 = 0.75
 # delta1 = 0.92 #63
 # delta1 = 0.97 #-32 -2
 
 delta1s=[0.97,0.97,0.92]
-# delta1=delta1s[de]
-delta1=1
+delta1=delta1s[de]
+# delta1=1
 
 
 
@@ -267,14 +273,14 @@ picture_path = os.path.join(path, 'Iso.png')
 # plt.tick_params(labelsize=20)
 # cbar = plt.colorbar(gci1)
 
-plt.figure(figsize=(12,6))
-ax1 = plt.subplot(111)
-gci1 = ax1.pcolor(deltas, phis, Isoe, cmap="bwr")
-cbar = plt.colorbar(gci1)
-plt.show()
-
-plt.figure(figsize=(12,6))
-ax1 = plt.subplot(111)
-gci1 = ax1.pcolor(deltas, phis, Iso, cmap="bwr")
-cbar = plt.colorbar(gci1)
-plt.show()
+# plt.figure(figsize=(12,6))
+# ax1 = plt.subplot(111)
+# gci1 = ax1.pcolor(deltas, phis, Isoe, cmap="bwr")
+# cbar = plt.colorbar(gci1)
+# plt.show()
+#
+# plt.figure(figsize=(12,6))
+# ax1 = plt.subplot(111)
+# gci1 = ax1.pcolor(deltas, phis, Iso, cmap="bwr")
+# cbar = plt.colorbar(gci1)
+# plt.show()
