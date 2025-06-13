@@ -30,7 +30,7 @@ omega_a = 8.247e9
 omega_m12 = omega_a-30.2e6
 omega_m21 = omega_a-31e6
 
-omega_se = np.loadtxt(r'F:\Nonreciprocity\20210703\m lager than a\f.txt')[start:stop]*1e9
+omega_se = np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\f.txt')[start:stop]*1e9
 k_int = 1.4e6
 k_1 = 45.5e6
 k_2 = 4.5e6
@@ -159,7 +159,7 @@ axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
 axes1.set_ylim(-105,5)
 plt.yticks([-100,-75,-50,-25,0],['-100','-75','-50','-25','0'])
 plt.tick_params(labelsize=20)
-plt.legend(loc=4,prop={'family':'Cambria','size':20})
+plt.legend(loc=3,prop={'family':'Cambria','size':20})
 plt.show()
 
 fig, axes1 = plt.subplots(1, 1, figsize=(8  , 6))
@@ -173,5 +173,5 @@ axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
 axes1.set_ylim(-105,5)
 plt.yticks([-100,-50,0,50,100],['-100','-50','0','50','100'])
 plt.tick_params(labelsize=20)
-plt.legend(loc=4,prop={'family':'Cambria','size':20})
+plt.legend(loc=3,prop={'family':'Cambria','size':20})
 plt.show()

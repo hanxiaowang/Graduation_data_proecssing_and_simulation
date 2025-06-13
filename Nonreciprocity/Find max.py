@@ -14,7 +14,7 @@ voltage=np.linspace(20,110,19)
 
 phi1=np.linspace(0,2,361)
 
-de=1
+de=2
 
 deltass=[45,45,50]
 deltas=0.97*voltage/deltass[de]
@@ -31,8 +31,25 @@ delta210=[]
 #
 for i in range(len(voltage)):
     print(i)
-    S12=np.loadtxt(f'F:\\Nonreciprocity\\20210701\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltage[i])}.0 mV 2D.txt',delimiter=',')
-    S21=np.loadtxt(f'F:\\Nonreciprocity\\20210701\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltage[i])}.0 mV 2D.txt',delimiter=',')
+    #resonant
+    # S12=np.loadtxt(f'F:\\Nonreciprocity\\20210701\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltage[i])}.0 mV 2D.txt',delimiter=',')
+    # S21=np.loadtxt(f'F:\\Nonreciprocity\\20210701\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltage[i])}.0 mV 2D.txt',delimiter=',')
+
+    #small
+    # S12 = np.loadtxt(
+    #     f'F:\\Nonreciprocity\\20210703\\m smaller than a\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltage[i])}.0 mV 2D.txt',
+    #     delimiter=',')
+    # S21 = np.loadtxt(
+    #     f'F:\\Nonreciprocity\\20210703\\m smaller than a\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltage[i])}.0 mV 2D.txt',
+    #     delimiter=',')
+
+    # large
+    S12 = np.loadtxt(
+        f'F:\\Nonreciprocity\\20210703\\m larger than a\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltage[i])}.0 mV 2D.txt',
+        delimiter=',')
+    S21 = np.loadtxt(
+        f'F:\\Nonreciprocity\\20210703\\m larger than a\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltage[i])}.0 mV 2D.txt',
+        delimiter=',')
 
     s12max=[]
     s21max=[]

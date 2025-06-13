@@ -1,33 +1,31 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import *
-import math as m
-import cmath
-from matplotlib import cm
 import skrf as rf
-import os
-import json
+
 voltages=np.linspace(20,110,19)
 phis=np.linspace(0,2,361)
 
 v_index=16#Iso min
 phi_index=107#phi min
+phi=phis[phi_index]    ### 0.594pi
 
-voltage=voltages[v_index]
+
+voltage=91.79
+# voltage=voltages[v_index]
+print(voltage)
+
 delta=0.97*voltage/45
-# print(delta)
-phi=phis[phi_index]
 print(delta)
 print(phi)
-start=0
+start=00000
 stop=20000
 
-S12e=np.loadtxt(f'F:\\Nonreciprocity\\20210703\\m smaller than a\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltage)}.0 mV 2D.txt',delimiter=',')[start:stop,phi_index]+33
-S21e=np.loadtxt(f'F:\\Nonreciprocity\\20210703\\m smaller than a\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltage)}.0 mV 2D.txt',delimiter=',')[start:stop,phi_index]+33
+S12e=np.loadtxt(f'F:\\Nonreciprocity\\20210703\\m smaller than a\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltages[v_index])}.0 mV 2D.txt',delimiter=',')[start:stop,phi_index]+33
+S21e=np.loadtxt(f'F:\\Nonreciprocity\\20210703\\m smaller than a\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltages[v_index])}.0 mV 2D.txt',delimiter=',')[start:stop,phi_index]+33
 Isoe=S12e-S21e
 
 omega_a = 8.247e9
-omega_m12 = omega_a-30.2e6
+omega_m12 = omega_a-31e6
 omega_m21 = omega_a-30e6
 
 omega_se = np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\f.txt')[start:stop]*1e9
@@ -44,31 +42,13 @@ gamma = gamma_int + gamma_e
 g = 8e6
 
 
-## deltas = 0.97 * voltage / 50  #63
-# deltas = 0.97 * voltage / 45  #-32 -2
-# deltas = 0.97 * voltage / 45  #-2
-
-
-
 phi1 = 0.75
 # delta1 = 0.92 #63
 # delta1 = 0.97 #-32 -2
 delta1=0.97
 
-
-# zhengti=-0.26
-# chazhi=0.06  #63
-
-# zhengti=-0.18
-# chazhi=0.08 #-32
-
-# zhengti=-0.2
-# chazhi=0.1 #-2
-
-# phi21=(-0.2+0.1)
-# phi12=(-0.2)
-phi21=-0.1
-phi12=-0.2939
+phi21=-0.11
+phi12=-0.330
 
 omega_ss = np.linspace(omega_se[0],omega_se[-1],20001)
 delta_m12 = omega_m12 - omega_ss
@@ -93,58 +73,20 @@ fenzi12 = (chi_m12 * (np.sqrt(k_1 * k_2) + np.sqrt(k_1 * k_3) * delta1 * delta *
 t12 = fenzi12 / fenmu12
 t21 = fenzi21 / fenmu21
 
-# T12.append(rf.mag_2_db(np.abs(t12)))
-# T21.append(rf.mag_2_db(np.abs(t21)))
+
 S12s = rf.mag_2_db(np.abs(t12))
 S21s = rf.mag_2_db(np.abs(t21))
 Isos=S12s-S21s
 
 
-# fig, axes = plt.subplots(1, 1, figsize=(15, 10))
-# # axes.plot(omega_s,S12e,'o',linewidth=2,label='E',color='blue')
-# # axes.plot(omega_s,S12s,'--',linewidth=5,label='S',color='blue')
-# axes.plot(omega_s,S21e,'o',linewidth=2,label='E',color='orange')
-# axes.plot(omega_s,S21s,'--',linewidth=5,label='S',color='orange')
-#
-# # axes.plot(omega_s,Isoe,'--',linewidth=2,label='E',color='green')
-# # axes.plot(omega_s,Isos,'--',linewidth=5,label='S',color='green')
-# axes.set_xlabel(r'$\omega_p/2\pi$ [GHz]',fontsize=40)
-# axes.set_ylabel(r'$S_{21}$ [dB]',fontsize=40)
-#
-# plt.tick_params(labelsize=35)
-# # plt.legend(loc=1,fontsize=40)
-# plt.show()
+
 print(min(S12e))
 print(min(S12s))
 print(min(Isoe))
 print(min(Isos))
-# plt.figure(figsize=(18,6))
-# #
-# ax1 = plt.subplot(131)
-# ax1.scatter(omega_s,S12e,s=10,label='E',color='blue',alpha=0.1)
-# ax1.plot(omega_s,S12s,'-',linewidth=1,label='S',color='blue',zorder=2)
-# ax1.set_ylim(-105,5)
-#
-# ax2 = plt.subplot(132)
-# ax2.scatter(omega_s,S21e,s=10,label='E',color='orange',alpha=0.1)
-# ax2.plot(omega_s,S21s,'-',linewidth=1,label='S',color='orange',zorder=2)
-# ax2.set_ylim(-105,5)
-#
-# ax3 = plt.subplot(133)
-# ax3.scatter(omega_s,Isoe,s=10,label='E',color='green',alpha=0.1)
-# ax3.plot(omega_s,Isos,'-',linewidth=1,label='S',color='green',zorder=2)
-# ax3.set_ylim(-105,105)
-#
-# ax1.set_xlabel(r'$\omega_p/2\pi$ [GHz]',fontsize=10)
-# ax1.set_ylabel(r'$S_{12}$ [dB]',fontsize=10)
-# ax2.set_ylabel(r'$S_{21}$ [dB]',fontsize=10)
-# ax3.set_ylabel(r'$Iso$ [dB]',fontsize=10)
-#
-# # plt.tick_params(labelsize=35)
-# # plt.legend(loc=1,fontsize=40)
-# plt.show()
 
-
+# print(omega_ss)
+# print(omega_se)
 
 fig, axes1 = plt.subplots(1, 1, figsize=(8  , 6))
 axes1 = plt.subplot(111)
@@ -159,7 +101,7 @@ axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
 axes1.set_ylim(-105,5)
 plt.yticks([-100,-75,-50,-25,0],['-100','-75','-50','-25','0'])
 plt.tick_params(labelsize=20)
-plt.legend(loc=4,prop={'family':'Cambria','size':20})
+plt.legend(loc=3,prop={'family':'Cambria','size':20})
 plt.show()
 
 
@@ -174,5 +116,5 @@ axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
 axes1.set_ylim(-105,5)
 plt.yticks([-100,-50,0,50,100],['-100','-50','0','50','100'])
 plt.tick_params(labelsize=20)
-plt.legend(loc=4,prop={'family':'Cambria','size':20})
+plt.legend(loc=3,prop={'family':'Cambria','size':20})
 plt.show()

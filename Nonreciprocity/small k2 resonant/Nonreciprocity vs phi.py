@@ -1,57 +1,24 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import skrf as rf
-de = 1
 
-if de==0:
-    start =0
-    stop = 10001
-elif de==1:
-    start = 5000
-    stop = 15001
-elif de==2:
-    start = 10000
-    stop = 20001
 
-voltages=[20,70,30]
-voltage=voltages[de]
+start = 5000
+stop = 15001
+
+
+voltage=110
 tu=np.linspace(0,360,361)
 
 
-S12l=np.loadtxt(f'F:\\Nonreciprocity\\20210703\\m larger than a\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltages[2])}.0 mV 2D.txt',delimiter=',')[start:stop,:]
-S21l=np.loadtxt(f'F:\\Nonreciprocity\\20210703\\m larger than a\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltages[2])}.0 mV 2D.txt',delimiter=',')[start:stop,:]
-Isol=S12l-S21l
 
-S12s=np.loadtxt(f'F:\\Nonreciprocity\\20210703\\m smaller than a\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltages[0])}.0 mV 2D.txt',delimiter=',')[start:stop,:]
-S21s=np.loadtxt(f'F:\\Nonreciprocity\\20210703\\m smaller than a\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltages[0])}.0 mV 2D.txt',delimiter=',')[start:stop,:]
-Isos=S12s-S21s
-
-
-S12r=np.loadtxt(f'F:\\Nonreciprocity\\20210701\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltages[1])}.0 mV 2D.txt',delimiter=',')[start-400:stop-400,:]
-S21r=np.loadtxt(f'F:\\Nonreciprocity\\20210701\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltages[1])}.0 mV 2D.txt',delimiter=',')[start-400:stop-400,:]
+S12r=np.loadtxt(f'F:\\Nonreciprocity\\20210630\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltage)}.0 mV 2D.txt',delimiter=',')[start-400:stop-400,:]
+S21r=np.loadtxt(f'F:\\Nonreciprocity\\20210630\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltage)}.0 mV 2D.txt',delimiter=',')[start-400:stop-400,:]
 Isor=S12r-S21r
 
-
-
-S12es=[]
-S21es=[]
-Isoes=[]
-
-S12es.append(S12s)
-S12es.append(S12r)
-S12es.append(S12l)
-
-S21es.append(S21s)
-S21es.append(S21r)
-S21es.append(S21l)
-
-Isoes.append(Isos)
-Isoes.append(Isor)
-Isoes.append(Isol)
-
-S12e=S12es[de]
-S21e=S21es[de]
-Isoe=Isoes[de]
+S12e=S12r
+S21e=S21r
+Isoe=Isor
 
 fe=np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\f.txt')[start:stop]
 
@@ -64,15 +31,13 @@ phie=np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\phi.txt')
 print(np.shape(S12r))
 print(np.shape(fe))
 omega_a = 8.247e9
-delta_ms = [-32*1e6, -2*1e6, 63*1e6]
 
-
-omega_m = omega_a+delta_ms[de]
+omega_m = omega_a-2*1e6
 omega_s = np.linspace(fe_start,fe_stop,10001)*1e9
 
 k_int = 1.4e6
 k_1 = 45.5e6
-k_2 = 4.5e6
+k_2 = 2.4e6
 k_3 = 1.33e6
 k_c = k_int + k_1 + k_2 + k_3
 
@@ -84,37 +49,19 @@ g = 8e6
 
 phis = np.linspace(0, 2, 361)
 
-## deltas = 0.97 * voltage / 50  #63
-# deltas = 0.97 * voltage / 45  #-32 -2
-# deltas = 0.97 * voltage / 45  #-2
-
-deltass=[45,45,50]
-delta=0.97*voltage/deltass[de]
+delta=0.97*voltage/52
 print(delta)
 
 phi1 = 0.75
-# delta1 = 0.92 #63
-# delta1 = 0.97 #-32 -2
 
-delta1s=[0.97,0.97,0.92]
-delta1=delta1s[de]
+delta1=0.97
 
 
-# zhengti=-0.26
-# chazhi=0.06  #63
-
-# zhengti=-0.18
-# chazhi=0.08 #-32
-
-# zhengti=-0.2
-# chazhi=0.1 #-2
-
-zhengtis=[-0.18,-0.2,-0.26]
-chazhis=[0.08,0.1,0.06]
 
 
-phi21=(zhengtis[de]+chazhis[de])
-phi12=(zhengtis[de])
+
+phi21=(-0.1)
+phi12=(-0.2)
 
 T12 = []
 T21 = []
@@ -254,7 +201,7 @@ for i in range(len(phis)):
 # extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
 # im = ax1.imshow(np.transpose(T12), extent=extents, aspect='auto',origin='lower')
 # plt.colorbar(im)
-
+#
 # cmap='bwr'
 # #
 # ax2 = plt.subplot(232)
@@ -288,45 +235,45 @@ for i in range(len(phis)):
 #
 
 #
-# plt.figure(figsize=(6,6))
-# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
-# ax1 = plt.subplot(111)
-# im = ax1.imshow(np.transpose(T12), extent=extents, aspect='auto',origin='lower')
-# plt.colorbar(im)
-# plt.show()
-#
-#
-# plt.figure(figsize=(6,6))
-# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
-# ax1 = plt.subplot(111)
-# im = ax1.imshow(np.transpose(T21), extent=extents, aspect='auto',origin='lower')
-# plt.colorbar(im)
-# plt.show()
-#
-# plt.figure(figsize=(6,6))
-# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
-# ax1 = plt.subplot(111)
-# im = ax1.imshow(np.transpose(Iso), extent=extents, cmap="bwr",aspect='auto',origin='lower')
-# plt.colorbar(im)
-# plt.show()
-#
-# ##### resonant
-# plt.figure(figsize=(6,6))
-# extents=[phis[0],phis[-1],fe[0],fe[-1]]
-# ax1 = plt.subplot(111)
-# im = ax1.imshow(S12e, extent=extents, aspect='auto',origin='lower')
-# plt.colorbar(im)
-# plt.show()
-#
-#
-# plt.figure(figsize=(6,6))
-# extents=[phis[0],phis[-1],fe[0],fe[-1]]
-# ax1 = plt.subplot(111)
-# im = ax1.imshow(S21e, extent=extents, aspect='auto',origin='lower')
-# plt.colorbar(im)
-# plt.show()
-#
-#
+plt.figure(figsize=(6,6))
+extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow(np.transpose(T12), extent=extents, aspect='auto',origin='lower')
+plt.colorbar(im)
+plt.show()
+
+
+plt.figure(figsize=(6,6))
+extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow(np.transpose(T21), extent=extents, aspect='auto',origin='lower')
+plt.colorbar(im)
+plt.show()
+
+plt.figure(figsize=(6,6))
+extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow(np.transpose(Iso), extent=extents, cmap="bwr",aspect='auto',origin='lower')
+plt.colorbar(im)
+plt.show()
+
+##### resonant
+plt.figure(figsize=(6,6))
+extents=[phis[0],phis[-1],fe[0],fe[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow(S12e, extent=extents, aspect='auto',origin='lower')
+plt.colorbar(im)
+plt.show()
+
+
+plt.figure(figsize=(6,6))
+extents=[phis[0],phis[-1],fe[0],fe[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow(S21e, extent=extents, aspect='auto',origin='lower')
+plt.colorbar(im)
+plt.show()
+
+
 plt.figure(figsize=(6,6))
 extents=[tu[0],tu[-1],fe[0],fe[-1]]
 ax1 = plt.subplot(111)

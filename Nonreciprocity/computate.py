@@ -23,14 +23,19 @@ hu=1
 fre=1
 delta=1
 
-a=Give_pi_verse(0.54)
-print(a)
+# a=Give_pi_verse(0.54)
+# print(a)
+#
+# b=Give_delta_verse(fre,0.97)
+# print(b)
+#
+# c=Give_pi(110)
+# print(c)
+#
+# d=Give_delta(fre,70)
+# print(d)
+#
+# print(np.arctan(0.227)/np.pi)
 
-b=Give_delta_verse(fre,0.97)
-print(b)
-
-c=Give_pi(110)
-print(c)
-
-d=Give_delta(fre,70)
-print(d)
+phis=np.linspace(0,2,361)
+print(phis[122])
