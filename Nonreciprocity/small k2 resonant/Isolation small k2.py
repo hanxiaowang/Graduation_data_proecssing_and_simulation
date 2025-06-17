@@ -8,9 +8,12 @@ import skrf as rf
 import os
 import json
 Isoe=np.loadtxt(r'F:\Nonreciprocity\20210630\Isore.txt')
-print(np.max(Isoe))
-print(np.min(Isoe))
-print(np.shape(Isoe))
+rr, cr = np.where(Isoe == np.min(Isoe))
+print(f'rr={rr}')
+print(f'cr={cr}')
+# print(np.max(Isoe))
+# print(np.min(Isoe))
+# print(np.shape(Isoe))
 omega_a = 8.247e9
 # delta_ms=np.linspace(-100,100,41)
 

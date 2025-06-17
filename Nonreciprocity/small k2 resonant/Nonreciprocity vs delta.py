@@ -16,17 +16,11 @@ phis=np.linspace(0,2,361)
 # print(phi1[110])
 
 #
-de = 1
-targets=[10,143,30]
-if de==0:
-    start =0
-    stop = 10001
-elif de==1:
-    start = 5000
-    stop = 15001
-elif de==2:
-    start = 10000
-    stop = 20001
+
+targets=150
+
+start = 5000
+stop = 15001
 
 
 Isoe=[]
@@ -34,27 +28,17 @@ S12e=[]
 S21e=[]
 for i in range(len(voltagen)):
     print(i)
-    if de==0:
-        s12=np.loadtxt(f'F:\\Nonreciprocity\\20210703\\m smaller than a\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltagen[i])}.0 mV 2D.txt',delimiter=',')[start:stop]
-        s21=np.loadtxt(f'F:\\Nonreciprocity\\20210703\\m smaller than a\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltagen[i])}.0 mV 2D.txt',delimiter=',')[start:stop]
-    elif de==1:
-        s12 = np.loadtxt(
-            f'F:\\Nonreciprocity\\20210701\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltagen[i])}.0 mV 2D.txt',
-            delimiter=',')[start:stop]
-        s21 = np.loadtxt(
-            f'F:\\Nonreciprocity\\20210701\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltagen[i])}.0 mV 2D.txt',
-            delimiter=',')[start:stop]
-    elif de==2:
-        s12 = np.loadtxt(
-            f'F:\\Nonreciprocity\\20210703\\m larger than a\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltagen[i])}.0 mV 2D.txt',
-            delimiter=',')[start:stop]
-        s21 = np.loadtxt(
-            f'F:\\Nonreciprocity\\20210703\\m larger than a\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltagen[i])}.0 mV 2D.txt',
-            delimiter=',')[start:stop]
+    s12 = np.loadtxt(
+        f'F:\\Nonreciprocity\\20210630\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltagen[i])}.0 mV 2D.txt',
+        delimiter=',')[start:stop]
+    s21 = np.loadtxt(
+        f'F:\\Nonreciprocity\\20210630\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltagen[i])}.0 mV 2D.txt',
+        delimiter=',')[start:stop]
+
     # print(np.shape(S12[:,110]))
-    S12e.append(s12[:,targets[de]])
-    S21e.append(s21[:,targets[de]])
-    Isoe.append(s12[:,targets[de]]-s21[:,targets[de]])
+    S12e.append(s12[:,targets])
+    S21e.append(s21[:,targets])
+    Isoe.append(s12[:,targets]-s21[:,targets])
 
 fe=np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\f.txt')[start:stop]
 
@@ -62,15 +46,12 @@ fe_start=fe[0]
 fe_stop=fe[-1]
 
 omega_a = 8.247e9
-delta_ms = [-32*1e6, -2*1e6, 63*1e6]
-
-
-omega_m = omega_a+delta_ms[de]
+omega_m = omega_a-2*1e6
 omega_s = np.linspace(fe_start,fe_stop,10001)*1e9
 
 k_int = 1.4e6
 k_1 = 45.5e6
-k_2 = 4.5e6
+k_2 = 2.4e6
 k_3 = 1.33e6
 k_c = k_int + k_1 + k_2 + k_3
 
@@ -80,39 +61,22 @@ gamma = gamma_int + gamma_e
 
 g = 8e6
 
-phiss = [phis[targets[0]],phis[targets[1]],phis[targets[2]]]
-phi=phiss[de]
+phi=phis[targets]
 print(phi)
 ## deltas = 0.97 * voltage / 50  #63
 # deltas = 0.97 * voltage / 45  #-32 -2
 # deltas = 0.97 * voltage / 45  #-2
 
-deltass=[45,45,50]
-delta=0.97*voltagen/deltass[de]
+delta=0.97*voltagen/52
 
 phi1 = 0.75
 # delta1 = 0.92 #63
 # delta1 = 0.97 #-32 -2
 
-delta1s=[0.97,0.97,0.92]
-delta1=delta1s[de]
+delta1=0.97
 
-
-# zhengti=-0.26
-# chazhi=0.06  #63
-
-# zhengti=-0.18
-# chazhi=0.08 #-32
-
-# zhengti=-0.2
-# chazhi=0.1 #-2
-
-zhengtis=[-0.18,-0.2,-0.26]
-chazhis=[0.08,0.1,0.06]
-
-
-phi21=(zhengtis[de]+chazhis[de])
-phi12=(zhengtis[de])
+phi21=(-0.1)
+phi12=(-0.2)
 
 
 T12 = []
@@ -145,8 +109,15 @@ for i in range(len(delta)):
     Isos.append(S12-S21)
 
 
-# plt.figure(figsize=(18,12))
+print(np.min(Isos))
+print(np.max(Isos))
 
+print(np.min(Isoe))
+print(np.max(Isoe))
+
+#
+# plt.figure(figsize=(18,12))
+#
 # ax1 = plt.subplot(231)
 # extents=[delta[0],delta[-1],fe[0],fe[-1]]
 # im = ax1.imshow(np.transpose(T12), extent=extents, aspect='auto',origin='lower')
@@ -182,12 +153,7 @@ for i in range(len(delta)):
 # plt.colorbar(im)
 #
 # plt.show()
-
-print(np.min(Isos))
-print(np.max(Isos))
-
-print(np.min(Isoe))
-print(np.max(Isoe))
+#
 
 # plt.figure(figsize=(6,6))
 # extents=[delta[0],delta[-1],omega_s[0],omega_s[-1]]
@@ -226,10 +192,10 @@ print(np.max(Isoe))
 # im = ax1.imshow(np.transpose(S21e), extent=extents, aspect='auto',origin='lower')
 # plt.colorbar(im)
 # plt.show()
-#
-#
+
+
 plt.figure(figsize=(6,6))
-extents=[tu[0],tu[-1],fe[0],fe[-1]]
+extents=[delta[0],delta[-1],fe[0],fe[-1]]
 ax1 = plt.subplot(111)
 im = ax1.imshow(np.transpose(Isoe), extent=extents, cmap="bwr",aspect='auto',origin='lower')
 plt.colorbar(im)

@@ -235,47 +235,47 @@ for i in range(len(phis)):
 #
 
 #
-plt.figure(figsize=(6,6))
-extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
-ax1 = plt.subplot(111)
-im = ax1.imshow(np.transpose(T12), extent=extents, aspect='auto',origin='lower')
-plt.colorbar(im)
-plt.show()
+# plt.figure(figsize=(6,6))
+# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(np.transpose(T12), extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+#
+#
+# plt.figure(figsize=(6,6))
+# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(np.transpose(T21), extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
 
-
-plt.figure(figsize=(6,6))
-extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
-ax1 = plt.subplot(111)
-im = ax1.imshow(np.transpose(T21), extent=extents, aspect='auto',origin='lower')
-plt.colorbar(im)
-plt.show()
-
-plt.figure(figsize=(6,6))
-extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
-ax1 = plt.subplot(111)
-im = ax1.imshow(np.transpose(Iso), extent=extents, cmap="bwr",aspect='auto',origin='lower')
-plt.colorbar(im)
-plt.show()
+# plt.figure(figsize=(6,6))
+# extents=[phis[0],phis[-1],omega_s[0],omega_s[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(np.transpose(Iso), extent=extents, cmap="bwr",aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
 
 ##### resonant
+# plt.figure(figsize=(6,6))
+# extents=[phis[0],phis[-1],fe[0],fe[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(S12e, extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+#
+#
+# plt.figure(figsize=(6,6))
+# extents=[phis[0],phis[-1],fe[0],fe[-1]]
+# ax1 = plt.subplot(111)
+# im = ax1.imshow(S21e, extent=extents, aspect='auto',origin='lower')
+# plt.colorbar(im)
+# plt.show()
+#
+
 plt.figure(figsize=(6,6))
 extents=[phis[0],phis[-1],fe[0],fe[-1]]
-ax1 = plt.subplot(111)
-im = ax1.imshow(S12e, extent=extents, aspect='auto',origin='lower')
-plt.colorbar(im)
-plt.show()
-
-
-plt.figure(figsize=(6,6))
-extents=[phis[0],phis[-1],fe[0],fe[-1]]
-ax1 = plt.subplot(111)
-im = ax1.imshow(S21e, extent=extents, aspect='auto',origin='lower')
-plt.colorbar(im)
-plt.show()
-
-
-plt.figure(figsize=(6,6))
-extents=[tu[0],tu[-1],fe[0],fe[-1]]
 ax1 = plt.subplot(111)
 im = ax1.imshow(Isoe, extent=extents, cmap="bwr",aspect='auto',origin='lower')
 plt.colorbar(im)

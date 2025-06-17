@@ -3,48 +3,12 @@ import matplotlib.pyplot as plt
 import skrf as rf
 
 
-
-##larger
-Dl21=np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\S21\cavity S21 with magnetic field without Drive.txt',dtype=complex)
-f=[rows[0] for rows in Dl21]
-Sl21=[rows[2] for rows in Dl21]
-
-Dl12=np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\S12\cavity S12 with magnetic field without Drive.txt',dtype=complex)
-f=[rows[0] for rows in Dl12]
-Sl12=[rows[2] for rows in Dl12]
-
-# Dl21=np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\S21\cavity S21 with magnetic field with IQ off.txt',dtype=complex)
-# f=[rows[0] for rows in Dl21]
-# Sl21=[rows[2] for rows in Dl21]
-#
-# Dl12=np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\S12\cavity S12 with magnetic field with IQ off.txt',dtype=complex)
-# f=[rows[0] for rows in Dl12]
-# Sl12=[rows[2] for rows in Dl12]
-
-##smaller
-Ds21=np.loadtxt(r'F:\Nonreciprocity\20210703\m smaller than a\S21\cavity S21 with magnetic field without Drive.txt',dtype=complex)
-f=[rows[0] for rows in Ds21]
-Ss21=[rows[2] for rows in Ds21]
-
-Ds12=np.loadtxt(r'F:\Nonreciprocity\20210703\m smaller than a\S12\cavity S12 with magnetic field without Drive.txt',dtype=complex)
-f=[rows[0] for rows in Ds12]
-Ss12=[rows[2] for rows in Ds12]
-
-
-# Ds21=np.loadtxt(r'F:\Nonreciprocity\20210703\m smaller than a\S21\cavity S21 with magnetic field with IQ off.txt',dtype=complex)
-# f=[rows[0] for rows in Ds21]
-# Ss21=[rows[2] for rows in Ds21]
-#
-# Ds12=np.loadtxt(r'F:\Nonreciprocity\20210703\m smaller than a\S12\cavity S12 with magnetic field with IQ off.txt',dtype=complex)
-# f=[rows[0] for rows in Ds12]
-# Ss12=[rows[2] for rows in Ds12]
-
 # ##resonant
-Dr21=np.loadtxt(r'F:\Nonreciprocity\20210701\S21\cavity S21 with magnetic field without Drive.txt',dtype=complex)
+Dr21=np.loadtxt(r'F:\Nonreciprocity\20210630\S21\cavity S21 with magnetic field without Drive.txt',dtype=complex)
 f=[rows[0] for rows in Dr21]
 Sr21=[rows[2] for rows in Dr21]
 
-Dr12=np.loadtxt(r'F:\Nonreciprocity\20210701\S12\cavity S12 with magnetic field without Drive.txt',dtype=complex)
+Dr12=np.loadtxt(r'F:\Nonreciprocity\20210630\S12\cavity S12 with magnetic field without Drive.txt',dtype=complex)
 f=[rows[0] for rows in Dr12]
 Sr12=[rows[2] for rows in Dr12]
 #
@@ -61,8 +25,6 @@ isor=[]
 fp=[]
 
 for i in range(len(f)):
-    isol.append(Sl21[i] - Sl12[i])
-    isos.append(Ss21[i] - Ss12[i])
     isor.append(Sr21[i] - Sr12[i])
     fp.append(f[i]/1e9)
 
