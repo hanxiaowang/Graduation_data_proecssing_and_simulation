@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 from Prepare import *
+from mpl_toolkits.mplot3d import Axes3D
+
 #
 drive_power_in=(np.loadtxt(r'F:\Chirality of encycling bistability critical point(20220726-20230503)\20230402\CP out and cross lower side change power first 18-34-3\drive power.txt'));
 delta_m_in=(8.184-np.loadtxt(r'F:\Chirality of encycling bistability critical point(20220726-20230503)\20230402\CP out and cross lower side change power first 18-34-3\drive fre.txt'));
@@ -22,17 +24,17 @@ print((len(drive_power_up_in)))
 step_up_in=np.linspace(1,len(drive_power_up_in)+1,len(drive_power_up_in))
 
 
-drive_powers=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at D 16-31-2\drive power.txt'));
-delta_ms=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at D 16-31-2\drive fre.txt'));
-cpf_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at D 16-31-2\Delta omega up.txt'));
-cfp_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change fre first at D 16-29-40\Delta omega up.txt'));
+drive_powers=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at D 16-31-2\drive power.txt'));
+delta_ms=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at D 16-31-2\drive fre.txt'));
+cpf_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at D 16-31-2\Delta omega up.txt'));
+cfp_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change fre first at D 16-29-40\Delta omega up.txt'));
 step_downs=np.linspace(1,len(drive_powers)+1,len(drive_powers))
 
 
-drive_power_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at D 16-29-53\drive power.txt'));
-delta_m_up_ins=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at D 16-29-53\drive fre.txt'));
-cpf_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at D 16-29-53\Delta omega up.txt'));
-cfp_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change fre first at D 16-30-49\Delta omega up.txt'));
+drive_power_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at D 16-29-53\drive power.txt'));
+delta_m_up_ins=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at D 16-29-53\drive fre.txt'));
+cpf_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at D 16-29-53\Delta omega up.txt'));
+cfp_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change fre first at D 16-30-49\Delta omega up.txt'));
 
 # print(len(step_down_out))
 drive_power_up=[]
@@ -53,10 +55,10 @@ for i in range(len(drive_power_up_in)):
         cpf_up.append(cpf_up_in[i])
         cfp_up.append(cfp_up_in[i])
 
-        # drive_power_ups.append(drive_power_up_ins[i])
-        # delta_m_ups.append(delta_m_up_ins[i]*1e3)
-        # cpf_ups.append(cpf_up_ins[i])
-        # cfp_ups.append(cfp_up_ins[i])
+        drive_power_ups.append(drive_power_up_ins[i])
+        delta_m_ups.append(delta_m_up_ins[i]*1e3)
+        cpf_ups.append(cpf_up_ins[i])
+        cfp_ups.append(cfp_up_ins[i])
 
 
 # step_in_up=np.linspace(1,len(drive_power_up)+1,len(drive_power_up))
@@ -65,7 +67,9 @@ for i in range(len(drive_power_up_in)):
 fig, axes = plt.subplots(1, 1, figsize=(12  , 6))
 fig.patch.set_alpha(0)
 axes.patch.set_alpha(0)
-# # CCW
+
+
+# CCW
 # axes.scatter(step_in,cpf_up,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
 # axes.plot(step_in,cpf_up_ins,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
 # #
@@ -76,9 +80,7 @@ axes.plot(step_in,cpf_down_ins,color='blue',linewidth=10,alpha=0.3,zorder= 0)
 axes.plot(step_in,cpf_up_ins,color='red',linewidth=10,alpha=0.3,zorder= 0)
 
 
-
-
-# CW
+# #CW
 # axes.scatter(step_in,cfp_up,label='Exp',marker='s',color='none',linewidth=2,edgecolors='green',s=80)
 # axes.plot(step_in,cfp_up_ins,'--',color='lime',label='Sim',linewidth=3,alpha=1,zorder= 2)
 #
@@ -99,7 +101,8 @@ plt.show()
 
 
 
-
+# fig = plt.figure()
+# axes = fig.add_subplot(111, projection='3d')
 # fig, axes = plt.subplots(1, 1, figsize=(12  , 6))
 # fig.patch.set_alpha(0)
 # axes.patch.set_alpha(0)
@@ -114,3 +117,19 @@ plt.show()
 # axes2.set_ylabel(r'$\delta_m/2\pi$ [MHz]',fontsize=10)
 # plt.tick_params(labelsize=10)
 # plt.show()
+#
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\p1.txt',drive_power_ups)
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\f1.txt',delta_m_ups)
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\d1.txt',cpf_down_ins)
+#
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\p2.txt',drive_power_ups)
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\f2.txt',delta_m_ups)
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\d2.txt',cpf_up_ins)
+#
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\p3.txt',drive_power_up_ins)
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\f3.txt',delta_m_up_ins)
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\d3.txt',cfp_down_ins)
+#
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\p4.txt',drive_power_up_ins)
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\f4.txt',delta_m_up_ins)
+# np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop6\d4.txt',cfp_up_ins)

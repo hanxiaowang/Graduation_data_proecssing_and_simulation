@@ -18,17 +18,17 @@ cfp_up_in=(np.loadtxt(r'F:\Chirality of encycling bistability critical point(202
 
 
 
-drive_power_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at C 13-36-49\drive power.txt'));
-delta_m_down_ins=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at C 13-36-49\drive fre.txt'));
-cpf_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at C 13-36-49\Delta omega up.txt'));
-cfp_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change fre first at C 13-36-59\Delta omega up.txt'));
+drive_power_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at C 13-36-49\drive power.txt'));
+delta_m_down_ins=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at C 13-36-49\drive fre.txt'));
+cpf_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at C 13-36-49\Delta omega up.txt'));
+cfp_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change fre first at C 13-36-59\Delta omega up.txt'));
 
 
 
-drive_power_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at C 13-23-37\drive power.txt'));
-delta_m_up_ins=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at C 13-23-37\drive fre.txt'));
-cpf_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at C 13-23-37\Delta omega up.txt'));
-cfp_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change fre first at C 13-23-53\Delta omega up.txt'));
+drive_power_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at C 13-23-37\drive power.txt'));
+delta_m_up_ins=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at C 13-23-37\drive fre.txt'));
+cpf_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at C 13-23-37\Delta omega up.txt'));
+cfp_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change fre first at C 13-23-53\Delta omega up.txt'));
 
 
 # pdele=np.linspace(9,199,100)
@@ -106,11 +106,11 @@ axes.patch.set_alpha(0)
 # axes.plot(step_in,cpf_ups,color='red',linewidth=10,alpha=0.3,zorder= 0)
 
 #CCW
-# axes.scatter(step_in,cfp_up,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
-# axes.plot(step_in,cfp_ups,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
+axes.scatter(step_in,cfp_up,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
+axes.plot(step_in,cfp_ups,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
 
-axes.scatter(step_in,cfp_down_in,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
-axes.plot(step_in,cfp_down_ins,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
+# axes.scatter(step_in,cfp_down_in,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
+# axes.plot(step_in,cfp_down_ins,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
 
 axes.plot(step_in,cfp_down_ins,color='blue',linewidth=10,alpha=0.3,zorder= 0)
 axes.plot(step_in,cfp_ups,color='red',linewidth=10,alpha=0.3,zorder= 0)

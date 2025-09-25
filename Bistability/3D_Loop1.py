@@ -3,25 +3,25 @@ import matplotlib.pyplot as plt
 from Prepare import *
 
 j=4
-drive_power_in1=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 1\\e\\drive power.txt'));
-delta_m_in1=(8.184-np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 1\\e\\drive fre.txt'));
-Deltae1=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 1\\e\\Delta omega UP.txt'));
-Deltas1=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 1\\s\\Delta omega UP.txt'));
+drive_power_in1=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 1\\e\\drive power.txt'));
+delta_m_in1=(8.184-np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 1\\e\\drive fre.txt'));
+Deltae1=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 1\\e\\Delta omega UP.txt'));
+Deltas1=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 1\\s\\Delta omega UP.txt'));
 
-drive_power_in2=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 2\\e\\drive power.txt'));
-delta_m_in2=(8.184-np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 2\\e\\drive fre.txt'));
-Deltae2=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 2\\e\\Delta omega UP.txt'));
-Deltas2=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 2\\s\\Delta omega UP.txt'));
+drive_power_in2=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 2\\e\\drive power.txt'));
+delta_m_in2=(8.184-np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 2\\e\\drive fre.txt'));
+Deltae2=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 2\\e\\Delta omega UP.txt'));
+Deltas2=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 2\\s\\Delta omega UP.txt'));
 
-drive_power_in3=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 3\\e\\drive power.txt'));
-delta_m_in3=(8.184-np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 3\\e\\drive fre.txt'));
-Deltae3=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 3\\e\\Delta omega UP.txt'));
-Deltas3=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 3\\s\\Delta omega UP.txt'));
+drive_power_in3=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 3\\e\\drive power.txt'));
+delta_m_in3=(8.184-np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 3\\e\\drive fre.txt'));
+Deltae3=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 3\\e\\Delta omega UP.txt'));
+Deltas3=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 3\\s\\Delta omega UP.txt'));
 
-drive_power_in4=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 4\\e\\drive power.txt'));
-delta_m_in4=(8.184-np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 4\\e\\drive fre.txt'));
-Deltae4=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 4\\e\\Delta omega UP.txt'));
-Deltas4=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\CP in 20231013\\CP in path 4\\s\\Delta omega UP.txt'));
+drive_power_in4=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 4\\e\\drive power.txt'));
+delta_m_in4=(8.184-np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 4\\e\\drive fre.txt'));
+Deltae4=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 4\\e\\Delta omega UP.txt'));
+Deltas4=(np.loadtxt(f'C:\\Users\\AORUS\\OneDrive\\桌面\\Bistability thesis\\CP in 20231013\\CP in path 4\\s\\Delta omega UP.txt'));
 
 step_in=np.linspace(1,len(drive_power_in1)+1,len(drive_power_in1))
 # # print(len(step_in))
@@ -47,11 +47,11 @@ axes.patch.set_alpha(0)
 # axes.scatter(step_in,Deltae1,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
 # axes.plot(step_in,Deltas1,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
 
-axes.scatter(step_in,Deltae2,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
-axes.plot(step_in,Deltas2,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
+axes.scatter(step_in,Deltae2,label='Exp',marker='s',color='none',linewidth=0.5,edgecolors='red',s=10)
+axes.plot(step_in,Deltas2,'--',color='red',label='Sim',linewidth=3,alpha=1,zorder= 2)
 
-axes.plot(step_in,Deltas2,color='blue',linewidth=10,alpha=0.3,zorder= 0)
-axes.plot(step_in,Deltas3,color='red',linewidth=10,alpha=0.3,zorder= 0)
+axes.plot(step_in,Deltas2,color='orange',linewidth=10,alpha=0.5,zorder= 0)
+axes.plot(step_in,Deltas3,color='green',linewidth=10,alpha=0.3,zorder= 0)
 
 #CW
 # axes.scatter(step_in,Deltae3[::-1],label='Exp',marker='s',color='none',linewidth=2,edgecolors='green',s=80)

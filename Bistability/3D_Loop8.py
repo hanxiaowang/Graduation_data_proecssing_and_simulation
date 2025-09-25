@@ -8,10 +8,10 @@ pre_deltae=(8.184-np.loadtxt(r'F:\Chirality of encycling bistability critical po
 pre_Delta1e=(np.loadtxt(r'F:\Chirality of encycling bistability critical point(20220726-20230503)\20230403\CP out and cross two sides change power first 23-27-27\Delta omega up.txt'));
 pre_Delta2e=(np.loadtxt(r'F:\Chirality of encycling bistability critical point(20220726-20230503)\20230403\CP out and cross two sides change frequency first 21-43-0\Delta omega up.txt'));
 
-pre_Ps=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at D 15-59-51\drive power.txt'));
-pre_deltas=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at D 15-59-51\drive fre.txt'));
-pre_Delta1s=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at D 15-59-51\Delta omega up.txt'));
-pre_Delta2s=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change fre first at D 15-59-21\Delta omega up.txt'));
+pre_Ps=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at D 15-59-51\drive power.txt'));
+pre_deltas=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at D 15-59-51\drive fre.txt'));
+pre_Delta1s=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at D 15-59-51\Delta omega up.txt'));
+pre_Delta2s=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change fre first at D 15-59-21\Delta omega up.txt'));
 
 # print(len(pre_Pe))
 # print(len(pre_Ps))
@@ -63,11 +63,11 @@ axes.patch.set_alpha(0)
 # axes.scatter(step_in,cpf_up_in,label='Exp',marker='s',color='none',linewidth=2,edgecolors='green',s=80)
 # axes.plot(step_in,cpf_up_ins,'--',color='lime',label='Sim',linewidth=3,alpha=1,zorder= 2)
 #
-# axes.scatter(step_in,cpf_down_in,label='Exp',marker='s',color='none',linewidth=2,edgecolors='green',s=80)
-# axes.plot(step_in,cpf_down_ins,'--',color='lime',label='Sim',linewidth=3,alpha=1,zorder= 2)
-#
-# axes.plot(step_in,cpf_down_ins,color='blue',linewidth=10,alpha=0.3,zorder= 0)
-# axes.plot(step_in,cpf_up_ins,color='red',linewidth=10,alpha=0.3,zorder= 0)
+axes.scatter(step_in,cpf_down_in,label='Exp',marker='s',color='none',linewidth=2,edgecolors='green',s=80)
+axes.plot(step_in,cpf_down_ins,'--',color='lime',label='Sim',linewidth=3,alpha=1,zorder= 2)
+
+axes.plot(step_in,cpf_down_ins,color='blue',linewidth=10,alpha=0.3,zorder= 0)
+axes.plot(step_in,cpf_up_ins,color='red',linewidth=10,alpha=0.3,zorder= 0)
 
 
 
@@ -76,11 +76,11 @@ axes.patch.set_alpha(0)
 # axes.scatter(step_in,cfp_up_in,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
 # axes.plot(step_in,cfp_up_ins,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
 
-axes.scatter(step_in,cfp_down_in,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
-axes.plot(step_in,cfp_down_ins,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
-
-axes.plot(step_in,cfp_down_ins,color='blue',linewidth=10,alpha=0.3,zorder= 0)
-axes.plot(step_in,cfp_up_ins,color='red',linewidth=10,alpha=0.3,zorder= 0)
+# axes.scatter(step_in,cfp_down_in,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
+# axes.plot(step_in,cfp_down_ins,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
+#
+# axes.plot(step_in,cfp_down_ins,color='blue',linewidth=10,alpha=0.3,zorder= 0)
+# axes.plot(step_in,cfp_up_ins,color='red',linewidth=10,alpha=0.3,zorder= 0)
 
 axes.set_xlabel(r'$f_d$ [GHz]',fontsize=10)
 axes.set_ylabel(r'$\Delta_+/2\pi$ [MHz]',fontsize=10)
@@ -115,3 +115,22 @@ plt.show()
 # axes2.set_ylabel(r'$\delta_m/2\pi$ [MHz]',fontsize=10)
 # plt.tick_params(labelsize=10)
 # plt.show()
+
+
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\p1.txt',drive_powers)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\f1.txt',delta_ms)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\d1.txt',cpf_down_ins)
+
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\p2.txt',drive_power_up_ins)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\f2.txt',delta_m_up_ins)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\d2.txt',cpf_up_ins)
+
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\p3.txt',drive_powers)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\f3.txt',delta_ms)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\d3.txt',cfp_down_ins)
+
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\p4.txt',drive_power_up_ins)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\f4.txt',delta_m_up_ins)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\chirality\loop8\d4.txt',cfp_up_ins)
+
+

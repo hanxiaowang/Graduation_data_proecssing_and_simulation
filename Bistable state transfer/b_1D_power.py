@@ -16,7 +16,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # part2=np.linspace(0.020,0.205,186)
 # part3=np.linspace(0.215,0.205,step2)
 # P = np.hstack((part1, np.delete(part2, 0), np.delete(part3, 0)))
-P = np.linspace(0, 0.3, 301)
+P = np.linspace(0.3, 0, 2)
 f=8.18
 para = {'omega_a': 8.246,
         'omega_m': 8.184,
