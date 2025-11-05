@@ -11,7 +11,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # f = np.hstack((part1, np.delete(part2, 0), np.delete(part3, 0)))
 
 f = np.linspace(8.14, 8.22, 801)
-P=0.1
+P=0.0029
 para = {'omega_a': 8.246,
         'omega_m': 8.184,
         'kaint': 3.39,
@@ -26,21 +26,22 @@ para = {'omega_a': 8.246,
         }
 
 ## Delta_+的双稳态求解
-# forward, forwardf, backward, backwardf, unstablef, unstable=Bistability(**para).BS_fre_with_unstable()
-forward, forwardf, backward, backwardf, unstable, unstablef=Bistability(**para).BS_fre_inside_BS()
+forward, forwardf, backward, backwardf, unstable, unstablef=Bistability(**para).BS_fre_with_unstable()
+print(len(unstable))
+# forward, forwardf, backward, backwardf, unstable, unstablef=Bistability(**para).BS_fre_inside_BS()
 print('Here is OK!1')
 # print(forwardf)
 # 双稳态图
-# plt.figure(figsize=(7, 6))
-# axes1 = plt.subplot(111)
-# axes1.plot(forwardf, forward, 'o', color='orange',markersize=10,label=r'forward',markerfacecolor='None')
-# axes1.plot(backwardf, backward, '^',  color='green',markersize=5,label=r'backward',markerfacecolor='None')
-# axes1.plot(unstablef,unstable, '--', linewidth=5, color='purple',label=r'unstable')
-# axes1.set_xlabel(r'$f_d$ [GHz]', fontsize=10)
-# axes1.set_ylabel(r'$\Delta_m$ [MHz]', fontsize=10)
-# plt.tick_params(labelsize=20)
-# plt.legend(loc=7,fontsize=10)
-# plt.show()
+plt.figure(figsize=(7, 6))
+axes1 = plt.subplot(111)
+axes1.plot(forwardf, forward, 'o', color='orange',markersize=10,label=r'forward',markerfacecolor='None')
+axes1.plot(backwardf, backward, '^',  color='green',markersize=5,label=r'backward',markerfacecolor='None')
+axes1.plot(unstablef,unstable, '--', linewidth=5, color='purple',label=r'unstable')
+axes1.set_xlabel(r'$f_d$ [GHz]', fontsize=10)
+axes1.set_ylabel(r'$\Delta_m$ [MHz]', fontsize=10)
+plt.tick_params(labelsize=20)
+plt.legend(loc=7,fontsize=10)
+plt.show()
 
 ## 根据Delta_+的双稳态求解m和a
 wminf=8.184*1e9*2*np.pi

@@ -15,10 +15,10 @@ phis=np.linspace(0,2,361)
 # print(phi1[110])
 
 #
-target=143
+target=110
 
-start = 4000
-stop = 14001
+start = 5000
+stop = 15001
 
 
 # Isoe=[]
@@ -76,7 +76,7 @@ fe_stop=fe[-1]
 
 omega_a = 8.247e9
 
-omega_m12 = omega_a-5.7*1e6
+omega_m12 = omega_a-2.7*1e6
 omega_m21 = omega_a-4.3*1e6
 omega_s = np.linspace(fe_start,fe_stop,10001)*1e9
 
@@ -101,17 +101,8 @@ phi1 = 0.75
 delta1=0.97
 
 
-# zhengti=-0.26
-# chazhi=0.06  #63
-
-# zhengti=-0.18
-# chazhi=0.08 #-32
-
-# zhengti=-0.2
-# chazhi=0.1 #-2
-
-phi21=(-0.105)
-phi12=(-0.18)
+phi21=(-0.168)
+phi12=(-0.19)
 
 
 delta_m12 = omega_m12 - omega_s
@@ -140,24 +131,29 @@ Isos=S12s-S21s
 
 
 print(max(Isoe))
+print(max(Isos))
 print(min(Isoe))
-print(min(S12s))
-print(min(S12e))
-fig, axes1 = plt.subplots(1, 1, figsize=(8  , 6))
-axes1 = plt.subplot(111)
-fig.patch.set_alpha(0)
-axes1.patch.set_alpha(0)
-axes1.plot(omega_s,S12e,'-',linewidth=10,label=r'$S_{12,exp}$',color='green',alpha=0.4)
-axes1.plot(omega_s,S12s,'-',linewidth=3,label=r'$S_{12,sim}$',color='green',zorder=2)
-axes1.plot(omega_s,S21e,'-',linewidth=10,label=r'$S_{21,exp}$',color='orange',alpha=0.4)
-axes1.plot(omega_s,S21s,'-',linewidth=3,label=r'$S_{21,sim}$',color='orange',zorder=2)
-axes1.set_xlabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
-axes1.set_ylim(-105,5)
-plt.yticks([-100,-75,-50,-25,0],['-100','-75','-50','-25','0'])
-plt.tick_params(labelsize=20)
-plt.legend(loc=4,prop={'family':'Cambria','size':20})
-plt.show()
+print(min(Isos))
+# fig, axes1 = plt.subplots(1, 1, figsize=(8  , 6))
+# axes1 = plt.subplot(111)
+# fig.patch.set_alpha(0)
+# axes1.patch.set_alpha(0)
+# axes1.plot(omega_s,S12e,'-',linewidth=10,label=r'$S_{12,exp}$',color='green',alpha=0.4)
+# axes1.plot(omega_s,S12s,'-',linewidth=3,label=r'$S_{12,sim}$',color='green',zorder=2)
+# axes1.plot(omega_s,S21e,'-',linewidth=10,label=r'$S_{21,exp}$',color='orange',alpha=0.4)
+# axes1.plot(omega_s,S21s,'-',linewidth=3,label=r'$S_{21,sim}$',color='orange',zorder=2)
+# axes1.set_xlabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
+# axes1.set_ylim(-105,5)
+# plt.yticks([-100,-75,-50,-25,0],['-100','-75','-50','-25','0'])
+# plt.tick_params(labelsize=20)
+# plt.legend(loc=4,prop={'family':'Cambria','size':20})
+# plt.show()
+
+a=max(np.abs(Isoe))
+index=np.where(np.abs(Isoe)==a)
+f=omega_s[index]
+print(f)
 
 fig, axes1 = plt.subplots(1, 1, figsize=(8  , 6))
 axes1 = plt.subplot(111)

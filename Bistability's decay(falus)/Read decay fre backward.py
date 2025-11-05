@@ -21,32 +21,34 @@ for i in range(len(drive_power)):
     D_T.append(Decay_th)
     D_X.append(Decay_xz)
 print(np.shape(D_E))
-plt.figure(figsize=(18,6))
-ax1 = plt.subplot(131)
-gci1 = ax1.pcolor(drive_fre,drive_power, D_E)
-# ax1.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
-ax1.set_ylabel(r'$\omega_d/2\pi$ [GHz]',fontsize=20)
-plt.tick_params(labelsize=10)
-cbar = plt.colorbar(gci1)
-# cmap='bwr'
+
+
+# plt.figure(figsize=(18,6))
+# ax1 = plt.subplot(131)
+# gci1 = ax1.pcolor(drive_fre,drive_power, D_E)
+# # ax1.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
+# ax1.set_ylabel(r'$\omega_d/2\pi$ [GHz]',fontsize=20)
+# plt.tick_params(labelsize=10)
+# cbar = plt.colorbar(gci1)
+# # cmap='bwr'
+# #
+# ax2 = plt.subplot(132)
+# gci2 = ax2.pcolor(drive_fre,drive_power, D_T)
+# ax2.set_xlabel(r'$P_d$[mW]',fontsize=20)
+# # ax2.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# plt.tick_params(labelsize=10)
+# cbar = plt.colorbar(gci2)
 #
-ax2 = plt.subplot(132)
-gci2 = ax2.pcolor(drive_fre,drive_power, D_T)
-ax2.set_xlabel(r'$P_d$[mW]',fontsize=20)
-# ax2.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-plt.tick_params(labelsize=10)
-cbar = plt.colorbar(gci2)
-
-ax3 = plt.subplot(133)
-gci3 = ax3.pcolor(drive_fre,drive_power, D_X)
-# ax3.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
-# ax3.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-plt.tick_params(labelsize=10)
-cbar = plt.colorbar(gci3)
-
-plt.show()
-
-j=40
+# ax3 = plt.subplot(133)
+# gci3 = ax3.pcolor(drive_fre,drive_power, D_X)
+# # ax3.set_xlabel(r'$\varphi$[$\pi$]',fontsize=20)
+# # ax3.set_ylabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# plt.tick_params(labelsize=10)
+# cbar = plt.colorbar(gci3)
+#
+# plt.show()
+print(np.shape(D_E))
+j=45
 plt.figure(figsize=(12 , 9))
 axes1 = plt.subplot(311)
 axes1.patch.set_alpha(0)

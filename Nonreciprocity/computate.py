@@ -38,4 +38,4 @@ delta=1
 # print(np.arctan(0.227)/np.pi)
 
 phis=np.linspace(0,2,361)
-print(phis[122])
+print(phis[110])

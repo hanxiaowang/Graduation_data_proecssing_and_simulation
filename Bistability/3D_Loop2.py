@@ -99,27 +99,27 @@ axes.patch.set_alpha(0)
 # axes.scatter(step_in,cpf_up,label='Exp',marker='s',color='none',linewidth=2,edgecolors='green',s=80)
 # axes.plot(step_in,cpf_ups,'--',color='lime',label='Sim',linewidth=3,alpha=1,zorder= 2)
 
-# axes.scatter(step_in,cpf_down_in,label='Exp',marker='s',color='none',linewidth=2,edgecolors='green',s=80)
-# axes.plot(step_in,cpf_down_ins,'--',color='lime',label='Sim',linewidth=3,alpha=1,zorder= 2)
+# axes.scatter(step_in,cpf_down_in,label='Exp',marker='s',color='none',linewidth=0.5,edgecolors='red',s=20)
+# axes.plot(step_in,cpf_down_ins,'--',color='red',label='Sim',linewidth=2,alpha=1,zorder= 2)
 #
-# axes.plot(step_in,cpf_down_ins,color='blue',linewidth=10,alpha=0.3,zorder= 0)
-# axes.plot(step_in,cpf_ups,color='red',linewidth=10,alpha=0.3,zorder= 0)
+# axes.plot(step_in,cpf_down_ins,color='darkorange',linewidth=10,alpha=0.3,zorder= 0)
+# axes.plot(step_in,cpf_ups,color='blue',linewidth=10,alpha=0.3,zorder= 0)
 
 #CCW
-axes.scatter(step_in,cfp_up,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
-axes.plot(step_in,cfp_ups,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
+# axes.scatter(step_in,cfp_up,label='Exp',marker='s',color='none',linewidth=0.5,edgecolors='blue',s=20)
+# axes.plot(step_in,cfp_ups,'-',color='blue',label='Sim',linewidth=2,alpha=1,zorder= 2)
 
-# axes.scatter(step_in,cfp_down_in,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
-# axes.plot(step_in,cfp_down_ins,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
+axes.scatter(step_in,cfp_down_in,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
+axes.plot(step_in,cfp_down_ins,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
 
-axes.plot(step_in,cfp_down_ins,color='blue',linewidth=10,alpha=0.3,zorder= 0)
-axes.plot(step_in,cfp_ups,color='red',linewidth=10,alpha=0.3,zorder= 0)
+axes.plot(step_in,cfp_down_ins,color='darkorange',linewidth=10,alpha=0.3,zorder= 0)
+axes.plot(step_in,cfp_ups,color='blue',linewidth=10,alpha=0.3,zorder= 0)
 
 axes.set_xlabel(r'$f_d$ [GHz]',fontsize=10)
 axes.set_ylabel(r'$\Delta_+/2\pi$ [MHz]',fontsize=10)
 plt.ylim(-1,20)
 plt.tick_params(labelsize=10)
-plt.legend(loc=9,fontsize=15)
+# plt.legend(loc=9,fontsize=15)
 plt.show()
 
 

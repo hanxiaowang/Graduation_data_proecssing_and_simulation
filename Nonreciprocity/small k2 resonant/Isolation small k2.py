@@ -8,7 +8,7 @@ import skrf as rf
 import os
 import json
 Isoe=np.loadtxt(r'F:\Nonreciprocity\20210630\Isore.txt')
-rr, cr = np.where(Isoe == np.min(Isoe))
+rr, cr = np.where(Isoe == np.max(Isoe))
 print(f'rr={rr}')
 print(f'cr={cr}')
 # print(np.max(Isoe))

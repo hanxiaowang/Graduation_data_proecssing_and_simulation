@@ -17,7 +17,7 @@ phis=np.linspace(0,2,361)
 
 #
 de = 1
-targets=[10,143,30]
+targets=[10,110,30]
 if de==0:
     start =0
     stop = 10001
@@ -56,6 +56,11 @@ for i in range(len(voltagen)):
     S21e.append(s21[:,targets[de]])
     Isoe.append(s12[:,targets[de]]-s21[:,targets[de]])
 
+
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Nonreciprocity thesis\s12 vs delta.txt',S12e)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Nonreciprocity thesis\s21 vs delta.txt',S21e)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Nonreciprocity thesis\iso vs delta.txt',Isoe)
+
 fe=np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\f.txt')[start:stop]
 
 fe_start=fe[0]
@@ -89,7 +94,7 @@ print(phi)
 
 deltass=[45,45,50]
 delta=0.97*voltagen/deltass[de]
-
+##  2.371(45) 2.134(50)
 phi1 = 0.75
 # delta1 = 0.92 #63
 # delta1 = 0.97 #-32 -2
@@ -189,44 +194,44 @@ print(np.max(Isos))
 print(np.min(Isoe))
 print(np.max(Isoe))
 
-# plt.figure(figsize=(6,6))
-# extents=[delta[0],delta[-1],omega_s[0],omega_s[-1]]
-# ax1 = plt.subplot(111)
-# im = ax1.imshow(np.transpose(T12), extent=extents, aspect='auto',origin='lower')
-# plt.colorbar(im)
-# plt.show()
-#
-#
-# plt.figure(figsize=(6,6))
-# extents=[delta[0],delta[-1],omega_s[0],omega_s[-1]]
-# ax1 = plt.subplot(111)
-# im = ax1.imshow(np.transpose(T21), extent=extents, aspect='auto',origin='lower')
-# plt.colorbar(im)
-# plt.show()
-#
-# plt.figure(figsize=(6,6))
-# extents=[delta[0],delta[-1],omega_s[0],omega_s[-1]]
-# ax1 = plt.subplot(111)
-# im = ax1.imshow(np.transpose(Isos), extent=extents, cmap="bwr",aspect='auto',origin='lower')
-# plt.colorbar(im)
-# plt.show()
-#
-# ##### resonant
-# plt.figure(figsize=(6,6))
-# extents=[delta[0],delta[-1],fe[0],fe[-1]]
-# ax1 = plt.subplot(111)
-# im = ax1.imshow(np.transpose(S12e), extent=extents, aspect='auto',origin='lower')
-# plt.colorbar(im)
-# plt.show()
-#
-#
-# plt.figure(figsize=(6,6))
-# extents=[delta[0],delta[-1],fe[0],fe[-1]]
-# ax1 = plt.subplot(111)
-# im = ax1.imshow(np.transpose(S21e), extent=extents, aspect='auto',origin='lower')
-# plt.colorbar(im)
-# plt.show()
-#
+plt.figure(figsize=(6,6))
+extents=[delta[0],delta[-1],omega_s[0],omega_s[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow(np.transpose(T12), extent=extents, aspect='auto',origin='lower')
+plt.colorbar(im)
+plt.show()
+
+
+plt.figure(figsize=(6,6))
+extents=[delta[0],delta[-1],omega_s[0],omega_s[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow(np.transpose(T21), extent=extents, aspect='auto',origin='lower')
+plt.colorbar(im)
+plt.show()
+
+plt.figure(figsize=(6,6))
+extents=[delta[0],delta[-1],omega_s[0],omega_s[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow(np.transpose(Isos), extent=extents, cmap="bwr",aspect='auto',origin='lower')
+plt.colorbar(im)
+plt.show()
+
+##### resonant
+plt.figure(figsize=(6,6))
+extents=[delta[0],delta[-1],fe[0],fe[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow(np.transpose(S12e), extent=extents, aspect='auto',origin='lower')
+plt.colorbar(im)
+plt.show()
+
+
+plt.figure(figsize=(6,6))
+extents=[delta[0],delta[-1],fe[0],fe[-1]]
+ax1 = plt.subplot(111)
+im = ax1.imshow(np.transpose(S21e), extent=extents, aspect='auto',origin='lower')
+plt.colorbar(im)
+plt.show()
+
 #
 plt.figure(figsize=(6,6))
 extents=[tu[0],tu[-1],fe[0],fe[-1]]

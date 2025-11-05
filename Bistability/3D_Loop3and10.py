@@ -13,10 +13,10 @@ step_down3=np.linspace(1,len(drive_power_down3)+1,len(drive_power_down3))
 print(len(step_down3))
 
 #
-drive_powers=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability\change power first at A 14-16-55\drive power.txt'));
-delta_ms=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability\change power first at A 14-16-55\drive fre.txt'));
-cpf_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability\change power first at A 14-16-55\Delta omega up.txt'));
-cfp_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability\change fre first at A 14-17-6\Delta omega up.txt'));
+drive_powers=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at A 14-16-55\drive power.txt'));
+delta_ms=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at A 14-16-55\drive fre.txt'));
+cpf_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at A 14-16-55\Delta omega up.txt'));
+cfp_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change fre first at A 14-17-6\Delta omega up.txt'));
 step_downs=np.linspace(1,len(drive_powers)+1,len(drive_powers))
 
 
@@ -83,21 +83,21 @@ axes.patch.set_alpha(0)
 # axes.scatter(step_down3,cpf_up,label='Exp',marker='s',color='none',linewidth=2,edgecolors='green',s=80)
 # axes.plot(step_down3,cpf_ups,'--',color='lime',label='Sim',linewidth=3,alpha=1,zorder= 2)
 
-axes.scatter(step_down3,cpf_down3,label='Exp',marker='s',color='none',linewidth=2,edgecolors='green',s=80)
-axes.plot(step_down3,cpf_down_ins,'--',color='lime',label='Sim',linewidth=3,alpha=1,zorder= 2)
+# axes.scatter(step_down3,cpf_down3,label='Exp',marker='s',color='none',linewidth=2,edgecolors='green',s=80)
+# axes.plot(step_down3,cpf_down_ins,'--',color='lime',label='Sim',linewidth=3,alpha=1,zorder= 2)
 
-axes.plot(step_down3,cpf_down_ins,color='black',linewidth=50,alpha=0.5,zorder= 0)
+# axes.plot(step_down3,cpf_down_ins,color='black',linewidth=50,alpha=0.5,zorder= 0)
 # axes.plot(step_down3,cpf_down_ins,color='red',linewidth=10,alpha=0.3,zorder= 0)
 
-#CCW
+# #CCW
 # axes.scatter(step_down3,cfp_up,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
 # axes.plot(step_down3,cfp_ups,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
-
+#
 # axes.scatter(step_down3,cfp_down3,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
 # axes.plot(step_down3,cfp_down_ins,'--',color='yellow',label='Sim',linewidth=5,alpha=1,zorder= 2)
-#
-# axes.plot(step_down3,cfp_down_ins,color='black',linewidth=50,alpha=0.5,zorder= 0)
-# axes.plot(step_down3,cfp_down_ins,color='red',linewidth=10,alpha=0.3,zorder= 0)
+
+axes.plot(step_down3,cfp_down_ins,color='black',linewidth=50,alpha=0.5,zorder= 0)
+axes.plot(step_down3,cfp_down_ins,color='red',linewidth=10,alpha=0.3,zorder= 0)
 
 axes.set_xlabel(r'$f_d$ [GHz]',fontsize=10)
 axes.set_ylabel(r'$\Delta_+/2\pi$ [MHz]',fontsize=10)

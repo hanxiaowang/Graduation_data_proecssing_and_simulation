@@ -23,17 +23,17 @@ print((len(drive_power_up_in)))
 step_up_in=np.linspace(1,len(drive_power_up_in)+1,len(drive_power_up_in))
 
 
-drive_powers=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at A 15-41-57\drive power.txt'));
-delta_ms=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at A 15-41-57\drive fre.txt'));
-cpf_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at A 15-41-57\Delta omega up.txt'));
-cfp_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change fre first at A 15-33-2\Delta omega up.txt'));
+drive_powers=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at A 15-41-57\drive power.txt'));
+delta_ms=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at A 15-41-57\drive fre.txt'));
+cpf_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at A 15-41-57\Delta omega up.txt'));
+cfp_down_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change fre first at A 15-33-2\Delta omega up.txt'));
 step_downs=np.linspace(1,len(drive_powers)+1,len(drive_powers))
 
 
-drive_power_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at A 15-32-51\drive power.txt'));
-delta_m_up_ins=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at A 15-32-51\drive fre.txt'));
-cpf_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change power first at A 15-32-51\Delta omega up.txt'));
-cfp_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\change fre first at A 15-42-21\Delta omega up.txt'));
+drive_power_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at A 15-32-51\drive power.txt'));
+delta_m_up_ins=(8.184-np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at A 15-32-51\drive fre.txt'));
+cpf_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change power first at A 15-32-51\Delta omega up.txt'));
+cfp_up_ins=(np.loadtxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\change fre first at A 15-42-21\Delta omega up.txt'));
 
 # print(len(step_down_out))
 drive_power_up=[]
@@ -115,3 +115,19 @@ plt.show()
 # axes2.set_ylabel(r'$\delta_m/2\pi$ [MHz]',fontsize=10)
 # plt.tick_params(labelsize=10)
 # plt.show()
+
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\p1.txt',drive_powers)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\f1.txt',delta_ms)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\d1.txt',cpf_down_ins)
+
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\p2.txt',drive_power_up_ins)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\f2.txt',delta_m_up_ins)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\d2.txt',cpf_up_ins)
+
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\p3.txt',drive_powers)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\f3.txt',delta_ms)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\d3.txt',cfp_down_ins)
+
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\p4.txt',drive_power_up_ins)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\f4.txt',delta_m_up_ins)
+np.savetxt(r'C:\Users\AORUS\OneDrive\桌面\Bistability thesis\chirality\loop4\d4.txt',cfp_up_ins)

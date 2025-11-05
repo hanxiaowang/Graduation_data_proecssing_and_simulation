@@ -16,7 +16,7 @@ stop = 14001
 
 voltage=70
 
-phi_target=270
+phi_target=62
 
 
 # 0
@@ -26,7 +26,7 @@ phi_target=270
 # 147
 # 155
 # 180
-
+# 270
 S12r=np.loadtxt(f'F:\\Nonreciprocity\\20210701\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltage)}.0 mV 2D.txt',delimiter=',')[start:stop,phi_target]+33
 S21r=np.loadtxt(f'F:\\Nonreciprocity\\20210701\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltage)}.0 mV 2D.txt',delimiter=',')[start:stop,phi_target]+33
 Isor=S12r-S21r
@@ -41,8 +41,8 @@ fe=np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\f.txt')[start:stop]
 
 fe_start=fe[0]
 fe_stop=fe[-1]
-# print(fe_start)
-# print(fe_stop)
+print(fe_start)
+print(fe_stop)
 phie=np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\phi.txt')
 
 # print(np.shape(S12r))
@@ -124,21 +124,26 @@ Isos=S12s-S21s
 print(max(Isoe))
 print(min(Isoe))
 
-fig, axes1 = plt.subplots(1, 1, figsize=(8  , 6))
-axes1 = plt.subplot(111)
-fig.patch.set_alpha(0)
-axes1.patch.set_alpha(0)
-axes1.plot(omega_s,S12e,'-',linewidth=10,label=r'$S_{12,exp}$',color='green',alpha=0.4)
-axes1.plot(omega_s,S12s,'-',linewidth=3,label=r'$S_{12,sim}$',color='green',zorder=2)
-axes1.plot(omega_s,S21e,'-',linewidth=10,label=r'$S_{21,exp}$',color='orange',alpha=0.4)
-axes1.plot(omega_s,S21s,'-',linewidth=3,label=r'$S_{21,sim}$',color='orange',zorder=2)
-axes1.set_xlabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
-axes1.set_ylim(-105,5)
-plt.yticks([-100,-75,-50,-25,0],['-100','-75','-50','-25','0'])
-plt.tick_params(labelsize=20)
-plt.legend(loc=4,prop={'family':'Cambria','size':20})
-plt.show()
+# fig, axes1 = plt.subplots(1, 1, figsize=(8  , 6))
+# axes1 = plt.subplot(111)
+# fig.patch.set_alpha(0)
+# axes1.patch.set_alpha(0)
+# axes1.plot(omega_s,S12e,'-',linewidth=10,label=r'$S_{12,exp}$',color='green',alpha=0.4)
+# axes1.plot(omega_s,S12s,'-',linewidth=3,label=r'$S_{12,sim}$',color='green',zorder=2)
+# axes1.plot(omega_s,S21e,'-',linewidth=10,label=r'$S_{21,exp}$',color='orange',alpha=0.4)
+# axes1.plot(omega_s,S21s,'-',linewidth=3,label=r'$S_{21,sim}$',color='orange',zorder=2)
+# axes1.set_xlabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
+# axes1.set_ylim(-105,5)
+# plt.yticks([-100,-75,-50,-25,0],['-100','-75','-50','-25','0'])
+# plt.tick_params(labelsize=20)
+# plt.legend(loc=4,prop={'family':'Cambria','size':20})
+# plt.show()
+
+a=max(np.abs(Isoe))
+index=np.where(np.abs(Isoe)==a)
+f=omega_s[index]
+print(f)
 
 fig, axes1 = plt.subplots(1, 1, figsize=(8  , 6))
 axes1 = plt.subplot(111)
@@ -153,3 +158,4 @@ plt.yticks([-100,-50,0,50,100],['-100','-50','0','50','100'])
 plt.tick_params(labelsize=20)
 plt.legend(loc=4,prop={'family':'Cambria','size':20})
 plt.show()
+

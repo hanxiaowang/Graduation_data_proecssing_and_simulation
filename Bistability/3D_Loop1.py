@@ -47,11 +47,21 @@ axes.patch.set_alpha(0)
 # axes.scatter(step_in,Deltae1,label='Exp',marker='s',color='none',linewidth=2,edgecolors='darkorange',s=80)
 # axes.plot(step_in,Deltas1,'--',color='yellow',label='Sim',linewidth=3,alpha=1,zorder= 2)
 
-axes.scatter(step_in,Deltae2,label='Exp',marker='s',color='none',linewidth=0.5,edgecolors='red',s=10)
+axes.scatter(step_in,Deltae2,label='Exp',marker='s',color='none',linewidth=0.5,edgecolors='red',s=20)
 axes.plot(step_in,Deltas2,'--',color='red',label='Sim',linewidth=3,alpha=1,zorder= 2)
 
 axes.plot(step_in,Deltas2,color='orange',linewidth=10,alpha=0.5,zorder= 0)
 axes.plot(step_in,Deltas3,color='green',linewidth=10,alpha=0.3,zorder= 0)
+
+#
+# 蓝色底#A6CEE3
+# 蓝色线#1F78B4
+# 蓝色框#6E6EFF
+# 橙色底#FDBF6F
+# 红色线#E31A1C
+# 粉色框#FF6E6E
+# 紫色边界线#6A3D9A
+
 
 #CW
 # axes.scatter(step_in,Deltae3[::-1],label='Exp',marker='s',color='none',linewidth=2,edgecolors='green',s=80)

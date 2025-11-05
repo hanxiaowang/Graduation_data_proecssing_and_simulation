@@ -10,8 +10,8 @@ import json
 voltages=np.linspace(20,110,19)
 phis=np.linspace(0,2,361)
 
-v_index=15#Iso max
-phi_index=143#phi max
+v_index=12#Iso min
+phi_index=105#phi min
 
 voltage=voltages[v_index]
 delta=0.97*voltage/45
@@ -22,18 +22,18 @@ print(phi)
 start=4000
 stop=14000
 
-S12e=np.loadtxt(f'F:\\Nonreciprocity\\20210701\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltage)}.0 mV 2D.txt',delimiter=',')[start:stop,phi_index]+33
-S21e=np.loadtxt(f'F:\\Nonreciprocity\\20210701\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltage)}.0 mV 2D.txt',delimiter=',')[start:stop,phi_index]+33
+S12e=np.loadtxt(f'F:\\Nonreciprocity\\20210630\\S12\\20-110\\S\\S12 of coupling(experiment) with A={round(voltage)}.0 mV 2D.txt',delimiter=',')[start:stop,phi_index]+33
+S21e=np.loadtxt(f'F:\\Nonreciprocity\\20210630\\S21\\20-110\\S\\S21 of coupling(experiment) with A={round(voltage)}.0 mV 2D.txt',delimiter=',')[start:stop,phi_index]+33
 Isoe=S12e-S21e
 
 omega_a = 8.247e9
-omega_m12 = omega_a-5.93e6
-omega_m21 = omega_a-3.8e6
+omega_m12 = omega_a-2e6
+omega_m21 = omega_a-0.5e6
 
 omega_se = np.loadtxt(r'F:\Nonreciprocity\20210703\m larger than a\f.txt')[start:stop]*1e9
 k_int = 1.4e6
 k_1 = 45.5e6
-k_2 = 4.5e6
+k_2 = 2.4e6
 k_3 = 1.33e6
 k_c = k_int + k_1 + k_2 + k_3
 
@@ -53,22 +53,12 @@ g = 8e6
 phi1 = 0.755
 # delta1 = 0.92 #63
 # delta1 = 0.97 #-32 -2
-delta1=0.97
+delta1=0.95
 
 
-# zhengti=-0.26
-# chazhi=0.06  #63
+phi21=(-0.16)
+phi12=(-0.25)
 
-# zhengti=-0.18
-# chazhi=0.08 #-32
-
-# zhengti=-0.2
-# chazhi=0.1 #-2
-
-# phi21=(-0.2+0.1)
-# phi12=(-0.2)
-phi21=-0.117
-phi12=(-0.1779025)
 
 omega_ss = np.linspace(omega_se[0],omega_se[-1],20001)
 delta_m12 = omega_m12 - omega_ss
@@ -146,22 +136,26 @@ print(min(Isos))
 
 
 
-fig, axes1 = plt.subplots(1, 1, figsize=(8  , 6))
-axes1 = plt.subplot(111)
-fig.patch.set_alpha(0)
-axes1.patch.set_alpha(0)
-axes1.plot(omega_se,S12e,'-',linewidth=10,label=r'$S_{12,exp}$',color='green',alpha=0.4)
-axes1.plot(omega_ss,S12s,'-',linewidth=3,label=r'$S_{12,sim}$',color='green',zorder=2)
-axes1.plot(omega_se,S21e,'-',linewidth=10,label=r'$S_{21,exp}$',color='orange',alpha=0.4)
-axes1.plot(omega_ss,S21s,'-',linewidth=3,label=r'$S_{21,sim}$',color='orange',zorder=2)
-axes1.set_xlabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
-axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
-axes1.set_ylim(-105,5)
-plt.yticks([-100,-75,-50,-25,0],['-100','-75','-50','-25','0'])
-plt.tick_params(labelsize=20)
-plt.legend(loc=4,prop={'family':'Cambria','size':20})
-plt.show()
+# fig, axes1 = plt.subplots(1, 1, figsize=(8  , 6))
+# axes1 = plt.subplot(111)
+# fig.patch.set_alpha(0)
+# axes1.patch.set_alpha(0)
+# axes1.plot(omega_se,S12e,'-',linewidth=10,label=r'$S_{12,exp}$',color='green',alpha=0.4)
+# axes1.plot(omega_ss,S12s,'-',linewidth=3,label=r'$S_{12,sim}$',color='green',zorder=2)
+# axes1.plot(omega_se,S21e,'-',linewidth=10,label=r'$S_{21,exp}$',color='orange',alpha=0.4)
+# axes1.plot(omega_ss,S21s,'-',linewidth=3,label=r'$S_{21,sim}$',color='orange',zorder=2)
+# axes1.set_xlabel(r'$\omega_p/2\pi$ [GHz]',fontsize=20)
+# axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
+# axes1.set_ylim(-105,5)
+# plt.yticks([-100,-75,-50,-25,0],['-100','-75','-50','-25','0'])
+# plt.tick_params(labelsize=20)
+# plt.legend(loc=3,prop={'family':'Cambria','size':20})
+# plt.show()
 
+a=max(np.abs(Isoe))
+index=np.where(np.abs(Isoe)==a)
+f=omega_se[index]
+print(f)
 
 fig, axes1 = plt.subplots(1, 1, figsize=(8  , 6))
 axes1 = plt.subplot(111)
@@ -174,5 +168,5 @@ axes1.set_ylabel(r'$S$ [dB]',fontsize=20)
 axes1.set_ylim(-105,5)
 plt.yticks([-100,-50,0,50,100],['-100','-50','0','50','100'])
 plt.tick_params(labelsize=20)
-plt.legend(loc=4,prop={'family':'Cambria','size':20})
+plt.legend(loc=3,prop={'family':'Cambria','size':20})
 plt.show()
